@@ -15,6 +15,10 @@ class login extends React.Component{
     state = {
         checkNick: true,
     }
+    componentWillMount(){
+        console.log("11")
+        // window.location.href="./main"
+    }
     check = () => {
         this.props.form.validateFields(
             (err) => {
@@ -24,6 +28,7 @@ class login extends React.Component{
             },
         );
     }
+
     handleChange = (e) => {
         this.setState({
             checkNick: e.target.checked,
@@ -37,7 +42,7 @@ class login extends React.Component{
             <div className='login-main'>
                 <div className='login-box'>
                     <Card title="测试" className='login-box' bordered={false}>
-                        <Form.Item {...formItemLayout} label="Name">
+                        <Form.Item {...formItemLayout} label="帐号">
                             {getFieldDecorator('username', {
                                 rules: [{
                                     required: true,
@@ -47,11 +52,11 @@ class login extends React.Component{
                                 <Input placeholder="Please input your name" />
                             )}
                         </Form.Item>
-                        <Form.Item {...formItemLayout} label="Nickname">
+                        <Form.Item {...formItemLayout} label="密码">
                             {getFieldDecorator('nickname', {
                                 rules: [{
                                     required: this.state.checkNick,
-                                    message: 'Please input your nickname',
+                                    message: 'Please input your password',
                                 }],
                             })(
                                 <Input placeholder="Please input your nickname" />
@@ -62,12 +67,12 @@ class login extends React.Component{
                                 checked={this.state.checkNick}
                                 onChange={this.handleChange}
                             >
-                                Nickname is required
+                                记住登录状态
                             </Checkbox>
                         </Form.Item>
                         <Form.Item {...formTailLayout}>
                             <Button type="primary" onClick={this.check}>
-                                Check
+                                登录
                             </Button>
                         </Form.Item>
                     </Card>
