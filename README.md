@@ -1,18 +1,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-所用组件及版本
-webpack 4.29.6
-node 9.11.1
-yarn 1.13.0 //管理包
-create-react-app  //架手架
-"antd": "^3.15.1",  //UI库
-"axios": "^0.18.0", //接口请求
-"babel-plugin-import": "^1.11.0",  //按需加载
-"less": "2.7.3",  //less编译
-"less-loader": "^4.1.0", //less管理
-"react-router-dom": "^4.4.0",  //路由
-"readux": "^1.0.0",   //状态管理
+所用组件及版本</br>
+webpack 4.29.6</br>
+node 9.11.1</br>
+yarn 1.13.0 //管理包 </br>
+create-react-app  //架手架</br>
+"antd": "^3.15.1",  //UI库</br>
+"axios": "^0.18.0", //接口请求</br>
+"babel-plugin-import": "^1.11.0",  //按需加载</br>
+"less": "2.7.3",  //less编译</br>
+"less-loader": "^4.1.0", //less管理</br>
+"react-router-dom": "^4.4.0",  //路由</br>
+"readux": "^1.0.0",   //状态管理</br>
 
 ## Available Scripts
 
