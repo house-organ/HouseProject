@@ -5,15 +5,15 @@ const menuList = [
     },
     {
         title:'次页',
-        key:'/page/modules/home',
+        key:'/page/modules/homes',
         children:[
             {
                 title:'首页1',
-                key:'/page/modules/home'
+                key:'/page/modules/homess'
             },
             {
                 title:'首页2',
-                key:'/page/modules/home'
+                key:'/page/modules/homesss'
             }
         ]
     }

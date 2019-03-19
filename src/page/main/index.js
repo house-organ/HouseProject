@@ -1,11 +1,12 @@
 import React from 'react'
 import {
-    Layout,  Breadcrumb, Icon,
+    Layout,  Breadcrumb, Icon,Button
 } from 'antd';
 import './index.less'
 import Headers from '../../components/header';
 import Footers from '../../components/footer'
 import Menus from '../../components/menu'
+import Home from '../modules/home'
 
 const { Content, Sider } = Layout;
 
@@ -34,7 +35,7 @@ export default class main extends React.Component{
                             background: '#fff', padding: 24, margin: 0, minHeight: 280,
                         }}
                         >
-                            Content
+                            <Home></Home>
                         </Content>
                         <Footers></Footers>
                     </Layout>
