@@ -17,7 +17,7 @@ class login extends React.Component{
     }
     componentWillMount(){
         console.log("11")
-        // window.location.href="./main"
+        //location.href = 'main/index.html';
     }
     check = () => {
         this.props.form.validateFields(
