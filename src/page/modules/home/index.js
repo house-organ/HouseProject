@@ -1,7 +1,6 @@
 import React from 'react'
-import { Modal,Card, Form, Input, Button, Checkbox,Table,Select  } from 'antd';
+import { Modal, Input, Button,Table  } from 'antd';
 import './index.less'
-const Option = Select.Option;
 
 const columns = [{
     title: 'Name',

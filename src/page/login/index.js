@@ -20,13 +20,20 @@ class login extends React.Component{
         //location.href = 'main/index.html';
     }
     check = () => {
-        this.props.form.validateFields(
-            (err) => {
-                if (!err) {
-                    console.info('success');
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                // let { keyword } = values;
+                // this.searchQuery(keyword);
+
+                let params = {username:'admin',password:'123456'}
+                if(params.username==values.username && params.password == values.password){
+                    console.log("params-----",params)
+                    window.location.href = '/#/index';
                 }
-            },
-        );
+
+                // this.setState({pagination: pager,param: params},this.fetch);
+            }
+        });
     }
 
     handleChange = (e) => {
@@ -34,6 +41,7 @@ class login extends React.Component{
             checkNick: e.target.checked,
         }, () => {
             this.props.form.validateFields(['nickname'], { force: true });
+
         });
     }
     render() {
@@ -53,13 +61,13 @@ class login extends React.Component{
                             )}
                         </Form.Item>
                         <Form.Item {...formItemLayout} label="密码">
-                            {getFieldDecorator('nickname', {
+                            {getFieldDecorator('password', {
                                 rules: [{
                                     required: this.state.checkNick,
                                     message: 'Please input your password',
                                 }],
                             })(
-                                <Input placeholder="Please input your nickname" />
+                                <Input type="password" placeholder="Please input your nickname" />
                             )}
                         </Form.Item>
                         <Form.Item {...formTailLayout}>

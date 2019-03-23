@@ -1,17 +1,23 @@
 import React from 'react'
-import {HashRouter as Router,Route , Switch} from 'react-router-dom'
+import {HashRouter,Route } from 'react-router-dom'
 import App from '../App.js'
-// import Login from '../page/login'
-import Main from '../page/main'
-export default class adminRouter extends React.Component{
+import Index from '../page/index'
+import Login from '../page/login'
+import Home from '../page/modules/home'
+export default class AdminRouter extends React.Component{
     render(){
         return(
-            <Router>
+            <HashRouter>
                 <App>
-                    {/*<Router path="../page/login" component={Login} />*/}
-                    <Router path="../page/main" component={Main} />
+                    <Route path="/" exact={true} component={Login} />
+                    <Route path="/index" render={() =>
+                        <Index>
+                            <Route path="/" component={Home}/>
+                            {/*<Route path="/" component={Home}/>*/}
+                        </Index>
+                    } />
                 </App>
-            </Router>
+            </HashRouter>
         )
     }
 }

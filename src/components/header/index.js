@@ -1,13 +1,13 @@
 import React from 'react'
 
 import {
-    Layout, Menu, Breadcrumb, Icon,
+    Layout, Menu
 } from 'antd';
 import './index.less'
 
 
 
-const { Header, Sider } = Layout;
+const { Header } = Layout;
 
 export default class Headers extends React.Component{
     render() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.less'
-import {Icon, Menu} from "antd";
+import {Menu, Icon} from "antd";
 // import {NavLink} from 'react-router-dom'
 import MenuConfig from './menuConfig'
 const SubMenu = Menu.SubMenu;
@@ -9,12 +9,11 @@ export default class Menus extends React.Component{
     state = {
     }
     componentWillMount(){
-        this.readerMenu(MenuConfig)
+        let menuList = this.readerMenu(MenuConfig)
+        this.setState({menuTreeNode:menuList})
     }
     readerMenu = (data)=>{
-        console.log("menu---->",data)
-        let that = this;
-        let menuList =  data.map((item)=>{
+        return  data.map((item)=>{
             if(item.children){
                 return (
                     <SubMenu key={item.key} title={<span>{item.title}</span>}>
@@ -23,15 +22,12 @@ export default class Menus extends React.Component{
                 )
             }
             return (
-                <Menu.Item key={item.key} title={item.title}>
-                    {/*<NavLink to={item.key}>{item.title}</NavLink>*/}
+                <Menu.Item key={item.key} data-id={item.key}>
                     {item.title}
                 </Menu.Item>
             )
 
         })
-        this.setState({menuTreeNode:menuList})
-        console.log("menuList---->",menuList)
 
     }
     render() {

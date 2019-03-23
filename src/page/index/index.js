@@ -1,26 +1,29 @@
 import React from 'react'
 import {
-    Layout,  Breadcrumb, Icon,Button
+    Layout,  Breadcrumb,
 } from 'antd';
 import './index.less'
 import Headers from '../../components/header';
 import Footers from '../../components/footer'
 import Menus from '../../components/menu'
-import Home from '../modules/home'
+// import Home from '../modules/home'
 
 const { Content, Sider } = Layout;
 
 
-
-export default class main extends React.Component{
+export default class Index extends React.Component{
     state= {
 
     }
+    componentWillMount() {
+
+    }
+
     render(){
+
         return (
             <Layout>
-
-                <Headers></Headers>
+                <Headers>2323232</Headers>
                 <Layout className='main-box'>
                     <Sider width={200} style={{ background: '#fff' }}>
                         <Menus></Menus>
@@ -35,7 +38,8 @@ export default class main extends React.Component{
                             background: '#fff', padding: 24, margin: 0, minHeight: 280,
                         }}
                         >
-                            <Home></Home>
+                            {/*<Home></Home>*/}
+                            {this.props.children}
                         </Content>
                         <Footers></Footers>
                     </Layout>
