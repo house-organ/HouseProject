@@ -29,6 +29,8 @@ class login extends React.Component{
                 if(params.username==values.username && params.password == values.password){
                     console.log("params-----",params)
                     window.location.href = '/#/index';
+                }else {
+
                 }
 
                 // this.setState({pagination: pager,param: params},this.fetch);
