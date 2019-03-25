@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Form, Input, Button, Checkbox} from 'antd';
+import {Card, Form, Input, Button, Checkbox,notification } from 'antd';
 import './index.less'
 
 const formItemLayout = {
@@ -30,7 +30,13 @@ class login extends React.Component{
                     console.log("params-----",params)
                     window.location.href = '/#/index';
                 }else {
-
+                    notification.open({
+                        message: '提示',
+                        description: '帐号或密码错误！',
+                        onClick: () => {
+                            console.log('Notification Clicked!');
+                        },
+                    });
                 }
 
                 // this.setState({pagination: pager,param: params},this.fetch);
@@ -49,43 +55,45 @@ class login extends React.Component{
     render() {
         const { getFieldDecorator } = this.props.form;
         return(
-            <div className='login-main'>
-                <div className='login-box'>
-                    <Card title="测试" className='login-box' bordered={false}>
-                        <Form.Item {...formItemLayout} label="帐号">
-                            {getFieldDecorator('username', {
-                                rules: [{
-                                    required: true,
-                                    message: 'Please input your name',
-                                }],
-                            })(
-                                <Input placeholder="Please input your name" />
-                            )}
-                        </Form.Item>
-                        <Form.Item {...formItemLayout} label="密码">
-                            {getFieldDecorator('password', {
-                                rules: [{
-                                    required: this.state.checkNick,
-                                    message: 'Please input your password',
-                                }],
-                            })(
-                                <Input type="password" placeholder="Please input your nickname" />
-                            )}
-                        </Form.Item>
-                        <Form.Item {...formTailLayout}>
-                            <Checkbox
-                                checked={this.state.checkNick}
-                                onChange={this.handleChange}
-                            >
-                                记住登录状态
-                            </Checkbox>
-                        </Form.Item>
-                        <Form.Item {...formTailLayout}>
-                            <Button type="primary" onClick={this.check}>
-                                登录
-                            </Button>
-                        </Form.Item>
-                    </Card>
+            <div className='login-con'>
+                <div className='login-main'>
+                    <div className='login-box'>
+                        <Card title="测试" className='login-box' bordered={false}>
+                            <Form.Item {...formItemLayout} label="帐号">
+                                {getFieldDecorator('username', {
+                                    rules: [{
+                                        required: true,
+                                        message: 'Please input your name',
+                                    }],
+                                })(
+                                    <Input placeholder="Please input your name" />
+                                )}
+                            </Form.Item>
+                            <Form.Item {...formItemLayout} label="密码">
+                                {getFieldDecorator('password', {
+                                    rules: [{
+                                        required: this.state.checkNick,
+                                        message: 'Please input your password',
+                                    }],
+                                })(
+                                    <Input type="password" placeholder="Please input your nickname" />
+                                )}
+                            </Form.Item>
+                            <Form.Item {...formTailLayout}>
+                                <Checkbox
+                                    checked={this.state.checkNick}
+                                    onChange={this.handleChange}
+                                >
+                                    记住登录状态
+                                </Checkbox>
+                            </Form.Item>
+                            <Form.Item {...formTailLayout}>
+                                <Button type="primary" onClick={this.check}>
+                                    登录
+                                </Button>
+                            </Form.Item>
+                        </Card>
+                    </div>
                 </div>
             </div>
         )
