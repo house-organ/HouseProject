@@ -1,33 +1,37 @@
 const menuList = [
     {
         title:'首页',
-        key:'/page/modules/home'
+        key:'/home'
     },
     {
         title:'用户中心',
-        key:'page/modules/userManage',
+        key:'/userCore',
         children:[
             {
                 title:'用户管理',
-                key:'/page/modules/userManage/userManage'
+                key:'/userCore/userManage'
             },
             {
                 title:'权限管理',
-                key:'/page/modules/userManage/privilegeManage'
+                key:'/userCore/privilegeManage'
+            },
+            {
+                title:'菜单管理',
+                key:'/userCore/menuManage'
             }
         ]
     },
     {
         title:'二次页',
-        key:'/page/modules/homes1',
+        key:'/homes1',
         children:[
             {
                 title:'测试222',
-                key:'/page/modules/homess1'
+                key:'/modules/homess1'
             },
             {
                 title:'测试2333',
-                key:'/page/modules/homesss1'
+                key:'/modules/homesss1'
             }
         ]
     }

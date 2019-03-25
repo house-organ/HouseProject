@@ -26,7 +26,7 @@ class login extends React.Component{
                 // this.searchQuery(keyword);
 
                 let params = {username:'admin',password:'123456'}
-                if(params.username==values.username && params.password == values.password){
+                if(params.username===values.username && params.password === values.password){
                     console.log("params-----",params)
                     window.location.href = '/#/index';
                 }else {
