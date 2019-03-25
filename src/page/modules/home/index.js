@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button,Table, Divider, Tag,Popconfirm,} from 'antd';
+import {Button,Table, Divider, Tag,Popconfirm,Row, Col} from 'antd';
 import './index.less'
 
 let dataList =[
@@ -68,7 +68,7 @@ export default class Home extends React.Component{
                     return (record.state==0 ? '启用 ':'未启用')
                 }
             },
-            { title: '操作', key: '#', width: '14%',
+            { title: '操作', key: '#', width: '20%',
                 render: (text, record) => {
                     return (
                         <div>
@@ -84,6 +84,14 @@ export default class Home extends React.Component{
         return (
             <div className="admin-content">
                 <Table columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
+                <Row>
+                    <Col span={12}>
+                        <Table className="row-tabl-l" columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
+                    </Col>
+                    <Col span={12}>
+                        <Table className="row-tabl-r" columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
+                    </Col>
+                </Row>
             </div>
         )
     }

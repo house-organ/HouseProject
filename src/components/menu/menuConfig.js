@@ -4,16 +4,16 @@ const menuList = [
         key:'/page/modules/home'
     },
     {
-        title:'一次页',
-        key:'/page/modules/homes',
+        title:'用户中心',
+        key:'page/modules/userManage',
         children:[
             {
-                title:'测试222',
-                key:'/page/modules/homess'
+                title:'用户管理',
+                key:'/page/modules/userManage/userManage'
             },
             {
-                title:'测试2333',
-                key:'/page/modules/homesss'
+                title:'权限管理',
+                key:'/page/modules/userManage/privilegeManage'
             }
         ]
     },
