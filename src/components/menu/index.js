@@ -16,17 +16,24 @@ export default class Menus extends React.Component{
         return  data.map((item)=>{
             if(item.children){
                 return (
-                    <SubMenu key={item.key} title={<span>{item.title}</span>}>
+                    <SubMenu key={item.key} title={<span><Icon type="user" /><span>{item.title}</span></span>}>
                         {this.readerMenu(item.children)}
                     </SubMenu>
                 )
             }
-            return (
-                <Menu.Item key={item.key} data-id={item.key}>
-                    <NavLink to={item.key}>{item.title}</NavLink>
-                    {/*{item.title}*/}
-                </Menu.Item>
-            )
+            if(item.hierarchy){
+                return (
+                    <Menu.Item key={item.key} data-id={item.key}>
+                        <NavLink to={item.key}><span><Icon type="user" /><span>{item.title}</span></span></NavLink>
+                    </Menu.Item>
+                )
+            }else{
+                return (
+                    <Menu.Item key={item.key} data-id={item.key}>
+                        <NavLink to={item.key}>{item.title}</NavLink>
+                    </Menu.Item>
+                )
+            }
 
         })
 
@@ -34,11 +41,7 @@ export default class Menus extends React.Component{
 
     render() {
         return (
-            <Menu
-                mode="inline"
-                defaultSelectedKeys={['/page/modules/home']}
-                style={{ height: '100%', borderRight: 0 }}
-            >
+            <Menu theme="light" defaultSelectedKeys={['/home']} mode="inline" style={{ border:'none'}} >
                 {this.state.menuTreeNode}
             </Menu>
         )

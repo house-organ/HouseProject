@@ -109,7 +109,7 @@ export default class UserManage extends React.Component{
         return(
             <div>
                 <Button type="primary" onClick={this.showModal}>
-                    Open Modal userManage
+                    Open Modal 用户管理
                 </Button>
                 <Modal
                     title="Title"

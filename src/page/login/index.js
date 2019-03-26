@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 import {Card, Form, Input, Button, Checkbox,notification } from 'antd';
 import './index.less'
 
@@ -27,8 +28,15 @@ class login extends React.Component{
 
                 let params = {username:'admin',password:'123456'}
                 if(params.username===values.username && params.password === values.password){
-                    console.log("params-----",params)
-                    window.location.href = '/#/index';
+
+                    {/*<Redirect to={{*/}
+                        // pathname: '/index',
+                        // search: '?utm=your+face',
+                        // state: { referrer: currentLocation }
+
+                    // }}/>
+                        console.log("params-----",params)
+                    window.location.href = '/#/home';
                 }else {
                     notification.open({
                         message: '提示',

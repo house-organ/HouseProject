@@ -1,29 +1,37 @@
 const menuList = [
     {
         title:'首页',
-        key:'/home'
+        key:'/home',
+        hierarchy:'1'
     },
     {
         title:'用户中心',
         key:'/userCore',
+        hierarchy:'1',
         children:[
             {
                 title:'用户管理',
-                key:'/userCore/userManage'
+                key:'/userCore/userManage',
             },
             {
                 title:'权限管理',
-                key:'/userCore/privilegeManage'
+                key:'/userCore/privilegeManage',
             },
             {
                 title:'菜单管理',
-                key:'/userCore/menuManage'
+                key:'/userCore/menuManage',
             }
         ]
     },
     {
+        title:'次页',
+        key:'/modules/sdas',
+        hierarchy:'1'
+    },
+    {
         title:'二次页',
-        key:'/homes1',
+        key:'/modules',
+        hierarchy:'1',
         children:[
             {
                 title:'测试222',

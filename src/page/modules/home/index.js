@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button,Table, Divider, Tag,Popconfirm,Row, Col} from 'antd';
+import {Button,Table, Divider, Tag,Popconfirm,Row, Col,List, Typography} from 'antd';
 import './index.less'
 
 let dataList =[
@@ -86,10 +86,24 @@ export default class Home extends React.Component{
                 <Table columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
                 <Row>
                     <Col span={12}>
-                        <Table className="row-tabl-l" columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
+                        <List className="row-tabl-r"
+                            size="small"
+                            header={<div>假装我是个列表1</div>}
+                            // footer={<div>Footer</div>}
+                            bordered
+                            dataSource={this.state.data}
+                            renderItem={item => (<List.Item>{item.title}的{item.companyid}</List.Item>)}
+                        />
                     </Col>
                     <Col span={12}>
-                        <Table className="row-tabl-r" columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
+                        <List className="row-tabl-l"
+                            size="small"
+                            header={<div>假装我是个列表2</div>}
+                            // footer={<div>Footer</div>}
+                            bordered
+                            dataSource={this.state.data}
+                            renderItem={item => (<List.Item>{item.title}的{item.companyid}</List.Item>)}
+                        />
                     </Col>
                 </Row>
             </div>

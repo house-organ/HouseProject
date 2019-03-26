@@ -1,48 +1,61 @@
 import React from 'react'
 import {
-    Layout,  Breadcrumb,
+    Layout, Breadcrumb, Icon, Menu
 } from 'antd';
 import './index.less'
 import Headers from '../../components/header';
 import Footers from '../../components/footer'
 import Menus from '../../components/menu'
-// import Home from '../modules/home'
 
-const { Content, Sider } = Layout;
-
-
+const {
+     Content,  Sider,
+} = Layout;
 export default class Index extends React.Component{
-    state= {
-
-    }
+    state = {
+        collapsed: false,
+    };
     componentWillMount() {
 
+    }
+    toggle = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
     }
 
     render(){
 
         return (
             <Layout>
-                <Headers>2323232</Headers>
-                <Layout className='main-box'>
-                    <Sider width={200} style={{ background: '#fff' }}>
-                        <Menus></Menus>
-                    </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
+                <Sider
+                    trigger={null}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                    className="menu-left"
+                    style={{ background: '#fff', padding: 0 ,minHeight:'100vh'}}
+                >
+                    <div className="logo" />
+                    <div className="toggle">
+                        <Icon
+                            className="trigger"
+                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            onClick={this.toggle}
+                        />
+                    </div>
+                    <Menus></Menus>
+                </Sider>
+                <Layout>
+                    <Headers></Headers>
+                    <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                            <Breadcrumb.Item>User</Breadcrumb.Item>
+                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
-                        <Content style={{
-                            background: '#fff', padding: 24, margin: 0, minHeight: 280,
-                        }}
-                        >
-                            {/*<Home></Home>*/}
+                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                             {this.props.children}
-                        </Content>
-                        <Footers></Footers>
-                    </Layout>
+                        </div>
+                    </Content>
+                    <Footers style={{ textAlign: 'center' }}></Footers>
                 </Layout>
             </Layout>
         )
