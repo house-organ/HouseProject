@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Layout, Breadcrumb, Icon, Menu
+    Layout, Breadcrumb, Icon,
 } from 'antd';
 import './index.less'
 import Headers from '../../components/header';
@@ -32,7 +32,7 @@ export default class Index extends React.Component{
                     collapsible
                     collapsed={this.state.collapsed}
                     className="menu-left"
-                    style={{ background: '#fff', padding: 0 ,minHeight:'100vh'}}
+                    style={{ background: '#fff', padding: 0 ,overflow: 'auto', height: '100vh', position: 'fixed', left: 0, }}
                 >
                     <div className="logo" />
                     <div className="toggle">
@@ -44,9 +44,9 @@ export default class Index extends React.Component{
                     </div>
                     <Menus></Menus>
                 </Sider>
-                <Layout>
+                <Layout style={{ marginLeft: 200 }}>
                     <Headers></Headers>
-                    <Content style={{ margin: '0 16px' }}>
+                    <Content style={{  marginTop: 64 }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>User</Breadcrumb.Item>
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>

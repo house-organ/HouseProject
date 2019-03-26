@@ -29,7 +29,7 @@ for (let i = 0; i < 46; i++) {
 
 export default class UserManage extends React.Component{
     state = {
-        ModalText: 'Content of the modal',
+        // ModalText: 'Content of the modal',
         visible: false,
         confirmLoading: false,
     };
@@ -45,7 +45,7 @@ export default class UserManage extends React.Component{
 
     handleOk = () => {
         this.setState({
-            ModalText: 'The modal will be closed after two seconds',
+            // ModalText: 'The modal will be closed after two seconds',
             confirmLoading: true,
         });
         setTimeout(() => {
@@ -63,7 +63,7 @@ export default class UserManage extends React.Component{
         });
     }
     render(){
-        const { visible, confirmLoading, ModalText } = this.state;
+        const { visible, confirmLoading } = this.state;
         const { selectedRowKeys } = this.state;
         const rowSelection = {
             selectedRowKeys,

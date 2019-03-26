@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card } from 'antd';
+// import {Card } from 'antd';
 
 export default class NoFind extends React.Component{
     render() {

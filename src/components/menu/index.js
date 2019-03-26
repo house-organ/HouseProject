@@ -16,7 +16,7 @@ export default class Menus extends React.Component{
         return  data.map((item)=>{
             if(item.children){
                 return (
-                    <SubMenu key={item.key} title={<span><Icon type="user" /><span>{item.title}</span></span>}>
+                    <SubMenu key={item.key} title={<span><Icon type="user" /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.children)}
                     </SubMenu>
                 )
@@ -41,7 +41,7 @@ export default class Menus extends React.Component{
 
     render() {
         return (
-            <Menu theme="light" defaultSelectedKeys={['/home']} mode="inline" style={{ border:'none'}} >
+            <Menu theme="light" defaultSelectedKeys={['/home']} mode="inline" style={{ border:'none',marginLeft: '-1px'}} >
                 {this.state.menuTreeNode}
             </Menu>
         )

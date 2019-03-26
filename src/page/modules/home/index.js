@@ -1,6 +1,8 @@
 import React from 'react'
-import {Button,Table, Divider, Tag,Popconfirm,Row, Col,List, Typography} from 'antd';
+import {Button,Table,Popconfirm,Row, Col,List} from 'antd';
 import './index.less'
+// import showMsg from "../../../components/notification";
+import axios from "../../../axios";
 
 let dataList =[
     {id:'1',title:'测试内容库1',companyid:'测试公司1',state:'0',},
@@ -12,10 +14,20 @@ let dataList =[
 export default class Home extends React.Component{
     state = {
         data:dataList || [],
+        listData:[],
         param:{}
     }
     componentWillMount() {
+        // this.showMsg.error("网络异常,请稍后再试 ");
+        axios.get("topics",this.state.param,
+            result=> {
+                console.log("--------->",result)
+                this.setState({listData:result.data ||[]})
+            },
+            result=> {
 
+            }
+        );
     }
     addOrUpdate=(e)=> {  //提交
         console.log("11111",e)
@@ -23,7 +35,6 @@ export default class Home extends React.Component{
         // e && e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             console.log("11111",values)
-
             if (!err) {
                 // let { keyword } = values;
                 // this.searchQuery(keyword);
@@ -65,7 +76,7 @@ export default class Home extends React.Component{
             },
             { title: '状态', key: 'state', width: '10%',
                 render: (text, record) => {
-                    return (record.state==0 ? '启用 ':'未启用')
+                    return (record.state===0 ? '启用 ':'未启用')
                 }
             },
             { title: '操作', key: '#', width: '20%',
@@ -91,8 +102,8 @@ export default class Home extends React.Component{
                             header={<div>假装我是个列表1</div>}
                             // footer={<div>Footer</div>}
                             bordered
-                            dataSource={this.state.data}
-                            renderItem={item => (<List.Item>{item.title}的{item.companyid}</List.Item>)}
+                            dataSource={this.state.listData}
+                            renderItem={item => (<List.Item>{item.title}</List.Item>)}
                         />
                     </Col>
                     <Col span={12}>
