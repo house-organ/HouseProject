@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Input, Button,Table  } from 'antd';
+import { Modal, Input, Button,Table,List, Typography  } from 'antd';
 import './index.less'
 
 const columns = [{
@@ -30,9 +30,22 @@ for (let i = 0; i < 46; i++) {
 export default class UserManage extends React.Component{
     state = {
         // ModalText: 'Content of the modal',
+        data:[],
         visible: false,
         confirmLoading: false,
-    };
+    }
+    componentWillMount() {
+        let data = []
+        for(let i=0;i<30;i++){
+            let obj = {}
+            obj.title = '测试数据'+i
+            data.push(obj)
+        }
+        this.setState({
+            data:data && data || []
+        })
+    }
+
     onSelectChange = (selectedRowKeys) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
@@ -111,6 +124,14 @@ export default class UserManage extends React.Component{
                 <Button type="primary" onClick={this.showModal}>
                     Open Modal 用户管理
                 </Button>
+                <List
+                    size="small"
+                    header={<div>Header</div>}
+                    footer={<div>Footer</div>}
+                    bordered
+                    dataSource={this.state.data}
+                    renderItem={item => (<List.Item>{item.title}</List.Item>)}
+                />
                 <Modal
                     title="Title"
                     visible={visible}

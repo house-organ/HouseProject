@@ -32,26 +32,26 @@ export default class Index extends React.Component{
                     collapsible
                     collapsed={this.state.collapsed}
                     className="menu-left"
-                    style={{ background: '#fff', padding: 0 ,overflow: 'auto', height: '100vh', position: 'fixed', left: 0, }}
+                    style={{ background: '#fff', padding: 0 ,overflow: 'auto',position:'fixed',top:0, height: '100vh', }}
                 >
                     <div className="logo" />
-                    <div className="toggle">
-                        <Icon
-                            className="trigger"
-                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={this.toggle}
-                        />
-                    </div>
+                    {/*<div className="toggle">*/}
+                        {/*<Icon*/}
+                            {/*className="trigger"*/}
+                            {/*type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}*/}
+                            {/*onClick={this.toggle}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                     <Menus></Menus>
                 </Sider>
-                <Layout style={{ marginLeft: 200 }}>
+                <Layout >
                     <Headers></Headers>
-                    <Content style={{  marginTop: 64 }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Content style={{  marginTop: 64,marginLeft:200 }}>
+                        <Breadcrumb style={{ margin: '6px 15px' }}>
                             <Breadcrumb.Item>User</Breadcrumb.Item>
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                        <div className='modular-main'>
                             {this.props.children}
                         </div>
                     </Content>

@@ -25,7 +25,7 @@ const menuList = [
     },
     {
         title:'次页',
-        key:'/modules/sdas',
+        key:'/sdas',
         hierarchy:'1'
     },
     {

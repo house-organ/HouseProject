@@ -20,7 +20,7 @@ export default class Headers extends React.Component{
             </Menu>
         );
         return (
-            <Header className="header header-box" style={{ background: '#fff',  position: 'fixed', zIndex: 1, width: '100%' }}>
+            <Header className="header header-box" >
                 <Row>
 
                     <Col span={12}>
@@ -28,7 +28,7 @@ export default class Headers extends React.Component{
                             theme="light"
                             mode="horizontal"
                             defaultSelectedKeys={['2']}
-                            style={{ lineHeight: '64px',border:'none' }}
+                            style={{ lineHeight: '62px',border:'none' }}
                         >
                             <Menu.Item key="1">nav 1</Menu.Item>
                             <Menu.Item key="2">nav 2</Menu.Item>
