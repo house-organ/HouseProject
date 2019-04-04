@@ -12,7 +12,7 @@ create-react-app  //架手架</br>
 "less": "2.7.3",  //less编译</br>
 "less-loader": "^4.1.0", //less管理</br>
 "react-router-dom": "^4.4.0",  //路由</br>
-"readux": "^1.0.0",   //状态管理</br>
+"redux": "^4.0.1",   //状态管理</br>
 "react-redux": "^6.0.1", //状态管理</br>
 ## Available Scripts
 
