@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Input, Button,Table,List, Typography  } from 'antd';
+import { Modal, Input, Button,Table,List  } from 'antd';
 import './index.less'
 
 const columns = [{
@@ -42,7 +42,7 @@ export default class UserManage extends React.Component{
             data.push(obj)
         }
         this.setState({
-            data:data && data || []
+            data:data && (data || [])
         })
     }
 

@@ -37,12 +37,12 @@ export default class Headers extends React.Component{
 
                     </Col>
                     <Col span={12}>
-                        <div className="user-info">111
-                            {/*<Dropdown overlay={menu}>*/}
-                                {/*<span className="ant-dropdown-link">*/}
-                                    {/*HoverMe <Icon type="down" />*/}
-                                {/*</span>*/}
-                            {/*</Dropdown>*/}
+                        <div className="user-info">
+                            <Dropdown overlay={menu}>
+                                <span className="ant-dropdown-link">
+                                    HoverMe <Icon type="down" />
+                                </span>
+                            </Dropdown>
                         </div>
                     </Col>
                 </Row>

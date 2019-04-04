@@ -12,6 +12,13 @@ export default class Menus extends React.Component{
         let menuList = this.readerMenu(MenuConfig)
         this.setState({menuTreeNode:menuList})
     }
+    onMenuClick = (key) =>{
+        let breadcrumb = key.key;
+        console.log("11111111",breadcrumb)
+        breadcrumb = key.key.split("/");
+
+        console.log("11111111",breadcrumb)
+    }
     readerMenu = (data)=>{
         return  data.map((item)=>{
             if(item.children){
@@ -41,7 +48,12 @@ export default class Menus extends React.Component{
 
     render() {
         return (
-            <Menu theme="light" defaultSelectedKeys={['/home']} mode="inline" style={{ border:'none',marginLeft: '-1px'}} >
+            <Menu theme="light"
+                  defaultSelectedKeys={['/home']}
+                  mode="inline"
+                  onClick={this.onMenuClick}
+                  style={{ border:'none',marginLeft: '-1px'}}
+            >
                 {this.state.menuTreeNode}
             </Menu>
         )
