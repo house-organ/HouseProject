@@ -14,10 +14,10 @@ export default class Menus extends React.Component{
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;
-        console.log("11111111",breadcrumb)
+        // console.log("11111111",breadcrumb)
         breadcrumb = key.key.split("/");
 
-        console.log("11111111",breadcrumb)
+        // console.log("11111111",breadcrumb)
     }
     readerMenu = (data)=>{
         return  data.map((item)=>{

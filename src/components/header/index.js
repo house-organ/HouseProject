@@ -15,7 +15,7 @@ export default class Headers extends React.Component{
         const menu = (
             <Menu>
                 <Menu.Item>
-                    <a  rel="noopener noreferrer" href="#/login">退出</a>
+                    <a  rel="noopener noreferrer" href="#/">退出</a>
                 </Menu.Item>
             </Menu>
         );
