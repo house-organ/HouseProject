@@ -7,6 +7,7 @@ const SubMenu = Menu.SubMenu;
 
 export default class Menus extends React.Component{
     state = {
+        curSelectedMenuKey:[]
     }
     componentWillMount(){
         let menuList = this.readerMenu(MenuConfig)
@@ -14,10 +15,14 @@ export default class Menus extends React.Component{
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;
-        // console.log("11111111",breadcrumb)
-        breadcrumb = key.key.split("/");
+        // breadcrumb = key.key.split("/");
+        this.setState({
+            curSelectedMenuKey:[breadcrumb]
+        })
+        console.log("11111111",breadcrumb)
 
-        // console.log("11111111",breadcrumb)
+
+        console.log("2222222",breadcrumb)
     }
     readerMenu = (data)=>{
         return  data.map((item)=>{
@@ -50,6 +55,7 @@ export default class Menus extends React.Component{
         return (
             <Menu theme="light"
                   defaultSelectedKeys={['/home']}
+                  selectedKeys={this.state.curSelectedMenuKey}
                   mode="inline"
                   onClick={this.onMenuClick}
                   style={{ border:'none',marginLeft: '-1px'}}

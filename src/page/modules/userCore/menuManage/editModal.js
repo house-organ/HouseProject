@@ -1,8 +1,7 @@
 import React from 'react'
-import {Button,Table,Popconfirm,Row, Col,List,Comment, Tooltip,} from 'antd';
+import {List,Comment,} from 'antd';
 import axios from "../../../../axios";
 
-import moment from 'moment';
 export default class editModal extends React.Component {
     state = {
         data:{},
@@ -24,7 +23,6 @@ export default class editModal extends React.Component {
     fetch=(id)=>{
         axios.get("topic/"+id,null,
             result=> {
-                console.log("----11----->",result.data.replies)
                 this.setState({
                     data:result.data ||{},
                     authorName:result.data.author.loginname || '',
@@ -37,15 +35,6 @@ export default class editModal extends React.Component {
         );
     }
     render() {
-        const contents = this.state.replies && this.state.replies.map((item)=>{
-            return (
-                item.content = item.content
-                // item.author.loginname = item.author.loginname
-            )
-        })
-        {
-            console.log("contents---",contents)
-        }
         return(
             <div>
                 <p>{this.props.match.params.id}</p>
@@ -63,8 +52,8 @@ export default class editModal extends React.Component {
                             // actions={item.actions}
                             author={item.author.loginname}
                             avatar={item.author.avatar_url}
-                            content={item.content}
-                            // content={}
+                            // content={item.content}
+                            content={item.content.replace(/<[^>]+>/g,"")}
                             datetime={item.create_at}
                         />
                     )}

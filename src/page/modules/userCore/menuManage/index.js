@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button,Table,Popconfirm,Row, Col,List} from 'antd';
+import {Button,Table,Popconfirm,} from 'antd';
 import axios from "../../../../axios";
 import {Link} from 'react-router-dom'
 // import editModal from './editModal'
