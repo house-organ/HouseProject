@@ -4,13 +4,30 @@ import {
     Layout, Menu,Row, Col,Dropdown, Icon
 } from 'antd';
 import './index.less'
+import axios from "../../axios";
 
 
 
 const { Header } = Layout;
 
 export default class Headers extends React.Component{
+    state = {
+        data:[]
+    }
+    componentWillMount(){
+        this.fetch()
+    }
+    fetch=()=>{
+        axios.get("menu/all",null,
+            result=> {
+                console.log("顶部导航--------->",result)
+                this.setState({data:result.result ||[]})
+            },
+            result=> {
 
+            }
+        );
+    }
     render() {
         const menu = (
             <Menu>
@@ -30,9 +47,11 @@ export default class Headers extends React.Component{
                             defaultSelectedKeys={['2']}
                             style={{ lineHeight: '62px',border:'none' }}
                         >
-                            <Menu.Item key="1">nav 1</Menu.Item>
-                            <Menu.Item key="2">nav 2</Menu.Item>
-                            <Menu.Item key="3">nav 3</Menu.Item>
+                            {
+                                this.state.data && this.state.data.map(item=>{
+                                    return(<Menu.Item key={item.id}><span><Icon type={item.icon} /><span>{item.title}</span></span></Menu.Item>)
+                                })
+                            }
                         </Menu>
 
                     </Col>

@@ -3,16 +3,29 @@ import './index.less'
 import {Menu, Icon} from "antd";
 import {NavLink} from 'react-router-dom'
 import MenuConfig from './menuConfig'
+import axios from "../../axios";
 const SubMenu = Menu.SubMenu;
 
 export default class Menus extends React.Component{
     state = {
-        curSelectedMenuKey:[]
+        curSelectedMenuKey:[],
+        data:[]
     }
     componentWillMount(){
         let menuList = this.readerMenu(MenuConfig)
         this.setState({menuTreeNode:menuList})
+        // this.fetch()
+    }
+    fetch=()=>{
+        axios.get("menu/all",null,
+            result=> {
+                console.log("控制面板--------->",result)
+                this.setState({data:result.result ||[]})
+            },
+            result=> {
 
+            }
+        );
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;

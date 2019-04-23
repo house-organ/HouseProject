@@ -9,19 +9,18 @@ export default class MenuManage extends React.Component{
         listData:[],
     }
     componentWillMount() {
-        axios.get("topics",this.state.param,
-            result=> {
-                console.log("--------->",result)
-                this.setState({listData:result.data ||[]})
-            },
-            result=> {
-
-            }
-        );
+        // axios.get("topics",this.state.param,
+        //     result=> {
+        //         console.log("--------->",result)
+        //         this.setState({listData:result.data ||[]})
+        //     },
+        //     result=> {
+        //
+        //     }
+        // );
     }
     addOrUpdate=(e)=> {  //提交
         // console.log("11111",e)
-        return false
         // e && e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             console.log("11111",values)

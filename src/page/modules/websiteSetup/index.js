@@ -12,20 +12,24 @@ export default class UserManage extends React.Component{
     state = {
         headerTabs:[
             {
-                tabs:'Tab1',
+                tabs:'站点设置',
                 content:'WebSetup'
             },
             {
-                tabs:'Tab2',
+                tabs:'短信设置',
                 content:'weChatSetup'
             },
             {
-                tabs:'Tab3',
+                tabs:'水印设置',
                 content:'watermarkSetup'
             },
             {
-                tabs:'Tab4',
+                tabs:'微信设置',
                 content:'envelopeSetup'
+            },
+            {
+                tabs:'云存储设置',
+                content:''
             },
         ]
     };

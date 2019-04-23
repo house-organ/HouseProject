@@ -1,25 +1,87 @@
 import React from 'react'
-import { Tabs} from 'antd'
+import {Form,Input, Button} from 'antd'
 import './index.less'
+import axios from "../../../../axios";
 
-import Basic from './basic'
-import senior from './senior'
 
-const TabPane = Tabs.TabPane;
+const FormItem = Form.Item;
+const createForm = Form.create;
 
-export default class webSetup extends  React.Component{
-    callback=(e)=>{
+class webSetup extends React.Component{
+    state = {
+        data:[]
+    }
+    componentWillMount(){
+        this.fetch()
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    }
+    fetch=()=>{
+        axios.get("setting/site",null,
+            result=> {
+                console.log("--------->",result)
+                this.setState({data:result.result ||[]})
+            },
+            result=> {
 
+            }
+        );
     }
     render() {
+        const { getFieldDecorator } = this.props.form;
+        // const { autoCompleteResult } = this.state;
 
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 2 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 10 },
+            },
+        };
+        const tailFormItemLayout = {
+            wrapperCol: {
+                xs: {
+                    span: 24,
+                    offset: 0,
+                },
+                sm: {
+                    span: 16,
+                    offset: 2,
+                },
+            },
+        };
         return(
             <div className="tabs-box">
-                <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <TabPane tab="基本设置" key="1"><Basic></Basic></TabPane>
-                    <TabPane tab="高级设置" key="2"><senior></senior></TabPane>
-                </Tabs>
+                <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+                    <Form.Item
+                        label="E-mail"
+                    >
+                        {getFieldDecorator('email', {
+                            rules: [{
+                                type: 'email', message: 'The input is not valid E-mail!',
+                            }, {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>
+                    <Form.Item {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">Register</Button>
+                    </Form.Item>
+                </Form>
             </div>
         )
     }
 }
+webSetup = Form.create()(webSetup);
+export default webSetup;
