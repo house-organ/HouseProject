@@ -2,12 +2,12 @@ const menuList = [
     {
         title:'首页',
         key:'/home',
-        hierarchy:'1'
+        icon:'home'
     },
     {
         title:'用户中心',
         key:'/userCore',
-        hierarchy:'1',
+        icon:'user',
         children:[
             {
                 title:'用户管理',
@@ -24,14 +24,19 @@ const menuList = [
         ]
     },
     {
+        title:'站点设置',
+        key:'/websiteSetup',
+        icon:'setting'
+    },
+    {
         title:'次页',
         key:'/sdas',
-        hierarchy:'1'
+        icon:'shop'
     },
     {
         title:'二次页',
         key:'/modules',
-        hierarchy:'1',
+        icon:'user',
         children:[
             {
                 title:'测试222',

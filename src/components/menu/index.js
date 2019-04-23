@@ -12,6 +12,7 @@ export default class Menus extends React.Component{
     componentWillMount(){
         let menuList = this.readerMenu(MenuConfig)
         this.setState({menuTreeNode:menuList})
+
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;
@@ -22,30 +23,25 @@ export default class Menus extends React.Component{
         console.log("11111111",breadcrumb)
 
 
-        console.log("2222222",breadcrumb)
     }
     readerMenu = (data)=>{
         return  data.map((item)=>{
+            let html
             if(item.children){
                 return (
-                    <SubMenu key={item.key} title={<span><Icon type="user" /><span>{item.title}</span></span>} >
+                    <SubMenu key={item.key} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.children)}
                     </SubMenu>
                 )
             }
-            if(item.hierarchy){
-                return (
-                    <Menu.Item key={item.key} data-id={item.key}>
-                        <NavLink to={item.key}><span><Icon type="user" /><span>{item.title}</span></span></NavLink>
-                    </Menu.Item>
-                )
-            }else{
-                return (
-                    <Menu.Item key={item.key} data-id={item.key}>
-                        <NavLink to={item.key}>{item.title}</NavLink>
-                    </Menu.Item>
-                )
-            }
+            item.icon ? html = <span><Icon type={item.icon} /><span>{item.title}</span></span> : html = <span>{item.title}</span>
+            return (
+                <Menu.Item key={item.key} data-id={item.key}>
+                    <NavLink to={item.key}>
+                        {html}
+                    </NavLink>
+                </Menu.Item>
+            )
 
         })
 
