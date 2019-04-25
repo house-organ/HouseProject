@@ -5,14 +5,15 @@ import {
 } from 'antd';
 import './index.less'
 import axios from "../../axios";
-
-
+import {switchMenu} from '../../redux/action'
+import Store from '../../redux/store'
 
 const { Header } = Layout;
 
 export default class Headers extends React.Component{
     state = {
-        data:[]
+        data:[],
+        currentKey:[]
     }
     componentWillMount(){
         this.fetch()
@@ -21,12 +22,36 @@ export default class Headers extends React.Component{
         axios.get("menu/all",null,
             result=> {
                 console.log("顶部导航--------->",result)
-                this.setState({data:result.result ||[]})
+                let currentKey = []
+                currentKey[0] = JSON.stringify(result.result[0].id) || '';
+                // console.log(currentKey)
+                this.setState({
+                    data:result.result ||[],
+                    currentKey:currentKey
+                })
             },
             result=> {
 
             }
         );
+    }
+    handleClick=({item,key})=>{
+        console.log('click ', item,key);
+        console.log("-------------",this.state.currentKey)
+        // let keys = []
+        // keys[0] = key;
+        // this.setState({
+        //     currentKey: keys
+        // });
+        // if(key==this.state.currentKey[0]){
+        //     console.log("key",key)
+        //     return false
+        // }
+
+        // const {dispatch} = this.props
+        Store.dispatch(switchMenu(key))
+        // switchMenu(key)
+        // console.log("this.props----",switchMenu)
     }
     render() {
         const menu = (
@@ -36,6 +61,8 @@ export default class Headers extends React.Component{
                 </Menu.Item>
             </Menu>
         );
+        const defaultSelectedKeys = this.state.currentKey
+        console.log(defaultSelectedKeys == ['1'])
         return (
             <Header className="header header-box" >
                 <Row>
@@ -44,7 +71,8 @@ export default class Headers extends React.Component{
                         <Menu
                             theme="light"
                             mode="horizontal"
-                            defaultSelectedKeys={['2']}
+                            onClick={this.handleClick}
+                            defaultSelectedKeys={["1"]}
                             style={{ lineHeight: '62px',border:'none' }}
                         >
                             {

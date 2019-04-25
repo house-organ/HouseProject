@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button,Table,Popconfirm,Row, Col,List} from 'antd';
 import './index.less'
+import { Provider } from 'react-redux'
 // import showMsg from "../../../components/notification";
 import axios from "../../../axios";
 
@@ -24,7 +25,7 @@ export default class Home extends React.Component{
                     o[i] = obj[i];
                     data.push(o)
                 }
-                console.log("data",data)
+                // console.log("data",data)
 
                 // this.setState({data:data ||[]})
             },
