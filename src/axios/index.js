@@ -39,6 +39,18 @@ function apiAxios (method, url, params, success, failure) {
     if (params) {
         params = filterNull(params)
     }
+    let token =  localStorage.getItem('token') && JSON.parse(localStorage.getItem('token'));
+    if(!token){
+        // showMsg.error({
+        //     message: '提示',
+        //     description: '登录超时！',
+        //     onClick: () => {
+        //         console.log('Notification Clicked!');
+        //     },
+        // });
+        // window.location.href = '#/';
+        // return false;
+    }
     axios({
         method: method,
         url: url,

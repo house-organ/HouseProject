@@ -41,7 +41,7 @@ export default class Index extends React.Component{
                     className="menu-left"
                     style={{ background: '#fff', padding: 0 ,overflow: 'auto',position:'fixed',top:0, height: '100vh', }}
                 >
-                    <div className="logo" />
+                    <div className="logo" >后台管理系统</div>
                     <Menus></Menus>
                 </Sider>
                 <Layout >

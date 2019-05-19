@@ -36,7 +36,7 @@ export default class Headers extends React.Component{
         );
     }
     handleClick=({item,key})=>{
-        console.log('click ', item,key);
+        console.log('click ', key);
         console.log("-------------",this.state.currentKey)
         // let keys = []
         // keys[0] = key;
@@ -53,11 +53,16 @@ export default class Headers extends React.Component{
         // switchMenu(key)
         // console.log("this.props----",switchMenu)
     }
+    signOut=()=>{
+        let token = '';
+        localStorage.setItem('token', JSON.stringify(token));
+        window.location.href = '#/';
+    }
     render() {
         const menu = (
             <Menu>
                 <Menu.Item>
-                    <a  rel="noopener noreferrer" href="#/">退出</a>
+                    <span  rel="noopener noreferrer" onClick={this.signOut}>退出</span>
                 </Menu.Item>
             </Menu>
         );

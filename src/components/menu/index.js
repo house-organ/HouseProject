@@ -10,34 +10,42 @@ const SubMenu = Menu.SubMenu;
 
 class Menus extends React.Component{
     state = {
-        curSelectedMenuKey:[],
-        data:[]
+        curSelectedMenuKey:[],//左侧菜单默认选中
+        data:[], //左侧菜单数据
+        param:'' //左侧菜单接口请求参数
     }
     componentWillMount(){
-        let menuList = this.readerMenu(MenuConfig)
-        this.setState({menuTreeNode:menuList})
-        // this.fetch()
-        let {menuName} = this.props;
-        console.log("99999999999999----->",menuName)
+
+
+        let {menuName} = this.props; //顶部菜单初始选中参数
+        console.log("左侧菜单默认加载参数----->",menuName)
+        this.setState({
+            param:menuName ||'',
+        },this.fetch)
+
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         let  menuNames = nextProps.menuName
         let {menuName} = this.props
-        console.log("99999999999999---888888-->",menuNames,menuName)
+        console.log("redux菜单值-->",menuNames,menuName)
         if(menuName == menuNames){
             return false
         }else {
-            this.fecth()
-            return true
-
+            // return true
+            this.fetch()
         }
         console.log("---------->",menuName,nextState)
     }
     fetch=()=>{
-        axios.get("menu/all",null,
+        axios.get("menu/"+this.state.param,null,
             result=> {
-                console.log("控制面板--------->",result)
-                this.setState({data:result.result ||[]})
+                console.log("左侧菜单接口数据-----1111---->",result)
+                let menuData = result.result ||[];
+                console.log("111",menuData)
+                let menuList = this.readerMenu(menuData)
+                this.setState({
+                    data:result.result ||[],
+                })
             },
             result=> {
 
@@ -50,24 +58,36 @@ class Menus extends React.Component{
         this.setState({
             curSelectedMenuKey:[breadcrumb]
         })
-        console.log("11111111",breadcrumb)
+        // console.log("11111111",breadcrumb)
 
 
     }
+    menuData=()=>{
+
+        let menuData = this.state.data;
+        console.log("111",menuData)
+        let menuList = this.readerMenu(menuData)
+        console.log("menuList----->",menuList,menuData)
+        this.setState({
+            menuTreeNode:menuList
+        })
+    }
     readerMenu = (data)=>{
+        // let data = this.state.data;
+        console.log("data----->",data)
         return  data.map((item)=>{
             let html
-            if(item.children){
+            if(item.leftChild){
                 return (
-                    <SubMenu key={item.key} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
+                    <SubMenu key={item.request_path} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.children)}
                     </SubMenu>
                 )
             }
             item.icon ? html = <span><Icon type={item.icon} /><span>{item.title}</span></span> : html = <span>{item.title}</span>
             return (
-                <Menu.Item key={item.key} data-id={item.key}>
-                    <NavLink to={item.key}>
+                <Menu.Item key={item.request_path} data-id={item.request_path}>
+                    <NavLink to={item.request_path}>
                         {html}
                     </NavLink>
                 </Menu.Item>

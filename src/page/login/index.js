@@ -2,49 +2,64 @@ import React from 'react'
 // import { Redirect } from 'react-router-dom';
 import {Card, Form, Input, Button, Checkbox,notification } from 'antd';
 import './index.less'
+import axios from "../../axios";
 
 const formItemLayout = {
     labelCol: { span: 6 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 18 },
 };
 const formTailLayout = {
     labelCol: { span: 6 },
-    wrapperCol: { span: 16, offset: 6 },
+    wrapperCol: { span: 18, offset: 6 },
 };
 
 class login extends React.Component{
     state = {
-        checkNick: true,
+        checkNick: true, //是否记住帐号状态
     }
     componentWillMount(){
-        console.log("11")
         //location.href = 'main/index.html';
     }
-    check = () => {
+    handleSubmit = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
+            console.log("values---",values)
+
+
+
+
+
+
+
+
+
             if (!err) {
                 // let { keyword } = values;
                 // this.searchQuery(keyword);
+                axios.post("token/app",values,
+                    result=> {
+                        console.log("登录--------->",result)
+                        if(result.result){
+                            let token = result.result.token;
+                            localStorage.setItem('token', JSON.stringify(token)); //token缓存
+                            window.location.href = '/#/home';
+                        }
 
-                let params = {username:'admin',password:'123456'}
-                if(params.username===values.username && params.password === values.password){
-                     /*  <Redirect to={{
-                        // pathname: '/index',
-                        // search: '?utm=your+face',
-                        // state: { referrer: currentLocation }
+                    },
+                    result=> {
+                        notification.open({
+                            message: '提示',
+                            description: '帐号或密码错误！',
+                            onClick: () => {
+                                console.log('Notification Clicked!');
+                            },
+                        });
+                    }
+                );
 
-                    // }}/>*/
-                        console.log("params-----",params)
-                    window.location.href = '/#/home';
-                }else {
-                    notification.open({
-                        message: '提示',
-                        description: '帐号或密码错误！',
-                        onClick: () => {
-                            console.log('Notification Clicked!');
-                        },
-                    });
-                }
+
+
+
+
 
                 // this.setState({pagination: pager,param: params},this.fetch);
             }
@@ -66,39 +81,41 @@ class login extends React.Component{
                 <div className='login-main'>
                     <div className='login-box'>
                         <Card title="测试" className='login-box' bordered={false}>
-                            <Form.Item {...formItemLayout} label="帐号">
-                                {getFieldDecorator('username', {
-                                    rules: [{
-                                        required: true,
-                                        message: 'Please input your name',
-                                    }],
-                                })(
-                                    <Input placeholder="Please input your name" />
-                                )}
-                            </Form.Item>
-                            <Form.Item {...formItemLayout} label="密码">
-                                {getFieldDecorator('password', {
-                                    rules: [{
-                                        required: this.state.checkNick,
-                                        message: 'Please input your password',
-                                    }],
-                                })(
-                                    <Input type="password" placeholder="Please input your nickname" />
-                                )}
-                            </Form.Item>
-                            <Form.Item {...formTailLayout}>
-                                <Checkbox
-                                    checked={this.state.checkNick}
-                                    onChange={this.handleChange}
-                                >
-                                    记住登录状态
-                                </Checkbox>
-                            </Form.Item>
-                            <Form.Item {...formTailLayout}>
-                                <Button type="primary" onClick={this.check}>
-                                    登录
-                                </Button>
-                            </Form.Item>
+                            <Form onSubmit={this.handleSubmit} autoComplete="off">
+                                <Form.Item {...formItemLayout} label="帐号">
+                                    {getFieldDecorator('ac', {
+                                        rules: [{
+                                            required: true,
+                                            message: 'Please input your name',
+                                        }],
+                                    })(
+                                        <Input placeholder="Please input your name" />
+                                    )}
+                                </Form.Item>
+                                <Form.Item {...formItemLayout} label="密码">
+                                    {getFieldDecorator('se', {
+                                        rules: [{
+                                            required: this.state.checkNick,
+                                            message: 'Please input your password',
+                                        }],
+                                    })(
+                                        <Input type="password" placeholder="Please input your nickname" />
+                                    )}
+                                </Form.Item>
+                                <Form.Item {...formTailLayout}>
+                                    <Checkbox
+                                        checked={this.state.checkNick}
+                                        onChange={this.handleChange}
+                                    >
+                                        记住登录状态
+                                    </Checkbox>
+                                </Form.Item>
+                                <Form.Item {...formTailLayout}>
+                                    <Button type="primary" htmlType="submit" >
+                                        登录
+                                    </Button>
+                                </Form.Item>
+                            </Form>
                         </Card>
                     </div>
                 </div>

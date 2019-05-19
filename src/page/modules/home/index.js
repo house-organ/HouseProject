@@ -17,17 +17,21 @@ export default class Home extends React.Component{
     fetch=()=>{
         axios.get("general/all",null,
             result=> {
-                console.log("控制面板--------->",result.result)
-                let obj = result.result ||[];
+                // console.log("控制面板--------->",result.result)
+                let list = result.result  ||[]
                 let data = []
-                for (let i in obj) {
-                    let o = {};
-                    o[i] = obj[i];
-                    data.push(o)
-                }
+                let obj  = {}
+                list && list.map((item,index)=>{
+                    if(index % 2 == 0){
+                        obj.title2 = item.title
+                        obj.key2 = item.key
+                    }else {
+                        var obj2 =  Object.assign(item, obj);
+                        data.push(obj2)
+                    }
+                })
                 // console.log("data",data)
-
-                // this.setState({data:data ||[]})
+                this.setState({data:data  ||[]})
             },
             result=> {
 
@@ -37,19 +41,20 @@ export default class Home extends React.Component{
 
     render() {
         let columns = [
-            { title: '编号',dataIndex: 'id', key: 'id', width: '6%'},
-            { title: '内容库名称', dataIndex: 'title', key: 'title', width: '25%',  },
-            { title: '公司名称',  dataIndex: 'companyid',key: 'companyid', width: '25%',
+            // { title: '编号',dataIndex: 'id', key: 'id', width: '6%'},
+            { title: '名称1', dataIndex: 'title', key: 'key', width: '25%',  },
+            { title: '名称2', dataIndex: 'title2', key: 'key2', width: '25%',  },
+            // { title: '公司名称',  dataIndex: 'companyid',key: 'companyid', width: '25%',
                 // render: (text, record) => {
                 //     return (record['companyid'] && companyList &&  companyList[record['companyid']])
                 // }
-            },
-            { title: '状态', key: 'state', width: '10%',
-                render: (text, record) => {
-                    return (record.state===0 ? '启用 ':'未启用')
-                }
-            },
-            { title: '操作', key: '#', width: '20%',
+            // },
+            // { title: '状态', key: 'state', width: '10%',
+            //     render: (text, record) => {
+            //         return (record.state===0 ? '启用 ':'未启用')
+            //     }
+            // },
+            // { title: '操作', key: '#', width: '20%',
                 // render: (text, record) => {
                 //     return (
                 //         <div>
@@ -60,11 +65,23 @@ export default class Home extends React.Component{
                 //         </div>
                 //     )
                 // }
-            }
+            // }
         ];
+        const upgrade = [
+
+        ]
         return (
             <div className="admin-content">
-                {/*<Table columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />*/}
+                <Table
+                    className="upgrade-box"
+                    columns={columns}
+                    dataSource={this.state.data}
+                    size="small"
+                    bordered
+                    pagination={false}
+                    title={() => 'Header'}
+                    rowKey={(record) => record.key}
+                />
                 <Row>
                     <Col span={12}>
                         {/*<List className="row-tabl-r"*/}
