@@ -10,9 +10,11 @@ const SubMenu = Menu.SubMenu;
 
 class Menus extends React.Component{
     state = {
+        defaultOpenKeys:[],//左侧菜单默认展开
         curSelectedMenuKey:[],//左侧菜单默认选中
         data:[], //左侧菜单数据
-        param:'' //左侧菜单接口请求参数
+        param:'', //左侧菜单接口请求参数
+        menuTreeNode:[]
     }
     componentWillMount(){
 
@@ -22,14 +24,16 @@ class Menus extends React.Component{
         this.setState({
             param:menuName ||'',
         },this.fetch)
-
+        console.log("-----左侧导航加载--222----",this.state.menuTreeNode)
+        console.log("curSelectedMenuKey---",this.state.curSelectedMenuKey)
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         let  menuNames = nextProps.menuName
         let {menuName} = this.props
         console.log("redux菜单值-->",menuNames,menuName)
         if(menuName == menuNames){
-            return false
+            console.log("11111111")
+            return true
         }else {
             // return true
             this.fetch()
@@ -39,12 +43,16 @@ class Menus extends React.Component{
     fetch=()=>{
         axios.get("menu/"+this.state.param,null,
             result=> {
-                console.log("左侧菜单接口数据-----1111---->",result)
                 let menuData = result.result ||[];
-                console.log("111",menuData)
+                console.log("左侧菜单接口数据----",menuData)
+
                 let menuList = this.readerMenu(menuData)
+                console.log("menuList----11->",[menuData[0].leftChild[0].id])
                 this.setState({
                     data:result.result ||[],
+                    menuTreeNode:menuList,
+                    defaultOpenKeys:[menuData[0].id],
+                    curSelectedMenuKey:[menuData[0].leftChild[0].id]
                 })
             },
             result=> {
@@ -58,36 +66,32 @@ class Menus extends React.Component{
         this.setState({
             curSelectedMenuKey:[breadcrumb]
         })
-        // console.log("11111111",breadcrumb)
 
 
     }
-    menuData=()=>{
-
-        let menuData = this.state.data;
-        console.log("111",menuData)
-        let menuList = this.readerMenu(menuData)
-        console.log("menuList----->",menuList,menuData)
-        this.setState({
-            menuTreeNode:menuList
-        })
-    }
+    // menuTreeNode = () =>{
+    //     let menuData = this.state.data;
+    //     console.log("menuData----11->",menuData)
+    //     let menuList = this.readerMenu(menuData)
+    //     console.log("menuList----->",menuList)
+    //     this.setState({
+    //         menuTreeNode:menuList
+    //     })
+    // }
     readerMenu = (data)=>{
-        // let data = this.state.data;
-        console.log("data----->",data)
         return  data.map((item)=>{
             let html
             if(item.leftChild){
                 return (
-                    <SubMenu key={item.request_path} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
-                        {this.readerMenu(item.children)}
+                    <SubMenu key={item.id} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
+                        {this.readerMenu(item.leftChild)}
                     </SubMenu>
                 )
             }
             item.icon ? html = <span><Icon type={item.icon} /><span>{item.title}</span></span> : html = <span>{item.title}</span>
             return (
-                <Menu.Item key={item.request_path} data-id={item.request_path}>
-                    <NavLink to={item.request_path}>
+                <Menu.Item key={item.id} data-id={item.request_child}>
+                    <NavLink to={item.request_child}>
                         {html}
                     </NavLink>
                 </Menu.Item>
@@ -100,13 +104,21 @@ class Menus extends React.Component{
     render() {
         return (
             <Menu theme="light"
-                  defaultSelectedKeys={['/home']}
+                  // defaultSelectedKeys={['/home']}
                   selectedKeys={this.state.curSelectedMenuKey}
+                  defaultSelectedKeys={['3']}
                   mode="inline"
                   onClick={this.onMenuClick}
                   style={{ border:'none',marginLeft: '-1px'}}
             >
                 {this.state.menuTreeNode}
+                {
+                    console.log("-----左侧导航加载---111---",this.state.menuTreeNode)
+
+                }
+                {
+                    console.log("-----左侧导航加载---333---",this.state.defaultOpenKeys)
+                }
             </Menu>
         )
     }
