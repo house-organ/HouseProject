@@ -21,7 +21,7 @@ export default class Headers extends React.Component{
     fetch=()=>{
         axios.get("menu/all",null,
             result=> {
-                console.log("顶部导航--------->",result)
+                // console.log("顶部导航--------->",result)
                 let currentKey = []
                 currentKey[0] = JSON.stringify(result.result[0].id) || '';
                 // console.log(currentKey)
@@ -37,7 +37,7 @@ export default class Headers extends React.Component{
     }
     handleClick=({item,key})=>{
         console.log('click ', key);
-        console.log("-------------",this.state.currentKey)
+        // console.log("-------------",this.state.currentKey)
         // let keys = []
         // keys[0] = key;
         // this.setState({
@@ -67,7 +67,6 @@ export default class Headers extends React.Component{
             </Menu>
         );
         const defaultSelectedKeys = this.state.currentKey
-        console.log(defaultSelectedKeys == ['1'])
         return (
             <Header className="header header-box" >
                 <Row>

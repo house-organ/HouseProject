@@ -6,12 +6,14 @@ import MenuConfig from './menuConfig'
 import axios from "../../axios";
 import {connect} from "react-redux";
 import Store from '../../redux/store'
+import {switchMenu} from "../../redux/action";
 const SubMenu = Menu.SubMenu;
 
 class Menus extends React.Component{
     state = {
-        defaultOpenKeys:[],//左侧菜单默认展开
-        curSelectedMenuKey:[],//左侧菜单默认选中
+        defaultOpenKeys:['2'],//左侧菜单默认展开
+        defaultSelectedKeys:['0'],//左侧菜单默认选中
+        // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
         param:'', //左侧菜单接口请求参数
         menuTreeNode:[]
@@ -20,30 +22,38 @@ class Menus extends React.Component{
 
 
         let {menuName} = this.props; //顶部菜单初始选中参数
-        console.log("左侧菜单默认加载参数----->",menuName)
+        // console.log("左侧菜单默认加载参数----->",menuName)
         this.setState({
             param:menuName ||'',
         },this.fetch)
-        console.log("-----左侧导航加载--222----",this.state.menuTreeNode)
-        console.log("curSelectedMenuKey---",this.state.curSelectedMenuKey)
+        // console.log("-----左侧导航加载--222----",this.state.menuTreeNode)
+        // console.log("curSelectedMenuKey---",this.state.curSelectedMenuKey)
     }
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        let  menuNames = nextProps.menuName
-        let {menuName} = this.props
-        console.log("redux菜单值-->",menuNames,menuName)
-        if(menuName == menuNames){
-            console.log("11111111")
-            return true
-        }else {
-            // return true
-            this.fetch()
-        }
-        console.log("---------->",menuName,nextState)
-    }
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     let  menuNames = nextProps.menuName
+    //     let {menuName} = this.props
+    //     // console.log("redux菜单值-->",menuNames,menuName)
+    //     if(menuName == menuNames){
+    //         // console.log("11111111")
+    //         return false
+    //     }else {
+    //         return true
+    //         // this.fetch()
+    //     }
+    //     // console.log("---------->",menuName,nextState)
+    // }
     fetch=()=>{
         axios.get("menu/"+this.state.param,null,
             result=> {
                 let menuData = result.result ||[];
+                let home = {}
+                home.id = '0';
+                home.title= "控制台";
+                home.request_child= "home";
+                home.request_method= "index";
+                home.request_parent= null;
+
+                menuData[0].leftChild.push(home)
                 console.log("左侧菜单接口数据----",menuData)
 
                 let menuList = this.readerMenu(menuData)
@@ -52,7 +62,7 @@ class Menus extends React.Component{
                     data:result.result ||[],
                     menuTreeNode:menuList,
                     defaultOpenKeys:[menuData[0].id],
-                    curSelectedMenuKey:[menuData[0].leftChild[0].id]
+                    defaultSelectedKeys:[menuData[0].leftChild[0].id]
                 })
             },
             result=> {
@@ -62,9 +72,11 @@ class Menus extends React.Component{
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;
+        // console.log("breadcrumb",breadcrumb)
         // breadcrumb = key.key.split("/");
+        // Store.dispatch(leftMenu(key))
         this.setState({
-            curSelectedMenuKey:[breadcrumb]
+            defaultSelectedKeys:[breadcrumb]
         })
 
 
@@ -104,27 +116,19 @@ class Menus extends React.Component{
     render() {
         return (
             <Menu theme="light"
-                  // defaultSelectedKeys={['/home']}
-                  selectedKeys={this.state.curSelectedMenuKey}
-                  defaultSelectedKeys={['3']}
+                  defaultOpenKeys={this.state.defaultOpenKeys}
+                  // selectedKeys={this.state.curSelectedMenuKey}
+                  defaultSelectedKeys={this.state.defaultSelectedKeys}
                   mode="inline"
                   onClick={this.onMenuClick}
                   style={{ border:'none',marginLeft: '-1px'}}
             >
                 {this.state.menuTreeNode}
-                {
-                    console.log("-----左侧导航加载---111---",this.state.menuTreeNode)
-
-                }
-                {
-                    console.log("-----左侧导航加载---333---",this.state.defaultOpenKeys)
-                }
             </Menu>
         )
     }
 }
 const mapStateToProps =(state)=>{
-    console.log("ssssssssss",state)
     return {
         menuName:state.menuName,
         // list:state.list
@@ -134,7 +138,6 @@ const mapStateToProps =(state)=>{
 const mapDispatchToProps =(dispatch)=>{
     return{
         changeInputValue(e){
-            console.log("1111111",e)
             // const action=changeValue(e.target.value)
             // dispatch(action)
         },
