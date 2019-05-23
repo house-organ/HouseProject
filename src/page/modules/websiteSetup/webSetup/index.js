@@ -2,7 +2,7 @@ import React from 'react'
 import {Form,Input, Button,Switch,Upload, Icon, message,Radio } from 'antd'
 import './index.less'
 import axios from "../../../../axios";
-
+import NotificationMixin from '../../../../components/notification';
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -30,6 +30,7 @@ class webSetup extends React.Component{
     state = {
         data:[],
         loading: false,
+        param:{}
     }
     componentWillMount(){
         this.fetch()
@@ -39,6 +40,9 @@ class webSetup extends React.Component{
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                this.setState({
+                    param:values ||[]
+                }.this.putFile)
             }
         });
     }
@@ -46,8 +50,18 @@ class webSetup extends React.Component{
         axios.get("setting/site",null,
             result=> {
                 console.log("站点设置参数--------->",result)
-                console.log("result.result",result.result.status=='0' ? true : false)
                 this.setState({data:result.result ||[]})
+            },
+            result=> {
+
+            }
+        );
+    }
+    putFile=()=>{
+        axios.get("setting/site",this.state.param,
+            result=> {
+                console.log("站点设置参数--------->",result)
+                NotificationMixin.success("修改成功！")
             },
             result=> {
 
@@ -107,7 +121,7 @@ class webSetup extends React.Component{
                 <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                     <Form.Item label="网站状态">
                         {getFieldDecorator('status', {
-                            initialValue: this.state.data && this.state.data.status || '0',
+                            initialValue: (this.state.data && this.state.data.status) || '0',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -120,8 +134,8 @@ class webSetup extends React.Component{
                             }],
                         })(
                             <RadioGroup>
-                                <Radio value={0}>关闭</Radio>
-                                <Radio value={1}>开启</Radio>
+                                <Radio value={'0'}>关闭</Radio>
+                                <Radio value={'1'}>开启</Radio>
                             </RadioGroup>
                         )}
                     </Form.Item>
@@ -129,7 +143,7 @@ class webSetup extends React.Component{
                         label="站点名称"
                     >
                         {getFieldDecorator('site_name', {
-                            initialValue: this.state.data && this.state.data.site_name || '',
+                            initialValue: (this.state.data && this.state.data.site_name) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -148,7 +162,7 @@ class webSetup extends React.Component{
                         label="电脑版Logo"
                     >
                         {getFieldDecorator('pc_logo', {
-                            initialValue: this.state.data && this.state.data.pc_logo || '',
+                            initialValue: (this.state.data && this.state.data.pc_logo) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -177,7 +191,7 @@ class webSetup extends React.Component{
                         label="移动端Logo"
                     >
                         {getFieldDecorator('mobile_logo', {
-                            initialValue: this.state.data && this.state.data.mobile_logo || '',
+                            initialValue: (this.state.data && this.state.data.mobile_logo) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -206,7 +220,7 @@ class webSetup extends React.Component{
                         label="微信二维码"
                     >
                         {getFieldDecorator('wechat_code', {
-                            initialValue: this.state.data && this.state.data.wechat_code || '',
+                            initialValue: (this.state.data && this.state.data.wechat_code) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -235,7 +249,7 @@ class webSetup extends React.Component{
                         label="备案号"
                     >
                         {getFieldDecorator('record_numbe', {
-                            initialValue: this.state.data && this.state.data.record_numbe || '',
+                            initialValue: (this.state.data && this.state.data.record_numbe) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -254,7 +268,7 @@ class webSetup extends React.Component{
                         label="客服电话"
                     >
                         {getFieldDecorator('customer_telephone', {
-                            initialValue: this.state.data && this.state.data.customer_telephone || '',
+                            initialValue: (this.state.data && this.state.data.customer_telephone) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -273,7 +287,7 @@ class webSetup extends React.Component{
                         label="客服QQ"
                     >
                         {getFieldDecorator('customer_qq', {
-                            initialValue: this.state.data && this.state.data.customer_qq || '',
+                            initialValue: (this.state.data && this.state.data.customer_qq) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -292,7 +306,7 @@ class webSetup extends React.Component{
                         label="默认地图坐标"
                     >
                         {getFieldDecorator('map_point', {
-                            initialValue: this.state.data && this.state.data.map_point || '',
+                            initialValue: (this.state.data && this.state.data.map_point) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -311,7 +325,7 @@ class webSetup extends React.Component{
                         label="在线咨询"
                     >
                         {getFieldDecorator('online_consulting', {
-                            initialValue: this.state.data && this.state.data.online_consulting || '',
+                            initialValue: (this.state.data && this.state.data.online_consulting) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -328,7 +342,7 @@ class webSetup extends React.Component{
                     </Form.Item>
                     <Form.Item label="城市域名">
                         {getFieldDecorator('city_domain', {
-                            initialValue: this.state.data && this.state.data.city_domain || '0',
+                            initialValue: (this.state.data && this.state.data.city_domain) || '0',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -341,14 +355,14 @@ class webSetup extends React.Component{
                             }],
                         })(
                             <RadioGroup>
-                                <Radio value={0}>关闭</Radio>
-                                <Radio value={1}>开启</Radio>
+                                <Radio value={'0'}>关闭</Radio>
+                                <Radio value={'1'}>开启</Radio>
                             </RadioGroup>
                         )}
                     </Form.Item>
                     <Form.Item label="购房红包">
                         {getFieldDecorator('red_packet', {
-                            initialValue: this.state.data && this.state.data.red_packet || '0',
+                            initialValue: (this.state.data && this.state.data.red_packet) || '0',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -361,8 +375,8 @@ class webSetup extends React.Component{
                             }],
                         })(
                             <RadioGroup>
-                                <Radio value={0}>关闭</Radio>
-                                <Radio value={1}>开启</Radio>
+                                <Radio value={'0'}>关闭</Radio>
+                                <Radio value={'1'}>开启</Radio>
                             </RadioGroup>
                         )}
                     </Form.Item>
@@ -371,7 +385,7 @@ class webSetup extends React.Component{
                         label="企业名称"
                     >
                         {getFieldDecorator('company_name', {
-                            initialValue: this.state.data && this.state.data.company_name || '',
+                            initialValue: (this.state.data && this.state.data.company_name) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -390,7 +404,7 @@ class webSetup extends React.Component{
                         label="SEO标题"
                     >
                         {getFieldDecorator('seo_title', {
-                            initialValue: this.state.data && this.state.data.seo_title || '',
+                            initialValue: (this.state.data && this.state.data.seo_title) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -409,7 +423,7 @@ class webSetup extends React.Component{
                         label="SEO关键词"
                     >
                         {getFieldDecorator('seo_keys', {
-                            initialValue: this.state.data && this.state.data.seo_keys || '',
+                            initialValue: (this.state.data && this.state.data.seo_keys) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -428,7 +442,7 @@ class webSetup extends React.Component{
                         label="SEO描述"
                     >
                         {getFieldDecorator('seo_desc', {
-                            initialValue: this.state.data && this.state.data.seo_desc || '',
+                            initialValue: (this.state.data && this.state.data.seo_desc) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -447,7 +461,7 @@ class webSetup extends React.Component{
                         label="公司邮箱"
                     >
                         {getFieldDecorator('email', {
-                            initialValue: this.state.data && this.state.data.email || '',
+                            initialValue: (this.state.data && this.state.data.email) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -466,7 +480,7 @@ class webSetup extends React.Component{
                         label="公司地址"
                     >
                         {getFieldDecorator('address', {
-                            initialValue: this.state.data && this.state.data.address || '',
+                            initialValue: (this.state.data && this.state.data.address) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
