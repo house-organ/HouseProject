@@ -63,12 +63,40 @@ class Menus extends React.Component{
                     menuTreeNode:menuList,
                     defaultOpenKeys:[menuData[0].id],
                     defaultSelectedKeys:[menuData[0].leftChild[0].id]
-                })
+                },this.urlSetMenu)
             },
             result=> {
 
             }
         );
+    }
+    urlSetMenu = ()=>{
+        // console.log("url",window.location.href)
+        var newHashUrl = this.getHashKeyByUrl(window.location.href);
+        console.log("------>",newHashUrl)
+      
+        this.setState({defaultSelectedKeys:[newHashUrl]});
+        console.log("-router----->",this.state.defaultSelectedKeys)
+        window.onhashchange = (hash)=> {
+            var newHash = this.getHashKeyByUrl(hash.newURL);
+            if(newHash == this.getHashKeyByUrl(hash.oldURL)){
+                return;
+            }
+            // this.setState({curSelectedMenuKey:[newHash]});
+            console.log("url参数-->",newHash)
+        };
+    }
+    getHashKeyByUrl=(url)=>{
+        var reg = new RegExp(/#\/(.*)?/);
+        var matches =url.match(reg);
+        if(matches && matches.length>=2 && matches[1]!=undefined){
+            return matches[1];
+        }else{
+            return null;
+        }
+    }
+    getMenuKey=(key)=>{
+        let menuList = this.state.data
     }
     onMenuClick = (key) =>{
         let breadcrumb = key.key;

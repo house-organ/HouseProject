@@ -17,7 +17,7 @@ export default class UserManage extends React.Component{
             },
             {
                 tabs:'短信设置',
-                content:'weChatSetup'
+                content:'envelopeSetup'
             },
             {
                 tabs:'水印设置',
@@ -25,7 +25,7 @@ export default class UserManage extends React.Component{
             },
             {
                 tabs:'微信设置',
-                content:'envelopeSetup'
+                content:'weChatSetup'
             },
             {
                 tabs:'云存储设置',
