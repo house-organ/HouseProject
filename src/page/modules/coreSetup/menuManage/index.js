@@ -1,23 +1,28 @@
 import React from 'react'
-import {Button,Table,Popconfirm,} from 'antd';
+import {Form,Button,Input,Table,Popconfirm,} from 'antd';
 import axios from "../../../../axios";
 import {Link} from 'react-router-dom'
 // import editModal from './editModal'
 
-export default class MenuManage extends React.Component{
+const FormItem = Form.Item;
+const createForm = Form.create;
+class MenuManage extends React.Component{
     state = {
-        listData:[],
+        data:[],
     }
     componentWillMount() {
-        // axios.get("topics",this.state.param,
-        //     result=> {
-        //         console.log("--------->",result)
-        //         this.setState({listData:result.data ||[]})
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+        this.fetch()
+    }
+    fetch=()=>{
+        axios.get("setting/storage",null,
+            result=> {
+                console.log("导航设置--------->",result)
+                // this.setState({data:result.result ||[]})
+            },
+            result=> {
+
+            }
+        );
     }
     addOrUpdate=(e)=> {  //提交
         // console.log("11111",e)
@@ -36,11 +41,10 @@ export default class MenuManage extends React.Component{
             }
         });
     }
-    handleClose(record) {
+    handleClose=(record)=> {
         let that = this;
         if (!record) return;
         console.log("record---",record);
-        return false
         this.post({
             url: "c509bd90a82719a3569291e12c24a6f1af4bac",
             param: {
@@ -54,7 +58,11 @@ export default class MenuManage extends React.Component{
             }
         });
     }
+    handleSubmit=()=>{
+
+    }
     render(){
+        const { getFieldDecorator } = this.props.form;
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id', width: '6%'},
             { title: '标题', dataIndex: 'title', key: 'title', width: '25%',
@@ -84,8 +92,26 @@ export default class MenuManage extends React.Component{
         ];
         return(
             <div className="admin-content">
-                <Table columns={columns} dataSource={this.state.listData} size="small" rowKey={(record) => record.id} />
+                <div className="form-search">
+                    <Form layout="inline" onSubmit={this.handleSubmit} autoComplete="off">
+                        <FormItem>
+                            {
+                                getFieldDecorator('title')(
+                                    <Input placeholder="请输入内容库名称" />
+                                )
+                            }
+                        </FormItem>
+                        <FormItem>
+                            <Button type="primary" htmlType="submit">查询</Button>
+                        </FormItem>
+
+                        {/*<Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>*/}
+                    </Form>
+                </div>
+                <Table columns={columns} dataSource={this.state.data} size="small" rowKey={(record) => record.id} />
             </div>
         )
     }
 }
+MenuManage = Form.create()(MenuManage);
+export default MenuManage;

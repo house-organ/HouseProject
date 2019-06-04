@@ -3,13 +3,13 @@ import {HashRouter,Route, Switch} from 'react-router-dom'
 import App from '../App.js'
 import Index from '../page/index'
 import Login from '../page/login'
-import Home from '../page/modules/home'
-import NoFind from '../page/modules/noFind'
-import UserManage from '../page/modules/userCore/userManage'
-import PrivilegeManage from '../page/modules/userCore/privilegeManage'
-import MenuManage from '../page/modules/userCore/menuManage'
-import WebsiteSetup from '../page/modules/websiteSetup'
-import MenuManageEditModal from '../page/modules/userCore/menuManage/editModal'
+import Home from '../page/modules/home' //控制台
+import NoFind from '../page/modules/noFind'  //404
+import UserManage from '../page/modules/coreSetup/userManage'  //用户设置
+import PrivilegeManage from '../page/modules/coreSetup/privilegeManage'
+import MenuManage from '../page/modules/coreSetup/menuManage'  //导航设置
+import WebsiteSetup from '../page/modules/coreSetup/websiteSetup'  //站点设置
+import MenuManageEditModal from '../page/modules/coreSetup/menuManage/editModal'
 
 export default class AdminRouter extends React.Component{
     render(){
@@ -24,9 +24,9 @@ export default class AdminRouter extends React.Component{
                                     <Route path="/home"  component={Home}/>
                                     <Route path="/Nav" component={UserManage}/>{/*站点设置*/}
                                     <Route path="/Setting" exact component={WebsiteSetup}/>
-                                    <Route path="/Menu" component={PrivilegeManage}/>
+                                    <Route path="/Menu" component={MenuManage}/>
                                     <Route path="/MenuManage" exact component={MenuManage}/>
-                                    <Route path="/userCore/menuManage/editModal/:id?" component={MenuManageEditModal}/>
+                                    <Route path="/coreSetup/menuManage/editModal/:id?" component={MenuManageEditModal}/>
 
                                     {/*<Route path="/userCore/menuManage" render={() =>*/}
                                         {/*<Switch>*/}

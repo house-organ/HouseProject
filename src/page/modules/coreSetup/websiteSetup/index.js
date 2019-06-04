@@ -5,6 +5,7 @@ import WebSetup from './webSetup'
 import WeChatSetup from './weChatSetup'
 import WatermarkSetup from './watermarkSetup'
 import EnvelopeSetup from './envelopeSetup'
+import CloudStorage from './cloudStorage'
 
 const TabPane = Tabs.TabPane;
 
@@ -29,7 +30,7 @@ export default class UserManage extends React.Component{
             },
             {
                 tabs:'云存储设置',
-                content:''
+                content:'cloudStorage'
             },
         ]
     };
@@ -54,6 +55,8 @@ export default class UserManage extends React.Component{
                                 content = <WatermarkSetup></WatermarkSetup>
                             }else if(item.content=='envelopeSetup'){
                                 content = <EnvelopeSetup></EnvelopeSetup>
+                            }else if(item.content=='cloudStorage'){
+                                content = <CloudStorage></CloudStorage>
                             }
                             return(
                                 <TabPane tab={item.tabs} key={index}>{content}</TabPane>

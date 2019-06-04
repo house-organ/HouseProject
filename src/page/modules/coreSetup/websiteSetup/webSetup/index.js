@@ -1,8 +1,8 @@
 import React from 'react'
 import {Form,Input, Button,Switch,Upload, Icon, message,Radio } from 'antd'
 import './index.less'
-import axios from "../../../../axios";
-import NotificationMixin from '../../../../components/notification';
+import axios from "../../../../../axios";
+import NotificationMixin from '../../../../../components/notification';
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -42,7 +42,7 @@ class webSetup extends React.Component{
                 console.log('Received values of form: ', values);
                 this.setState({
                     param:values ||[]
-                }.this.putFile)
+                },this.putFile)
             }
         });
     }
@@ -58,7 +58,7 @@ class webSetup extends React.Component{
         );
     }
     putFile=()=>{
-        axios.get("setting/site",this.state.param,
+        axios.post("setting/site",this.state.param,
             result=> {
                 console.log("站点设置参数--------->",result)
                 NotificationMixin.success("修改成功！")
