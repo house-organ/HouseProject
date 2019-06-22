@@ -1,64 +1,141 @@
 import React from 'react'
-import {List,Comment,} from 'antd';
+import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
 import axios from "../../../../axios";
+import NotificationMixin from "../../../../components/notification";
 
-export default class editModal extends React.Component {
+const FormItem = Form.Item;
+const createForm = Form.create;
+const Option = Select.Option;
+const { TextArea } = Input;
+class editModal extends React.Component {
     state = {
-        data:{},
-        replies:[],
-        authorName:''
+        item:this.props.item || {},
     }
     componentWillMount() {
-        // console.log("this.props.match.params-----",this.props)
-        let id = this.props.match.params.id;
-        if(id){
-            this.setState({
-                data:{},
-                replies:[],
-                authorName:''
-            },this.fetch(id))
-            // this.fetch(id)
-        }
     }
     fetch=(id)=>{
-        axios.get("topic/"+id,null,
-            result=> {
-                this.setState({
-                    data:result.data ||{},
-                    authorName:result.data.author.loginname || '',
-                    replies:result.data.replies || [],
-                })
-            },
-            result=> {
+        // axios.get("topic/"+id,null,
+        //     result=> {
+        //         this.setState({
+        //             data:result.data ||{},
+        //             authorName:result.data.author.loginname || '',
+        //             replies:result.data.replies || [],
+        //         })
+        //     },
+        //     result=> {
+        //
+        //     }
+        // );
+    }
+    hideModal=()=> {
+        /**
+         * 说明：弹窗关闭事件
+         * */
+        this.props.onCancel && this.props.onCancel();
+    }
+    handleSubmit=()=>{
+        /**
+         * 说明：表单提交事件
+         * */
+        this.props.form.validateFieldsAndScroll((errors, values) => {
+            if (!!errors) {
+                console.log('Errors in form!!!');
+                return;
+            }
+            // console.log("values",values)
+            let url = "nav";
+            let param = values;
 
+
+            if (this.props.item.id) {
+                url = "nav";
+                param.id = this.props.item.id;
+                if(param.is_sys === !!param.is_sys){
+                    param.is_sys ? param.is_sys = 1 : param.is_sys = 0
+                }
+                console.log("param----->",param)
+            }
+            this.postFile(url,param)
+        })
+    }
+    postFile=(url,param)=>{
+        axios.post(url,param,
+            result=> {
+                // console.log("修改成功--------->",result)
+                NotificationMixin.success("修改成功！")
+                this.props.onManualClose && this.props.onManualClose();
+            },result=>{
+                NotificationMixin.error("修改失败！")
             }
         );
+
     }
     render() {
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 18 },
+        };
         return(
-            <div>
-                <p>{this.props.match.params.id}</p>
-                <h1>{this.state.data.title}</h1>
-                <p>作者： {this.state.authorName}    发表于：{this.state.data.create_at}</p>
-                <div dangerouslySetInnerHTML={{__html:this.state.data.content}}>
-                </div>
-                <List
-                    className="comment-list"
-                    header={`${this.state.replies.length} replies`}
-                    itemLayout="horizontal"
-                    dataSource={this.state.replies}
-                    renderItem={item => (
-                        <Comment
-                            // actions={item.actions}
-                            author={item.author.loginname}
-                            avatar={item.author.avatar_url}
-                            // content={item.content}
-                            content={item.content.replace(/<[^>]+>/g,"")}
-                            datetime={item.create_at}
-                        />
-                    )}
-                />
-            </div>
+            <Modal
+                title={this.props.title}
+                visible={true}
+                maskClosable={false}
+                onOk={this.handleSubmit}
+                onCancel={this.hideModal}
+                // width={800}
+            >
+                <Form  layout="horizontal" >
+                    <FormItem
+                        {...formItemLayout}
+                        label="菜单名称："
+                    >
+                        {getFieldDecorator('title', {
+                            initialValue: (this.state.item && this.state.item.title) || '',
+                            rules: [{
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
+                            }],
+                        })(
+                            <Input type="text"  placeholder="名称" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="状态："
+                    >
+                        {getFieldDecorator('status', {
+                            initialValue: (this.state.item && this.state.item.status) || '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="SEO描述："
+                    >
+                        {getFieldDecorator('seo_desc', {
+                            initialValue: '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <TextArea rows={4} placeholder="SEO描述" />
+                        )}
+                    </FormItem>
+                </Form>
+            </Modal>
         )
     }
 }
+editModal = createForm()(editModal);
+export default editModal;

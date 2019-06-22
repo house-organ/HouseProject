@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Input, Button,Switch,Upload, Icon, message,Radio } from 'antd'
+import {Form,Input, Button,Upload, Icon, message,Radio } from 'antd'
 import './index.less'
 import axios from "../../../../../axios";
 import NotificationMixin from '../../../../../components/notification';

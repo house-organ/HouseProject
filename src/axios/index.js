@@ -79,7 +79,7 @@ function apiAxios (method, url, params, success, failure) {
             //   // window.alert('api error, HTTP CODE: ' + res.status)
             //   console.log('api error333, HTTP CODE: ' + res.status);
             // }
-            showMsg.error('api error, HTTP CODE: ' +err.status);
+            showMsg.error('api error, HTTP CODE: ' +err.msg);
         })
 }
 

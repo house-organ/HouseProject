@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Input, Button,Table ,Tabs } from 'antd';
+import { Tabs } from 'antd';
 import './index.less'
 import WebSetup from './webSetup'
 import WeChatSetup from './weChatSetup'
@@ -47,15 +47,15 @@ export default class UserManage extends React.Component{
                     {
                         this.state.headerTabs && this.state.headerTabs.map((item,index)=>{
                             let content
-                            if(item.content=='WebSetup'){
+                            if(item.content==='WebSetup'){
                                 content = <WebSetup></WebSetup>
-                            }else if(item.content=='weChatSetup'){
+                            }else if(item.content==='weChatSetup'){
                                 content = <WeChatSetup></WeChatSetup>
-                            }else if(item.content=='watermarkSetup'){
+                            }else if(item.content==='watermarkSetup'){
                                 content = <WatermarkSetup></WatermarkSetup>
-                            }else if(item.content=='envelopeSetup'){
+                            }else if(item.content==='envelopeSetup'){
                                 content = <EnvelopeSetup></EnvelopeSetup>
-                            }else if(item.content=='cloudStorage'){
+                            }else if(item.content==='cloudStorage'){
                                 content = <CloudStorage></CloudStorage>
                             }
                             return(

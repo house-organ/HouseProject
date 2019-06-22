@@ -2,7 +2,6 @@ import React from 'react'
 import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
 import axios from "../../../../axios";
 import NotificationMixin from "../../../../components/notification";
-// import NotificationMixin from "../../../../components/notification";
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -12,41 +11,34 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
-        data:{},
-        replies:[],
-        authorName:''
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
-        // console.log("this.props.match.params-----",this.props)
-        // let id = this.props.match.params.id;
-        // if(id){
-        //     this.setState({
-        //         data:{},
-        //         replies:[],
-        //         authorName:''
-        //     },this.fetch(id))
-        //     // this.fetch(id)
-        // }
     }
     fetch=(id)=>{
-        axios.get("topic/"+id,null,
-            result=> {
-                this.setState({
-                    data:result.data ||{},
-                    authorName:result.data.author.loginname || '',
-                    replies:result.data.replies || [],
-                })
-            },
-            result=> {
-
-            }
-        );
+        // axios.get("topic/"+id,null,
+        //     result=> {
+        //         this.setState({
+        //             data:result.data ||{},
+        //             authorName:result.data.author.loginname || '',
+        //             replies:result.data.replies || [],
+        //         })
+        //     },
+        //     result=> {
+        //
+        //     }
+        // );
     }
     hideModal=()=> {
+        /**
+         * 说明：弹窗关闭事件
+         * */
         this.props.onCancel && this.props.onCancel();
     }
     handleSubmit=()=>{
+        /**
+         * 说明：表单提交事件
+         * */
         this.props.form.validateFieldsAndScroll((errors, values) => {
             if (!!errors) {
                 console.log('Errors in form!!!');
@@ -74,9 +66,8 @@ class editModal extends React.Component {
                 // console.log("修改成功--------->",result)
                 NotificationMixin.success("修改成功！")
                 this.props.onManualClose && this.props.onManualClose();
-            },
-            result=> {
-
+            },result=>{
+                NotificationMixin.error("修改失败！")
             }
         );
 
@@ -102,7 +93,7 @@ class editModal extends React.Component {
                         label="菜单名称："
                     >
                         {getFieldDecorator('title', {
-                            initialValue: this.state.item && this.state.item.title || '',
+                            initialValue: (this.state.item && this.state.item.title )|| '',
                             rules: [{
                                 required: true,
                                 validator: (rule, value, callback) => {
@@ -122,7 +113,7 @@ class editModal extends React.Component {
                         label="状态："
                     >
                         {getFieldDecorator('status', {
-                            initialValue: this.state.item && this.state.item.status || '',
+                            initialValue: (this.state.item && this.state.item.status )|| '',
                             rules: [{
                                 required: false,
                             }],
@@ -148,7 +139,7 @@ class editModal extends React.Component {
                         label="导航位置："
                     >
                         {getFieldDecorator('pos', {
-                            initialValue: this.state.item && this.state.item.pos_name || '',
+                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
                             rules: [{
                                 required: true,
                                 message:'请选择导航位置'
@@ -166,7 +157,7 @@ class editModal extends React.Component {
                         label="打开方式："
                     >
                         {getFieldDecorator('open_type', {
-                            initialValue: this.state.item && this.state.item.open_type_name || '',
+                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
                             rules: [{
                                 required: true,
                                 message:'请选择导航位置'
@@ -184,7 +175,7 @@ class editModal extends React.Component {
                         label="排序："
                     >
                         {getFieldDecorator('ordid', {
-                            initialValue: this.state.item && this.state.item.ordid || '',
+                            initialValue: (this.state.item && this.state.item.ordid )|| '',
                             rules: [{
                                 required: false,
                             }],
@@ -197,7 +188,7 @@ class editModal extends React.Component {
                         label="seo标题："
                     >
                         {getFieldDecorator('seo_title', {
-                            initialValue: this.state.item && this.state.item.seo_title || '',
+                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
                             rules: [{
                                 required: false,
                             }],
@@ -210,7 +201,7 @@ class editModal extends React.Component {
                         label="seo关键词："
                     >
                         {getFieldDecorator('seo_keys', {
-                            initialValue: this.state.item && this.state.item.seo_keys || '',
+                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
                             rules: [{
                                 required: false,
                             }],

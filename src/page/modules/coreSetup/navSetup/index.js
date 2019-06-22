@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Button,Input,Table,Popconfirm,Switch} from 'antd';
+import {Form,Button,Table,Popconfirm,Switch} from 'antd';
 import axios from "../../../../axios";
 import NotificationMixin from "../../../../components/notification";
 import AddOrUpdateModal from './editModal'
@@ -20,6 +20,7 @@ class MenuManage extends React.Component{
          * */
         axios.get("nav/all",null,
             result=> {
+                // console.log(result.result)
                 this.setState({data:result.result ||[]})
             },
         );
@@ -30,6 +31,11 @@ class MenuManage extends React.Component{
          * */
         e && e.preventDefault() ;
         e && e.stopPropagation();
+        if(modal){
+            modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
+            modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
+        }
+
         new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
             this.fetch();
         }, null, {
@@ -40,25 +46,21 @@ class MenuManage extends React.Component{
             isEdit: modal && modal.id  ? true : false,
         }).show();
     }
-    handleClose=(record)=> {
+    handleDelete=(record)=> {
         /**
          * 说明：删除方法
          * */
-        let that = this;
-        if (!record) return;
+        let param = {};
+        param.id=record.id;
         console.log("record---",record);
-        this.post({
-            url: "c509bd90a82719a3569291e12c24a6f1af4bac",
-            param: {
-                id: record.id
+        axios.delete("nav",param,
+            result=> {
+                NotificationMixin.success("删除成功！")
             },
-            noLoading: true
-        }).then(result=> {
-            if (result.result) {
-                NotificationMixin.success("操作成功");
-                that.fetch();
+            result=> {
+
             }
-        });
+        );
     }
     handleSubmit=()=>{
         /**
@@ -113,7 +115,7 @@ class MenuManage extends React.Component{
 
             { title: '操作', key: '#', width: '20%',
                 render: (text, record) => {
-                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleClose.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
+                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
