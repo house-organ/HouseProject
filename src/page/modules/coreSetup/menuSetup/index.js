@@ -14,9 +14,9 @@ class MenuManage extends React.Component{
         this.fetch()
     }
     fetch=()=>{
-        axios.get("setting/storage",null,
+        axios.get("menu/list",null,
             result=> {
-                console.log("导航设置--------->",result)
+                console.log("菜单设置------11--->",result)
                 // this.setState({data:result.result ||[]})
             },
             result=> {
@@ -102,7 +102,7 @@ class MenuManage extends React.Component{
                             }
                         </FormItem>
                         <FormItem>
-                            <Button type="primary" htmlType="submit">查询</Button>
+                            <Button type="primary" htmlType="submit">菜单查询</Button>
                         </FormItem>
 
                         {/*<Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>*/}

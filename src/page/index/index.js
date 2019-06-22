@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Layout, Breadcrumb,
+    Layout, Breadcrumb,Card
 } from 'antd';
 import './index.less'
 import Headers from '../../components/header';
@@ -53,7 +53,10 @@ export default class Index extends React.Component{
                             {this.state.breadcrumb}
                         </Breadcrumb>
                         <div className='modular-main'>
-                            {this.props.children}
+                            <Card title="Default size card" >
+                                {this.props.children}
+                            </Card>
+
                         </div>
                     </Content>
                     <Footers style={{ textAlign: 'center' }}></Footers>

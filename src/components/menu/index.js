@@ -57,7 +57,7 @@ class Menus extends React.Component{
                 console.log("左侧菜单接口数据----",menuData)
 
                 let menuList = this.readerMenu(menuData)
-                console.log("menuList----11->",[menuData[0].leftChild[0].id])
+                // console.log("menuList----11->",[menuData[0].leftChild[0].id])
                 this.setState({
                     data:result.result ||[],
                     menuTreeNode:menuList,
@@ -73,10 +73,10 @@ class Menus extends React.Component{
     urlSetMenu = ()=>{
         // console.log("url",window.location.href)
         var newHashUrl = this.getHashKeyByUrl(window.location.href);
-        console.log("------>",newHashUrl)
+        // console.log("------>",newHashUrl)
       
         this.setState({defaultSelectedKeys:[newHashUrl]});
-        console.log("-router----->",this.state.defaultSelectedKeys)
+        // console.log("-router----->",this.state.defaultSelectedKeys)
         window.onhashchange = (hash)=> {
             var newHash = this.getHashKeyByUrl(hash.newURL);
             if(newHash == this.getHashKeyByUrl(hash.oldURL)){
