@@ -79,7 +79,7 @@ export default class Home extends React.Component{
                     size="small"
                     bordered
                     pagination={false}
-                    title={() => 'Header'}
+                    // title={() => 'Header'}
                     rowKey={(record) => record.key}
                 />
                 <Row>

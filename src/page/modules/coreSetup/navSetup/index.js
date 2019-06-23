@@ -113,7 +113,7 @@ class MenuManage extends React.Component{
             { title: 'SEO标题', dataIndex: 'seo_title', key: 'seo_title', width: '6%',  },
             { title: 'SEO关键字', dataIndex: 'seo_keys', key: 'seo_keys', width: '6%',  },
 
-            { title: '操作', key: '#', width: '20%',
+            { title: '操作', key: '#', width: '10%',
                 render: (text, record) => {
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (

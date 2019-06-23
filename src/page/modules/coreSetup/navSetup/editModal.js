@@ -55,7 +55,7 @@ class editModal extends React.Component {
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
                 }
-                console.log("param----->",param)
+                // console.log("param----->",param)
             }
             this.postFile(url,param)
         })

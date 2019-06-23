@@ -2,7 +2,6 @@ import React from 'react'
 import './index.less'
 import {Menu, Icon} from "antd";
 import {NavLink} from 'react-router-dom'
-import MenuConfig from './menuConfig'
 import axios from "../../axios";
 import {connect} from "react-redux";
 import Store from '../../redux/store'
@@ -16,32 +15,16 @@ class Menus extends React.Component{
         // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
         param:'', //左侧菜单接口请求参数
-        menuTreeNode:[]
+        menuTreeNode:[],
+        collapsed:this.props.collapsed,
     }
     componentWillMount(){
-
-
         let {menuName} = this.props; //顶部菜单初始选中参数
-        // console.log("左侧菜单默认加载参数----->",menuName)
         this.setState({
             param:menuName ||'',
         },this.fetch)
         // console.log("-----左侧导航加载--222----",this.state.menuTreeNode)
-        // console.log("curSelectedMenuKey---",this.state.curSelectedMenuKey)
     }
-    // shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //     let  menuNames = nextProps.menuName
-    //     let {menuName} = this.props
-    //     // console.log("redux菜单值-->",menuNames,menuName)
-    //     if(menuName == menuNames){
-    //         // console.log("11111111")
-    //         return false
-    //     }else {
-    //         return true
-    //         // this.fetch()
-    //     }
-    //     // console.log("---------->",menuName,nextState)
-    // }
     fetch=()=>{
         axios.get("menu/"+this.state.param,null,
             result=> {
@@ -83,7 +66,7 @@ class Menus extends React.Component{
                 return;
             }
             // this.setState({curSelectedMenuKey:[newHash]});
-            console.log("url参数-->",newHash)
+            // console.log("url参数-->",newHash)
         };
     }
     getHashKeyByUrl=(url)=>{
@@ -98,42 +81,44 @@ class Menus extends React.Component{
     getMenuKey=(key)=>{
         let menuList = this.state.data
     }
-    onMenuClick = (key) =>{
-        let breadcrumb = key.key;
-        // console.log("breadcrumb",breadcrumb)
-        // breadcrumb = key.key.split("/");
-        // Store.dispatch(leftMenu(key))
-        this.setState({
-            defaultSelectedKeys:[breadcrumb]
+    onMenuClick = (e) =>{
+        let breadcrumb = []
+        this.state.data.map(item=>{
+            let obj ={}
+            obj.key = item.id;
+            obj.title = item.title;
+            if(item.leftChild){
+                item.leftChild.map(todu=>{
+                    let obj2 = {}
+                    if(e.key === todu.id){
+                        obj2.key = todu.id;
+                        obj2.title = todu.title;
+                        breadcrumb.push(obj,obj2)
+                    }
+                })
+            }else {
+                if(e.key === item.key){
+                    breadcrumb.push(obj)
+                }
+            }
         })
-
+        this.props.onMenuChange(breadcrumb)
 
     }
-    // menuTreeNode = () =>{
-    //     let menuData = this.state.data;
-    //     console.log("menuData----11->",menuData)
-    //     let menuList = this.readerMenu(menuData)
-    //     console.log("menuList----->",menuList)
-    //     this.setState({
-    //         menuTreeNode:menuList
-    //     })
-    // }
     readerMenu = (data)=>{
-        return  data.map((item)=>{
-            let html
+        let iconList = ['bank','gold','container']
+        return  data.map((item,index)=>{
+            item.icon = iconList[index]
             if(item.leftChild){
                 return (
-                    <SubMenu key={item.id} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
+                    <SubMenu key={item.id} data-id={item.title} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.leftChild)}
                     </SubMenu>
                 )
             }
-            item.icon ? html = <span><Icon type={item.icon} /><span>{item.title}</span></span> : html = <span>{item.title}</span>
             return (
-                <Menu.Item key={item.id} data-id={item.request_child}>
-                    <NavLink to={item.request_child}>
-                        {html}
-                    </NavLink>
+                <Menu.Item key={item.id} title={item.title}>
+                    <NavLink to={item.request_child}>{ item.icon === 'home' ? <Icon type={item.icon} /> :'' }  <span>{item.title}</span> </NavLink>
                 </Menu.Item>
             )
 
@@ -144,12 +129,12 @@ class Menus extends React.Component{
     render() {
         return (
             <Menu theme="light"
-                  defaultOpenKeys={this.state.defaultOpenKeys}
-                  // selectedKeys={this.state.curSelectedMenuKey}
-                  defaultSelectedKeys={this.state.defaultSelectedKeys}
                   mode="inline"
+                  className="menu-box"
+                  defaultSelectedKeys={['0']}
+                  defaultOpenKeys={['6']}
                   onClick={this.onMenuClick}
-                  style={{ border:'none',marginLeft: '-1px'}}
+                  inlineCollapsed={this.state.collapsed}
             >
                 {this.state.menuTreeNode}
             </Menu>

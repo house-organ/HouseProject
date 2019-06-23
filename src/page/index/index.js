@@ -1,67 +1,66 @@
 import React from 'react'
-import {
-    Layout, Breadcrumb,Card
-} from 'antd';
+import {Layout, Breadcrumb} from 'antd';
 import './index.less'
 import Headers from '../../components/header';
 import Footers from '../../components/footer'
-import Menus from '../../components/menu'
+import Menu from '../../components/menu'
 
-const {
-     Content,  Sider,
-} = Layout;
+const {Content,  Sider} = Layout;
 export default class Index extends React.Component{
     state = {
         collapsed: false,
-        breadcrumb:[]
+        temperature:[], //标题
+        breadcrumb:[]  //面包屑
     };
     componentWillMount() {
-        this.breadcrumb();
     }
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
         });
     }
-    breadcrumb=()=>{
-        let breadcrumb =["userCore", "userManage"]
-        let breadcrumbItem = breadcrumb && breadcrumb.map((item)=>{
-                                return (<Breadcrumb.Item key={item}>{item}</Breadcrumb.Item>)
-                            })
-        this.setState({breadcrumb:breadcrumbItem})
+    handleTemp=(temperature)=> {
+        let breadcrumb = temperature.map(item=>{
+            return <Breadcrumb.Item key={item.key}>{item.title}</Breadcrumb.Item>
+        })
+        this.setState({
+            breadcrumb:breadcrumb,
+            temperature:temperature
+        })
     }
     render(){
 
         return (
-            <Layout>
-                <Sider
-                    trigger={null}
-                    collapsible
-                    collapsed={this.state.collapsed}
-                    className="menu-left"
-                    style={{ background: '#fff', padding: 0 ,overflow: 'auto',position:'fixed',top:0, height: '100vh', }}
-                >
-                    <div className="logo" >后台管理系统</div>
-                    <Menus></Menus>
-                </Sider>
-                <Layout >
-                    <Headers></Headers>
-                    <Content style={{  marginTop: 64,marginLeft:200 }}>
-                        <Breadcrumb style={{ margin: '6px 15px' }}>
-                            {/*<Breadcrumb.Item>User</Breadcrumb.Item>*/}
-                            {/*<Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
-                            {this.state.breadcrumb}
-                        </Breadcrumb>
-                        <div className='modular-main'>
-                            <Card title="Default size card" >
-                                {this.props.children}
-                            </Card>
+            <div>
+                <Layout className="components-layout-demo-custom-trigger">
+                    <Sider
+                        trigger={null}
+                        collapsible
+                        collapsed={this.state.collapsed}
+                        className="left-box"
+                    >
+                        <div className="logo" >后台管理系统</div>
+                        <Menu onMenuChange={this.handleTemp}  collapsed={this.state.collapsed}></Menu>
+                    </Sider>
+                    <Layout >
 
-                        </div>
-                    </Content>
-                    <Footers style={{ textAlign: 'center' }}></Footers>
+                        <Content className="main-content">
+                            <Headers collapsed={this.state.collapsed} toggle={this.toggle}></Headers>
+                            <Breadcrumb  className="breadcrumb-box">
+                                {this.state.breadcrumb.length > 1 ? this.state.breadcrumb : <Breadcrumb.Item >控制台</Breadcrumb.Item> }
+                            </Breadcrumb>
+                            <div className="content-box" >
+                                <div className="main-title">{this.state.temperature.length>1 ? this.state.temperature[1].title : '控制台'}</div>
+                                <div className="main-box">
+                                    {this.props.children}
+                                </div>
+
+                            </div>
+                        </Content>
+                        <Footers style={{ textAlign: 'center' }}></Footers>
+                    </Layout>
                 </Layout>
-            </Layout>
+            </div>
         )
     }
 }

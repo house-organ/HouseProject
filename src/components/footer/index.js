@@ -4,7 +4,7 @@ import './index.less'
 export default class Footters extends React.Component{
     render() {
         return (
-            <div className="foot-box">Ant Design ©2018 Created by Ant UED</div>
+            <div className="foot-box">admin ©2019 Created by jiangChuan</div>
         )
     }
 }

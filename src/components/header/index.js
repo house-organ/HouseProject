@@ -13,7 +13,8 @@ const { Header } = Layout;
 export default class Headers extends React.Component{
     state = {
         data:[],
-        currentKey:[]
+        currentKey:[],
+        collapsed:this.props.collapsed
     }
     componentWillMount(){
         this.fetch()
@@ -66,12 +67,18 @@ export default class Headers extends React.Component{
                 </Menu.Item>
             </Menu>
         );
-        const defaultSelectedKeys = this.state.currentKey
+        // const defaultSelectedKeys = this.state.currentKey
         return (
             <Header className="header header-box" >
                 <Row>
-
-                    <Col span={12}>
+                    <Col span={1}>
+                        <Icon
+                            className="trigger"
+                            type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            onClick={()=>{this.props.toggle(this.state.collapsed)}}
+                        />
+                    </Col>
+                    <Col span={13}>
                         <Menu
                             theme="light"
                             mode="horizontal"
@@ -87,7 +94,7 @@ export default class Headers extends React.Component{
                         </Menu>
 
                     </Col>
-                    <Col span={12}>
+                    <Col span={10}>
                         <div className="user-info">
                             <Dropdown overlay={menu}>
                                 <span className="ant-dropdown-link">

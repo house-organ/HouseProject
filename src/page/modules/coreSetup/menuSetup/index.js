@@ -14,6 +14,9 @@ class MenuManage extends React.Component{
         this.fetch()
     }
     fetch=()=>{
+        /**
+         * 说明：菜单管理列表接口
+         * */
         axios.get("menu/list",null,
             result=> {
                 console.log("菜单设置------11--->",result)
@@ -28,6 +31,8 @@ class MenuManage extends React.Component{
         /**
          * 说明：添加菜单
          * */
+        console.log(e)
+        // console.log("type--->",type)
         e && e.preventDefault() ;
         e && e.stopPropagation();
         if(modal){
@@ -82,11 +87,12 @@ class MenuManage extends React.Component{
                 // }
             // },
 
-            { title: '操作', key: '#', width: '16%',
+            { title: '操作', key: '#', width: '18%',
                 render: (text, record) => {
                     return (
                         <div>
-                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
+                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>添加子栏目</Button>
+                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)} style={{marginLeft:15}}>修改</Button>
                             <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleClose.bind(this,record)} okText="确定" cancelText="取消">
                                 <Button type="primary" style={{marginLeft: "10px"}}>删除</Button>
                             </Popconfirm>
@@ -124,15 +130,20 @@ class MenuManage extends React.Component{
                         <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
                     </Form>
                 </div>
-                <Table
-                    columns={columns}
-                    dataSource={this.state.data}
-                    rowSelection={rowSelection}
-                    defaultExpandAllRows={ true }
-                    pagination={ false }
-                    size="small"
-                    rowKey={(record) => record.id}
-                />
+                {
+                    this.state.data && this.state.data.length ?
+                        <Table
+                            columns={columns}
+                            dataSource={this.state.data}
+                            rowSelection={rowSelection}
+                            pagination={ false }
+                            defaultExpandAllRows={true}
+                            size="small"
+                            rowKey={(record) => record.id}
+                        />
+                        : ''
+                }
+
             </div>
         )
     }
