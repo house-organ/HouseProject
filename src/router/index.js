@@ -3,15 +3,16 @@ import {HashRouter,Route, Switch} from 'react-router-dom'
 import App from '../App.js'
 import Index from '../page/index'
 import Login from '../page/login'
-import Home from '../page/modules/home' //控制台
+import Home from '../page/modules/setUp/coreSetup/home' //控制台
 import NoFind from '../page/modules/noFind'  //404
-import UserManage from '../page/modules/coreSetup/userManage'  //用户设置
+import UserManage from '../page/modules/setUp/coreSetup/userManage'  //用户设置
 // import PrivilegeManage from '../page/modules/coreSetup/privilegeManage'
-import MenuSetup from '../page/modules/coreSetup/menuSetup'  //导航设置
-import NavSetup from '../page/modules/coreSetup/navSetup'  //导航设置
-import WebsiteSetup from '../page/modules/coreSetup/websiteSetup'  //站点设置
+import MenuSetup from '../page/modules/setUp/coreSetup/menuSetup'  //导航设置
+import NavSetup from '../page/modules/setUp/coreSetup/navSetup'  //导航设置
+import WebsiteSetup from '../page/modules/setUp/coreSetup/websiteSetup'  //站点设置
 // import MenuManageEditModal from '../page/modules/coreSetup/menuManage/editModal'
 
+import Region from '../page/modules/modular/regionalManag' //区域管理
 export default class AdminRouter extends React.Component{
     render(){
         return(
@@ -30,6 +31,7 @@ export default class AdminRouter extends React.Component{
                                     {/*<Route path="/MenuManage" exact component={MenuManage}/>*/}
                                     {/*<Route path="/coreSetup/menuManage/editModal/:id?" component={MenuManageEditModal}/>*/}
 
+                                     <Route path="/region" exact component={Region}/>
                                     {/*<Route path="/userCore/menuManage" render={() =>*/}
                                         {/*<Switch>*/}
                                             {/*<Route path="/userCore/menuManage" component={MenuManage}/>*/}

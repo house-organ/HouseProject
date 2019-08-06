@@ -25,7 +25,8 @@ class Menus extends React.Component{
     componentWillMount(){
         let {menuName} = this.props; //顶部菜单初始选中参数
         this.setState({
-            param:menuName ||'',
+            // param:menuName ||'',
+            param:'2' ||'',
         },this.fetch)
     }
     // shouldComponentUpdate(nextProps, nextState){
@@ -111,11 +112,12 @@ class Menus extends React.Component{
                 }
             }
         })
+        console.log("breadcrumb--->",breadcrumb)
         this.props.onMenuChange(breadcrumb)
 
     }
     readerMenu = (data)=>{
-        let iconList = ['bank','gold','container']
+        let iconList = ['bank','gold','container','filter','hourglass','folder','dashboard']
         return  data.map((item,index)=>{
             item.icon = iconList[index]
             if(item.leftChild){
