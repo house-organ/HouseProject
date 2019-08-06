@@ -14,17 +14,34 @@ class Menus extends React.Component{
         defaultSelectedKeys:['0'],//左侧菜单默认选中
         // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
-        param:'', //左侧菜单接口请求参数
+        param:'1', //左侧菜单接口请求参数
         menuTreeNode:[],
         collapsed:this.props.collapsed,
+        headItemKey:[],  //this.props.headItemKey
+    }
+    componentDidMount(){
+       
     }
     componentWillMount(){
         let {menuName} = this.props; //顶部菜单初始选中参数
         this.setState({
             param:menuName ||'',
         },this.fetch)
-        // console.log("-----左侧导航加载--222----",this.state.menuTreeNode)
     }
+    // shouldComponentUpdate(nextProps, nextState){
+    //     console.log("--1->",nextProps.menuName , this.props.menuName)
+    //     console.log("--2->",nextProps.menuName !== this.props.menuName)
+    //     return nextProps.menuName !== this.props.menuName
+    // }
+    // componentWillUpdate(props,state){
+    //     let {menuName} = props; //顶部菜单后续选中参数
+    //     this.setState({
+    //         param:menuName ||'',
+    //     },this.fetch)
+    // }
+    // componentWillReceiveProps(nextProps){
+    //     console.log("nextProps--->",nextProps)
+    // }
     fetch=()=>{
         axios.get("menu/"+this.state.param,null,
             result=> {
@@ -35,17 +52,14 @@ class Menus extends React.Component{
                 home.request_child= "home";
                 home.request_method= "index";
                 home.request_parent= null;
-
                 menuData[0].leftChild.push(home)
                 console.log("左侧菜单接口数据----",menuData)
-
                 let menuList = this.readerMenu(menuData)
-                // console.log("menuList----11->",[menuData[0].leftChild[0].id])
                 this.setState({
                     data:result.result ||[],
                     menuTreeNode:menuList,
                     defaultOpenKeys:[menuData[0].id],
-                    defaultSelectedKeys:[menuData[0].leftChild[0].id]
+                    defaultSelectedKeys:[menuData[0].leftChild[0].id],
                 },this.urlSetMenu)
             },
             result=> {
@@ -54,20 +68,15 @@ class Menus extends React.Component{
         );
     }
     urlSetMenu = ()=>{
-        // console.log("url",window.location.href)
         var newHashUrl = this.getHashKeyByUrl(window.location.href);
-        // console.log("------>",newHashUrl)
-      
         this.setState({defaultSelectedKeys:[newHashUrl]});
-        // console.log("-router----->",this.state.defaultSelectedKeys)
         window.onhashchange = (hash)=> {
             var newHash = this.getHashKeyByUrl(hash.newURL);
-            if(newHash == this.getHashKeyByUrl(hash.oldURL)){
+            if(newHash === this.getHashKeyByUrl(hash.oldURL)){
                 return;
             }
-            // this.setState({curSelectedMenuKey:[newHash]});
-            // console.log("url参数-->",newHash)
         };
+
     }
     getHashKeyByUrl=(url)=>{
         var reg = new RegExp(/#\/(.*)?/);
@@ -111,13 +120,13 @@ class Menus extends React.Component{
             item.icon = iconList[index]
             if(item.leftChild){
                 return (
-                    <SubMenu key={item.id} data-id={item.title} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
+                    <SubMenu key={index} data-id={item.title} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.leftChild)}
                     </SubMenu>
                 )
             }
             return (
-                <Menu.Item key={item.id} title={item.title}>
+                <Menu.Item key={index} title={item.title}>
                     <NavLink to={item.request_child}>{ item.icon === 'home' ? <Icon type={item.icon} /> :'' }  <span>{item.title}</span> </NavLink>
                 </Menu.Item>
             )
@@ -127,6 +136,7 @@ class Menus extends React.Component{
     }
 
     render() {
+        console.log("执行了1-",this.state.menuTreeNode)
         return (
             <Menu theme="light"
                   mode="inline"
@@ -153,11 +163,13 @@ const mapDispatchToProps =(dispatch)=>{
         changeInputValue(e){
             // const action=changeValue(e.target.value)
             // dispatch(action)
+           
         },
         //新增数据
         handleAddClick(){
             // const action =additem()
             // dispatch(action)
+            
         },
         //删除数据
         handleDelete(index){

@@ -11,13 +11,13 @@ const ebikeData = (state = initalState,action)=>{
     switch (action.type) {
         case type.SWITCH_MENU:
         {
-            console.log("action",action)
+            // console.log("action",action)
             const newState =JSON.parse(JSON.stringify(state))
             if(action){
 
             }
             newState.menuName = action.menuName
-            console.log("newState",newState)
+            // console.log("newState",newState)
             return newState
 
         }
