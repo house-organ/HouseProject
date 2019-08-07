@@ -17,17 +17,17 @@ class Menus extends React.Component{
         param:'1', //左侧菜单接口请求参数
         menuTreeNode:[],
         collapsed:this.props.collapsed,
-        headItemKey:[],  //this.props.headItemKey
     }
     componentDidMount(){
-       
+        this.fetch("1")
     }
     componentWillMount(){
-        let {menuName} = this.props; //顶部菜单初始选中参数
-        this.setState({
+        // let {menuName} = this.props; //顶部菜单初始选中参数
+        // this.setState({
             // param:menuName ||'',
-            param:'2' ||'',
-        },this.fetch)
+            // param:'2' ||'',
+        // },this.fetch)
+        
     }
     // shouldComponentUpdate(nextProps, nextState){
     //     console.log("--1->",nextProps.menuName , this.props.menuName)
@@ -43,8 +43,8 @@ class Menus extends React.Component{
     // componentWillReceiveProps(nextProps){
     //     console.log("nextProps--->",nextProps)
     // }
-    fetch=()=>{
-        axios.get("menu/"+this.state.param,null,
+    fetch=(id)=>{
+        axios.get("menu/"+(this.state.param || id),null,
             result=> {
                 let menuData = result.result ||[];
                 let home = {}
@@ -138,7 +138,7 @@ class Menus extends React.Component{
     }
 
     render() {
-        console.log("执行了1-",this.state.menuTreeNode)
+        console.log("render执行了-",this.state.menuTreeNode)
         return (
             <Menu theme="light"
                   mode="inline"

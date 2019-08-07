@@ -39,9 +39,6 @@ export default class Headers extends React.Component{
     
     handleClick=({item,key})=>{
         console.log('click ', key);
-        if(this.props.onSwitch){
-            this.props.onSwitch({key})
-        }
         // console.log("-------------",this.state.currentKey)
         // let keys = []
         // keys[0] = key;
