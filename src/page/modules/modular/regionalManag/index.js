@@ -7,6 +7,8 @@ import ModalWrapper from "../../../../components/modalwrapper";
 
 const FormItem = Form.Item;
 const createForm = Form.create;
+
+//区域管理
 class MenuManage extends React.Component{
     state = {
         data:[],
@@ -18,9 +20,9 @@ class MenuManage extends React.Component{
         /**
          * 说明：菜单列表接口方法
          * */
-        axios.get("nav/all",null,
+        axios.get("/region/list",null,
             result=> {
-                // console.log(result.result)
+                console.log(result.result)
                 this.setState({data:result.result ||[]})
             },
         );
@@ -69,12 +71,12 @@ class MenuManage extends React.Component{
     }
     statusChange=(record,checked)=>{
         /**
-         * 说明：是否预置菜单状态方法
+         * 说明：状态方法
          * */
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("region/update",param)
 
     }
     postFile=(url,param)=>{
@@ -90,30 +92,22 @@ class MenuManage extends React.Component{
     render(){
         const { getFieldDecorator } = this.props.form;
         let columns = [
-            { title: '编号',dataIndex: 'id', key: 'id', width: '6%'},
+            { title: '编号',dataIndex: 'id', key: 'id',},
             // { title: '标题', dataIndex: 'title', key: 'title', width: '25%',
             //     render: (text, record) => {
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '菜单名称', dataIndex: 'title', key: 'title', width: '6%',  },
-            { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
-            { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
-            { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
-            { title: '是否预置菜单', dataIndex: 'is_sys', key: 'is_sys', width: '6%',
+            { title: '栏目名称', dataIndex: 'names', key: 'names', },
+            { title: '栏目别名', dataIndex: 'alias', key: 'alias',   },
+            { title: '域名', dataIndex: 'domain', key: 'domain',  },
+            { title: '排序', dataIndex: 'ordid', key: 'ordid',  },
+            { title: '状态', dataIndex: 'status', key: 'status', 
                 render:(text, record)=>{
-                    return (<Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={record['is_sys']==='1' ? true:false} disabled/>)
+                    return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['status']==='1' ? true:false} />)
                 }
             },
-            { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
-                render:(text, record)=>{
-                    return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
-                }
-            },
-            { title: 'SEO标题', dataIndex: 'seo_title', key: 'seo_title', width: '6%',  },
-            { title: 'SEO关键字', dataIndex: 'seo_keys', key: 'seo_keys', width: '6%',  },
-
-            { title: '操作', key: '#', width: '10%',
+            { title: '操作', key: '#',
                 render: (text, record) => {
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
@@ -128,6 +122,17 @@ class MenuManage extends React.Component{
                 }
             }
         ];
+        const rowSelection = {
+            onChange: (selectedRowKeys, selectedRows) => {
+                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            },
+            onSelect: (record, selected, selectedRows) => {
+                console.log(record, selected, selectedRows);
+            },
+            onSelectAll: (selected, selectedRows, changeRows) => {
+                console.log(selected, selectedRows, changeRows);
+            },
+        };
         return(
             <div className="admin-content">
                 <div className="form-search">
@@ -146,13 +151,28 @@ class MenuManage extends React.Component{
                         <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
                     </Form>
                 </div>
-                <Table
+                {/* <Table
                     columns={columns}
                     dataSource={this.state.data}
                     pagination={ false }
                     size="small"
                     rowKey={(record) => record.id}
-                />
+                /> */}
+
+                {
+                    this.state.data && this.state.data.length ?
+                        <Table
+                            columns={columns}
+                            dataSource={this.state.data}
+                            rowSelection={rowSelection}
+                            pagination={ false }
+                            defaultExpandAllRows={true}
+                            bordered
+                            size="small"
+                            rowKey={(record) => record.id}
+                        />
+                        : ''
+                }
             </div>
         )
     }

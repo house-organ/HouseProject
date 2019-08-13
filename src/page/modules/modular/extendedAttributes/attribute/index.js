@@ -1,9 +1,9 @@
 import React from 'react'
 import {Form,Button,Table,Popconfirm,Switch} from 'antd';
-import axios from "../../../../axios";
-import NotificationMixin from "../../../../components/notification";
+import axios from "../../../../../axios";
+import NotificationMixin from "../../../../../components/notification";
 import AddOrUpdateModal from './editModal'
-import ModalWrapper from "../../../../components/modalwrapper";
+import ModalWrapper from "../../../../../components/modalwrapper";
 
 const FormItem = Form.Item;
 const createForm = Form.create;

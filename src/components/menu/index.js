@@ -14,7 +14,7 @@ class Menus extends React.Component{
         defaultSelectedKeys:['0'],//左侧菜单默认选中
         // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
-        param:'1', //左侧菜单接口请求参数
+        param:'2', //左侧菜单接口请求参数
         menuTreeNode:[],
         collapsed:this.props.collapsed,
     }
@@ -112,7 +112,7 @@ class Menus extends React.Component{
                 }
             }
         })
-        console.log("breadcrumb--->",breadcrumb)
+        // console.log("breadcrumb--->",breadcrumb)
         this.props.onMenuChange(breadcrumb)
 
     }
@@ -138,7 +138,7 @@ class Menus extends React.Component{
     }
 
     render() {
-        console.log("render执行了-",this.state.menuTreeNode)
+        // console.log("render执行了-",this.state.menuTreeNode)
         return (
             <Menu theme="light"
                   mode="inline"

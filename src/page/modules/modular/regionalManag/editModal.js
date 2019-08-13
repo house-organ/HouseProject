@@ -45,12 +45,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "region/add";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
+                url = "region/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0

@@ -148,5 +148,6 @@ class MenuManage extends React.Component{
         )
     }
 }
+
 MenuManage = Form.create()(MenuManage);
 export default MenuManage;
