@@ -45,12 +45,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "poster_space/add";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
+                url = "poster_space/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -90,10 +90,10 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="广告位名称："
                     >
-                        {getFieldDecorator('title', {
-                            initialValue: (this.state.item && this.state.item.title )|| '',
+                        {getFieldDecorator('names', {
+                            initialValue: (this.state.item && this.state.item.names )|| '',
                             rules: [{
                                 required: true,
                                 validator: (rule, value, callback) => {
@@ -105,7 +105,7 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="名称" />
+                            <Input type="text"  placeholder="广告位名称" />
                         )}
                     </FormItem>
                     <FormItem
@@ -118,111 +118,46 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="图标："
+                        label="广告位宽度："
                     >
-                        {getFieldDecorator('icon', {
-                            initialValue: '',
+                        {getFieldDecorator('width', {
+                            initialValue: (this.state.item && this.state.item.width )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="icon" />
+                            <Input type="text"  placeholder="广告位宽度" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="导航位置："
+                        label="广告位高度："
                     >
-                        {getFieldDecorator('pos', {
-                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 页头菜单 </Option>
-                                <Option value="2"> 页脚菜单 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="打开方式："
-                    >
-                        {getFieldDecorator('open_type', {
-                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 新页面 </Option>
-                                <Option value="2"> 当前页面 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序："
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                        {getFieldDecorator('height', {
+                            initialValue: (this.state.item && this.state.item.height )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="排序" />
+                            <Input type="text"  placeholder="广告位高度" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo标题："
+                        label="显示广告数："
                     >
-                        {getFieldDecorator('seo_title', {
-                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
+                        {getFieldDecorator('display_num', {
+                            initialValue: (this.state.item && this.state.item.display_num )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="seo标题" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="seo关键词："
-                    >
-                        {getFieldDecorator('seo_keys', {
-                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="seo关键词" />
-                        )}
-                    </FormItem>
-
-
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="SEO描述："
-                    >
-                        {getFieldDecorator('seo_desc', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <TextArea rows={4} placeholder="SEO描述" />
+                            <Input type="text"  placeholder="显示广告数" />
                         )}
                     </FormItem>
 

@@ -55,7 +55,7 @@ class MenuManage extends React.Component{
         let param = {};
         param.id=record.id;
         console.log("record---",record);
-        axios.delete("nav",param,
+        axios.delete("region",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -114,7 +114,8 @@ class MenuManage extends React.Component{
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                // record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>
@@ -151,13 +152,6 @@ class MenuManage extends React.Component{
                         <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
                     </Form>
                 </div>
-                {/* <Table
-                    columns={columns}
-                    dataSource={this.state.data}
-                    pagination={ false }
-                    size="small"
-                    rowKey={(record) => record.id}
-                /> */}
 
                 {
                     this.state.data && this.state.data.length ?
