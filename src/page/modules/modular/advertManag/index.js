@@ -93,12 +93,23 @@ class MenuManage extends React.Component{
         );
     }
     onExpand=(expanded, record)=>{
-        if(expanded){
-            this.nestedTable(record)
+        console.log("expanded",expanded,record)
+        if(expanded=== false){
+            this.setState({
+                subTabData:[]
+            });        
+        }else{
+            axios.get("/poster/look/"+record.id,null,
+                result=> {
+                    console.log("1----->",result.result)
+                    this.setState({
+                        subTabData: result.result || []
+                    },this.nestedTable)
+                }
+              );
         }
     }
-    nestedTable=(record)=>{
-        let rowList = record;
+    nestedTable=()=>{
         expandedRowRender = (rowList) => {
             const columns = [
                 { title: '编号',dataIndex: 'id', key: 'id'},
@@ -122,29 +133,9 @@ class MenuManage extends React.Component{
                   ),
                 },
               ];
-              console.log("rowList--->",rowList)
-              if(rowList){
-                let params = rowList.id;
-                axios.get("/poster/look/"+params,null,
-                    result=> {
-                        // console.log(result.result)
-                        let dataList = result.result;
-                        return <Table columns={columns} dataSource={dataList} pagination={false} rowKey={(record) => record.id} />;
-                    },
-                );
-
-                let dataList = [
-                    {id:'1',names:'1',type_name:'1',city_name:'1',poster_space_name:'1',start_time:'1',end_time:'1',ordid:'1',status:'1'},
-                    {id:'2',names:'1',type_name:'1',city_name:'1',poster_space_name:'1',start_time:'1',end_time:'1',ordid:'1',status:'1'},
-                    {id:'3',names:'1',type_name:'1',city_name:'1',poster_space_name:'1',start_time:'1',end_time:'1',ordid:'1',status:'1'},
-                ]
-                return <Table columns={columns} dataSource={dataList} pagination={false} rowKey={(record) => record.id} />;
-              }else{
-                return () => {}
-              }
-              
-              
+              return <Table columns={columns} dataSource={this.state.subTabData} pagination={false} rowKey={(record) => record.id} />;
         }
+       
     }
     
     addChild=(modal,e)=>{
