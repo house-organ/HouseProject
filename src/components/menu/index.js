@@ -14,7 +14,7 @@ class Menus extends React.Component{
         defaultSelectedKeys:['0'],//左侧菜单默认选中
         // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
-        param:'2', //左侧菜单接口请求参数
+        param:'3', //左侧菜单接口请求参数
         menuTreeNode:[],
         collapsed:this.props.collapsed,
     }
@@ -146,7 +146,7 @@ class Menus extends React.Component{
                   defaultSelectedKeys={['0']}
                   defaultOpenKeys={['6']}
                   onClick={this.onMenuClick}
-                  inlineCollapsed={this.state.collapsed}
+                //   inlineCollapsed={this.state.collapsed}
             >
                 {this.state.menuTreeNode}
             </Menu>

@@ -21,6 +21,10 @@ import LinkType from '../page/modules/modular/friendshipLinks/linkType' //友情
 import Screen from '../page/modules/modular/extendedAttributes/screen' //筛选条件 
 import Attribute from '../page/modules/modular/extendedAttributes/attribute' //属性管理 
 
+import ArticleList from '../page/modules/content/articleManag/articleList' //文章列表 
+
+
+import EstateManag from '../page/modules/estate/estateManag' //楼盘管理 houselist
 
 export default class AdminRouter extends React.Component{
     render(){
@@ -47,8 +51,10 @@ export default class AdminRouter extends React.Component{
                                     <Route path="/link" exact component={LinkManag}/>{/*友情链接管理*/}
                                     <Route path="/linksort" exact component={LinkType}/>{/*友情链接管理*/}
                                     <Route path="/screen" exact component={Screen}/>{/*筛选条件*/}
-                                    <Route path="/attribute" exact component={Attribute}/>{/*属性管理*/}
-                                    
+                                    <Route path="/attribute" exact component={Attribute}/>{/*属性管理*/} 
+
+                                    <Route path="/houselist" exact component={EstateManag}/>{/*楼盘列表*/}
+
                                     {/*<Route path="/userCore/menuManage" render={() =>*/}
                                         {/*<Switch>*/}
                                             {/*<Route path="/userCore/menuManage" component={MenuManage}/>*/}

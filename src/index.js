@@ -1,19 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {LocaleProvider} from 'antd'
+import {ConfigProvider} from 'antd'
 import './index.css';
 import Router from './router'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import * as serviceWorker from './serviceWorker';
 import './components/notification'
-// import zhCN from 'antd/es/locale-provider/zh_CN';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 const Main = (
     <Provider store={store}>
-        <LocaleProvider locale={zhCN}>
+        <ConfigProvider locale={zhCN}>
             <Router />
-        </LocaleProvider>
+        </ConfigProvider>
     </Provider>
 )
 
