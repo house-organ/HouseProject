@@ -14,36 +14,35 @@ class Menus extends React.Component{
         defaultSelectedKeys:['0'],//左侧菜单默认选中
         // curSelectedMenuKey:['3'],//左侧菜单默认选中
         data:[], //左侧菜单数据
-        param:'3', //左侧菜单接口请求参数
+        param:'1', //左侧菜单接口请求参数
         menuTreeNode:[],
         collapsed:this.props.collapsed,
     }
     componentDidMount(){
-        this.fetch("1")
+        // this.fetch("1")
     }
     componentWillMount(){
-        // let {menuName} = this.props; //顶部菜单初始选中参数
-        // this.setState({
-            // param:menuName ||'',
+        let {menuName} = this.props; //顶部菜单初始选中参数
+        this.setState({
+            param:menuName ||'',
             // param:'2' ||'',
-        // },this.fetch)
+        },this.fetch)
         
     }
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log("--1->",nextProps.menuName , this.props.menuName)
-    //     console.log("--2->",nextProps.menuName !== this.props.menuName)
-    //     return nextProps.menuName !== this.props.menuName
-    // }
-    // componentWillUpdate(props,state){
-    //     let {menuName} = props; //顶部菜单后续选中参数
-    //     this.setState({
-    //         param:menuName ||'',
-    //     },this.fetch)
-    // }
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("--1->",nextProps.menuName , this.props.menuName)
+        console.log("--2->",nextProps.menuName !== this.props.menuName)
+        return nextProps.menuName !== this.props.menuName
+    }
+    componentWillUpdate(props,state){
+        let {menuName} = props; //顶部菜单后续选中参数
+        this.fetch(menuName)
+    }
     // componentWillReceiveProps(nextProps){
     //     console.log("nextProps--->",nextProps)
     // }
     fetch=(id)=>{
+        console.log("param--1->",this.state.param)
         axios.get("menu/"+(this.state.param || id),null,
             result=> {
                 let menuData = result.result ||[];
@@ -159,7 +158,6 @@ const mapStateToProps =(state)=>{
         // list:state.list
     }
 }
-
 const mapDispatchToProps =(dispatch)=>{
     return{
         changeInputValue(e){
