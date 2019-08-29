@@ -24,23 +24,16 @@ class Menus extends React.Component{
     componentWillMount(){
         let {menuName} = this.props; //顶部菜单初始选中参数
         this.setState({
-            param:menuName ||'',
-            // param:'2' ||'',
+            param:menuName,
         },this.fetch)
         
     }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log("--1->",nextProps.menuName , this.props.menuName)
-        console.log("--2->",nextProps.menuName !== this.props.menuName)
-        return nextProps.menuName !== this.props.menuName
+    componentWillReceiveProps=(nextProps)=>{
+        console.log("nextProps--->",nextProps.menuName)
+        this.setState({
+            param:nextProps.menuName,
+        },this.fetch)
     }
-    componentWillUpdate(props,state){
-        let {menuName} = props; //顶部菜单后续选中参数
-        this.fetch(menuName)
-    }
-    // componentWillReceiveProps(nextProps){
-    //     console.log("nextProps--->",nextProps)
-    // }
     fetch=(id)=>{
         console.log("param--1->",this.state.param)
         axios.get("menu/"+(this.state.param || id),null,
