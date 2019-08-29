@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select,Icon,DatePicker } from 'antd';
+import {Modal, Switch,Form,Input,Select,DatePicker } from 'antd';
 import axios from "../../../../axios";
 import NotificationMixin from "../../../../components/notification";
 import locale from 'antd/es/locale-provider/zh_CN';

@@ -4,8 +4,6 @@ import {Menu, Icon} from "antd";
 import {NavLink} from 'react-router-dom'
 import axios from "../../axios";
 import {connect} from "react-redux";
-import Store from '../../redux/store'
-import {switchMenu} from "../../redux/action";
 const SubMenu = Menu.SubMenu;
 
 class Menus extends React.Component{
@@ -19,7 +17,7 @@ class Menus extends React.Component{
         collapsed:this.props.collapsed,
     }
     componentDidMount(){
-        // this.fetch("1")
+
     }
     componentWillMount(){
         let {menuName} = this.props; //顶部菜单初始选中参数
@@ -29,13 +27,11 @@ class Menus extends React.Component{
         
     }
     componentWillReceiveProps=(nextProps)=>{
-        console.log("nextProps--->",nextProps.menuName)
         this.setState({
             param:nextProps.menuName,
         },this.fetch)
     }
     fetch=(id)=>{
-        console.log("param--1->",this.state.param)
         axios.get("menu/"+(this.state.param || id),null,
             result=> {
                 let menuData = result.result ||[];
@@ -80,9 +76,6 @@ class Menus extends React.Component{
             return null;
         }
     }
-    getMenuKey=(key)=>{
-        let menuList = this.state.data
-    }
     onMenuClick = (e) =>{
         let breadcrumb = []
         this.state.data.map(item=>{
@@ -99,12 +92,11 @@ class Menus extends React.Component{
                     }
                 })
             }else {
-                if(e.key === item.key){
+                if(e.key === item.id){
                     breadcrumb.push(obj)
                 }
             }
         })
-        // console.log("breadcrumb--->",breadcrumb)
         this.props.onMenuChange(breadcrumb)
 
     }
@@ -114,13 +106,13 @@ class Menus extends React.Component{
             item.icon = iconList[index]
             if(item.leftChild){
                 return (
-                    <SubMenu key={index} data-id={item.title} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
+                    <SubMenu key={item.id} data-id={item.title} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>} >
                         {this.readerMenu(item.leftChild)}
                     </SubMenu>
                 )
             }
             return (
-                <Menu.Item key={index} title={item.title}>
+                <Menu.Item key={item.id} title={item.title}>
                     <NavLink to={item.request_child}>{ item.icon === 'home' ? <Icon type={item.icon} /> :'' }  <span>{item.title}</span> </NavLink>
                 </Menu.Item>
             )
@@ -130,7 +122,6 @@ class Menus extends React.Component{
     }
 
     render() {
-        // console.log("render执行了-",this.state.menuTreeNode)
         return (
             <Menu theme="light"
                   mode="inline"

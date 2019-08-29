@@ -20,6 +20,7 @@ export default class Index extends React.Component{
         });
     }
     handleTemp=(temperature)=> {
+        console.log("temperature--------->",temperature)
         let breadcrumb = temperature.map(item=>{
             return <Breadcrumb.Item key={item.key}>{item.title}</Breadcrumb.Item>
         })
@@ -40,7 +41,7 @@ export default class Index extends React.Component{
                         className="left-box"
                     >
                         <div className="logo" >后台管理系统</div>
-                        <Menu onMenuChange={this.handleTemp}  collapsed={this.state.collapsed}></Menu>
+                        <Menu onMenuChange={this.handleTemp.bind(this)}  collapsed={this.state.collapsed}></Menu>
                     </Sider>
                     <Layout >
 

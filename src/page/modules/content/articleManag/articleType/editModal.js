@@ -1,7 +1,7 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
-import axios from "../../../../axios";
-import NotificationMixin from "../../../../components/notification";
+import {Modal, Switch,Form,Input,Select} from 'antd';
+import axios from "../../../../../axios";
+import NotificationMixin from "../../../../../components/notification";
 
 const FormItem = Form.Item;
 const createForm = Form.create;

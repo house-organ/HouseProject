@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
+import {Modal, Switch,Form,Input,Select} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
