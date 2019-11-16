@@ -31,7 +31,7 @@ import Attribute from '../page/modules/modular/extendedAttributes/attribute' //�
 //*** 楼盘 ***//
 import EstateManag from '../page/modules/estate/estateManag' //楼盘管理
 import Developers from '../page/modules/estate/developer' //开发管理
-
+import AddHouselistModal from '../page/modules/estate/estateManag/addHouselistModal' //添加楼盘
 
 //*** 内容 ***//
 import ArticleType from '../page/modules/content/articleManag/articleType' //文章分类
@@ -78,6 +78,7 @@ export default class AdminRouter extends React.Component{
 
                                     <Route path="/houselist" exact component={EstateManag}/>{/*楼盘列表*/}
                                     <Route path="/developer" exact component={Developers}/>{/*开发商管理*/}
+                                    <Route path="/houseadd" exact component={AddHouselistModal}/>{/*添加楼盘列表*/}
 
                                     <Route path="/articlesort" exact component={ArticleType}/>{/*文章分类*/}
                                     <Route path="/list" exact component={ArticleList}/>{/*文章列表*/}

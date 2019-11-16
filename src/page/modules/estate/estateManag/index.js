@@ -39,16 +39,17 @@ class MenuManage extends React.Component{
         /**
          * 说明：楼盘新增或编辑弹窗
          * */
-        e && e.preventDefault() ;
-        e && e.stopPropagation();
-
-        new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
-            this.fetch();
-        }, null, {
-            title:  modal && modal.id  ? '编辑楼盘' : '新增楼盘',
-            item: modal && modal.id ? modal : {},
-            isEdit: modal && modal.id  ? true : false,
-        }).show();
+        // e && e.preventDefault() ;
+        // e && e.stopPropagation();
+        //
+        // new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
+        //     this.fetch();
+        // }, null, {
+        //     title:  modal && modal.id  ? '编辑楼盘' : '新增楼盘',
+        //     item: modal && modal.id ? modal : {},
+        //     isEdit: modal && modal.id  ? true : false,
+        // }).show();
+        this.props.history.push({pathname:'/houseadd',state:modal})
     }
     addOrUpdateChild=(modal,e)=>{
         /**
