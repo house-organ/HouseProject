@@ -64,10 +64,10 @@ class editModal extends React.Component {
         axios.post(url,param,
             result=> {
                 // console.log("修改成功--------->",result)
-                NotificationMixin.success("修改成功！")
+                NotificationMixin.success("提交成功！")
                 this.props.onManualClose && this.props.onManualClose();
             },result=>{
-                NotificationMixin.error("修改失败！")
+                NotificationMixin.error("提交失败！")
             }
         );
 
@@ -106,6 +106,29 @@ class editModal extends React.Component {
                             }],
                         })(
                             <Input type="text"  placeholder="广告位名称" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="类型："
+                    >
+                        {getFieldDecorator('type', {
+                            initialValue: (this.state.item && this.state.item.type) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择类型'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择类型 </Option>
+                                <Option value="1"> 矩形横幅 </Option>
+                                <Option value="2"> 对联广告 </Option>
+                                <Option value="3"> 图片列表 </Option>
+                                <Option value="4"> PC轮播图 </Option>
+                                <Option value="5"> 手机轮播图 </Option>
+                                <Option value="6"> 文字广告 </Option>
+                                <Option value="7"> 代码广告 </Option>
+                            </Select>
                         )}
                     </FormItem>
                     <FormItem
@@ -158,6 +181,19 @@ class editModal extends React.Component {
                             }],
                         })(
                             <Input type="text"  placeholder="显示广告数" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="说明："
+                    >
+                        {getFieldDecorator('description', {
+                            initialValue: '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <TextArea rows={4} placeholder="说明" />
                         )}
                     </FormItem>
 

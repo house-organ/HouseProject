@@ -37,7 +37,7 @@ class login extends React.Component{
                             let token = result.result.token;
                             localStorage.setItem('token', JSON.stringify(token)); //token缓存
 
-
+                            console.log("1")
                             if(this.state.checkboxVal){
                                 let accountInfo = values.ac+ '&' +values.se
                                 let Days = 3;  //cookie保存时间
@@ -59,7 +59,7 @@ class login extends React.Component{
                                 this.state.password = '';
 
                             }
-
+                            console.log("2")
                             window.location.href = '/#/home';
                         }
 

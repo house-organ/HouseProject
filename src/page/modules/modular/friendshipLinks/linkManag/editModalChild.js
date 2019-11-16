@@ -1,7 +1,8 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch,Form,Input,Select,DatePicker } from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
+import locale from 'antd/es/locale-provider/zh_CN';
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -11,6 +12,9 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        startValue: null,
+        endValue: null,
+        endOpen: false,
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
@@ -45,12 +49,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "poster_space/add";
+            let url = "poster";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "poster_space/update";
+                url = "poster";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -72,12 +76,62 @@ class editModal extends React.Component {
         );
 
     }
+
+
+
+
+
+
+
+      
+    disabledStartDate = startValue => {
+        const { endValue } = this.state;
+        if (!startValue || !endValue) {
+        return false;
+        }
+        return startValue.valueOf() > endValue.valueOf();
+    };
+    
+    disabledEndDate = endValue => {
+        const { startValue } = this.state;
+        if (!endValue || !startValue) {
+        return false;
+        }
+        return endValue.valueOf() <= startValue.valueOf();
+    };
+    
+    onChange = (field, value) => {
+        this.setState({
+        [field]: value,
+        });
+    };
+    
+    onStartChange = value => {
+        this.onChange('startValue', value);
+    };
+    
+    onEndChange = value => {
+        this.onChange('endValue', value);
+    };
+    
+    handleStartOpenChange = open => {
+        if (!open) {
+        this.setState({ endOpen: true });
+        }
+    };
+    
+    handleEndOpenChange = open => {
+        this.setState({ endOpen: open });
+    };
+
+
     render() {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+        const { startValue, endValue, endOpen } = this.state;
         return(
             <Modal
                 title={this.props.title}
@@ -85,9 +139,27 @@ class editModal extends React.Component {
                 maskClosable={false}
                 onOk={this.handleSubmit}
                 onCancel={this.hideModal}
-                // width={800}
+                width={600}
             >
                 <Form  layout="horizontal" >
+                    <FormItem
+                        {...formItemLayout}
+                        label="所属城市："
+                    >
+                        {getFieldDecorator('often', {
+                            initialValue: (this.state.item && this.state.item.often) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择所属城市'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择所属城市 </Option>
+                                <Option value="0"> 海南 </Option>
+                                <Option value="1"> 海口 </Option>
+                            </Select>
+                        )}
+                    </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="广告位名称："
@@ -110,25 +182,56 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="类型："
+                        label="广告类型："
                     >
-                        {getFieldDecorator('type', {
-                            initialValue: (this.state.item && this.state.item.type) || '',
+                        {getFieldDecorator('type_name', {
+                            initialValue: (this.state.item && this.state.item.type_name) || '',
                             rules: [{
                                 required: true,
-                                message:'请选择类型'
+                                message:'请选择广告类型'
                             }],
                         })(
                             <Select>
-                                <Option value=""> 请选择类型 </Option>
-                                <Option value="1"> 矩形横幅 </Option>
-                                <Option value="2"> 对联广告 </Option>
-                                <Option value="3"> 图片列表 </Option>
-                                <Option value="4"> PC轮播图 </Option>
-                                <Option value="5"> 手机轮播图 </Option>
-                                <Option value="6"> 文字广告 </Option>
-                                <Option value="7"> 代码广告 </Option>
+                                <Option value=""> 请选择广告类型 </Option>
+                                <Option value="Images"> 图片 </Option>
+                                <Option value="flash"> 动画 </Option>
                             </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="有效时间："
+                    >
+                        {getFieldDecorator('url', {
+                            initialValue: (this.state.item && this.state.item.time )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                           <div>
+                               <DatePicker
+                                disabledDate={this.disabledStartDate}
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                value={startValue}
+                                placeholder="Start"
+                                locale={locale}
+                                onChange={this.onStartChange}
+                                onOpenChange={this.handleStartOpenChange}
+                                />
+                                <span style={{marginLeft:'5px',marginRight:'5px'}}>至</span>
+                                <DatePicker
+                                disabledDate={this.disabledEndDate}
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                value={endValue}
+                                placeholder="End"
+                                locale={locale}
+                                onChange={this.onEndChange}
+                                open={endOpen}
+                                onOpenChange={this.handleEndOpenChange}
+                                />
+                           </div>
                         )}
                     </FormItem>
                     <FormItem
@@ -146,54 +249,41 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="广告位宽度："
+                        label="链接地址："
                     >
-                        {getFieldDecorator('width', {
-                            initialValue: (this.state.item && this.state.item.width )|| '',
+                        {getFieldDecorator('url', {
+                            initialValue: (this.state.item && this.state.item.url )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="广告位宽度" />
+                            <Input type="text"  placeholder="链接地址" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="广告位高度："
+                        label="提示文字："
                     >
-                        {getFieldDecorator('height', {
-                            initialValue: (this.state.item && this.state.item.height )|| '',
+                        {getFieldDecorator('alt', {
+                            initialValue: (this.state.item && this.state.item.alt )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="广告位高度" />
+                            <Input type="text"  placeholder="提示文字" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="显示广告数："
+                        label="图片路径："
                     >
-                        {getFieldDecorator('display_num', {
-                            initialValue: (this.state.item && this.state.item.display_num )|| '',
+                        {getFieldDecorator('img', {
+                            initialValue: (this.state.item && this.state.item.img )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="显示广告数" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="说明："
-                    >
-                        {getFieldDecorator('description', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <TextArea rows={4} placeholder="说明" />
+                            <Input type="text"  placeholder="图片路径" />
                         )}
                     </FormItem>
 

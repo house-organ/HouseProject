@@ -45,12 +45,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "poster_space/add";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
+                url = "poster_space/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -64,10 +64,10 @@ class editModal extends React.Component {
         axios.post(url,param,
             result=> {
                 // console.log("修改成功--------->",result)
-                NotificationMixin.success("修改成功！")
+                NotificationMixin.success("提交成功！")
                 this.props.onManualClose && this.props.onManualClose();
             },result=>{
-                NotificationMixin.error("修改失败！")
+                NotificationMixin.error("提交失败！")
             }
         );
 
@@ -90,10 +90,10 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="广告位名称："
                     >
-                        {getFieldDecorator('title', {
-                            initialValue: (this.state.item && this.state.item.title )|| '',
+                        {getFieldDecorator('names', {
+                            initialValue: (this.state.item && this.state.item.names )|| '',
                             rules: [{
                                 required: true,
                                 validator: (rule, value, callback) => {
@@ -105,7 +105,30 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="名称" />
+                            <Input type="text"  placeholder="广告位名称" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="类型："
+                    >
+                        {getFieldDecorator('type', {
+                            initialValue: (this.state.item && this.state.item.type) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择类型'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择类型 </Option>
+                                <Option value="1"> 矩形横幅 </Option>
+                                <Option value="2"> 对联广告 </Option>
+                                <Option value="3"> 图片列表 </Option>
+                                <Option value="4"> PC轮播图 </Option>
+                                <Option value="5"> 手机轮播图 </Option>
+                                <Option value="6"> 文字广告 </Option>
+                                <Option value="7"> 代码广告 </Option>
+                            </Select>
                         )}
                     </FormItem>
                     <FormItem
@@ -118,111 +141,59 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="图标："
+                        label="广告位宽度："
                     >
-                        {getFieldDecorator('icon', {
+                        {getFieldDecorator('width', {
+                            initialValue: (this.state.item && this.state.item.width )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="广告位宽度" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="广告位高度："
+                    >
+                        {getFieldDecorator('height', {
+                            initialValue: (this.state.item && this.state.item.height )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="广告位高度" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="显示广告数："
+                    >
+                        {getFieldDecorator('display_num', {
+                            initialValue: (this.state.item && this.state.item.display_num )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="显示广告数" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="说明："
+                    >
+                        {getFieldDecorator('description', {
                             initialValue: '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="icon" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="导航位置："
-                    >
-                        {getFieldDecorator('pos', {
-                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 页头菜单 </Option>
-                                <Option value="2"> 页脚菜单 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="打开方式："
-                    >
-                        {getFieldDecorator('open_type', {
-                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 新页面 </Option>
-                                <Option value="2"> 当前页面 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序："
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="排序" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="seo标题："
-                    >
-                        {getFieldDecorator('seo_title', {
-                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="seo标题" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="seo关键词："
-                    >
-                        {getFieldDecorator('seo_keys', {
-                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="seo关键词" />
-                        )}
-                    </FormItem>
-
-
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="SEO描述："
-                    >
-                        {getFieldDecorator('seo_desc', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <TextArea rows={4} placeholder="SEO描述" />
+                            <TextArea rows={4} placeholder="说明" />
                         )}
                     </FormItem>
 
