@@ -33,8 +33,6 @@ class AddHouselistModal extends React.Component{
             }
             let url = "floor/add";
             let param = values;
-
-
             if (this.props.item) {
                 url = "floor/update";
                 param.id = this.props.item.id;

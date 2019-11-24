@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="-8785">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -109,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
+            <state relative-caret-position="550">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -222,7 +222,6 @@
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.less" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index2.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js" />
@@ -230,6 +229,7 @@
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" />
       </list>
     </option>
   </component>
@@ -451,12 +451,12 @@
       <workItem from="1571658277241" duration="6340000" />
       <workItem from="1572479208561" duration="386000" />
       <workItem from="1573910709251" duration="6009000" />
-      <workItem from="1574565389550" duration="17202000" />
+      <workItem from="1574565389550" duration="18303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76203000" />
+    <option name="totallyTimeSpent" value="77304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -804,38 +804,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="149" column="107" selection-start-line="149" selection-start-column="107" selection-end-line="149" selection-end-column="107" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/editModal.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="228" column="47" lean-forward="true" selection-start-line="228" selection-start-column="47" selection-end-line="228" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -884,10 +854,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="149" column="107" selection-start-line="149" selection-start-column="107" selection-end-line="149" selection-end-column="107" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="-8785">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="228" column="47" lean-forward="true" selection-start-line="228" selection-start-column="47" selection-end-line="228" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

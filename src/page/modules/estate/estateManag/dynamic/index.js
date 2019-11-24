@@ -125,7 +125,6 @@ class MenuManage extends React.Component{
                             {
                                 record.is_sys === '0' ? html :''
                             }
-
                         </div>
                     )
                 }
