@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6cb315-af89-406f-a37a-97197a91c612" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/editModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/editModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/index3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/editModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/doc/开发记录.text" beforeDir="false" afterPath="$PROJECT_DIR$/public/doc/开发记录.text" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -76,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="630">
               <caret line="114" column="145" selection-start-line="114" selection-start-column="145" selection-end-line="114" selection-end-column="145" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -100,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="45" />
+            <state relative-caret-position="471">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -184,8 +169,8 @@
       <find>statusChangeChild</find>
     </findStrings>
     <replaceStrings>
-      <replace />
-      <replace />
+      <replace>initialValue: (this</replace>
+      <replace>)|| ''</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -240,11 +225,11 @@
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index2.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" />
       </list>
     </option>
   </component>
@@ -264,7 +249,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-6" />
     <option name="y" value="2" />
     <option name="width" value="1317" />
@@ -466,12 +451,12 @@
       <workItem from="1571658277241" duration="6340000" />
       <workItem from="1572479208561" duration="386000" />
       <workItem from="1573910709251" duration="6009000" />
-      <workItem from="1574565389550" duration="16493000" />
+      <workItem from="1574565389550" duration="17202000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75494000" />
+    <option name="totallyTimeSpent" value="76203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -859,16 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -901,8 +876,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
+        <state relative-caret-position="630">
           <caret line="114" column="145" selection-start-line="114" selection-start-column="145" selection-end-line="114" selection-end-column="145" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
