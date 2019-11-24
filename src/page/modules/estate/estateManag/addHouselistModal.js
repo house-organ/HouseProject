@@ -13,14 +13,14 @@ class AddHouselistModal extends React.Component{
     }
     componentWillMount(){
         let item = this.props.location.state;
-        if(item){
-            localStorage.setItem('addHouse', JSON.stringify(item));
-        }else {
-            let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
-            this.setState({item:addHouse})
-            console.log("111",addHouse)
-        }
-
+        // if(item){
+        //     localStorage.setItem('addHouse', JSON.stringify(item));
+        // }else {
+        //     let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
+        //     this.setState({item:addHouse})
+        //     console.log("111",addHouse)
+        // }
+        this.setState({item: item})
         console.log('item--->', this.state.item)
     }
     callback=(key)=>{
