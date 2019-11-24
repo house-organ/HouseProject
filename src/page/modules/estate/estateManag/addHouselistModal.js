@@ -23,7 +23,6 @@ class AddHouselistModal extends React.Component{
         //     console.log("111",addHouse)
         // }
         this.setState({item:item})
-        console.log('item--->', this.state.item)
     }
     handleSubmit = e => {
         e.preventDefault();
