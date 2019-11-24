@@ -1,5 +1,8 @@
 import React from 'react'
-import { Form,Switch,Input,Select,DatePicker,Tabs } from 'antd'
+import { Form,Switch,Input,Select,DatePicker,Tabs,Row, Col,Button } from 'antd'
+import './index.less'
+import axios from "../../../../axios";
+import NotificationMixin from "../../../../components/notification";
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -8,36 +11,70 @@ const { TextArea } = Input;
 const { TabPane } = Tabs;
 class AddHouselistModal extends React.Component{
     state = {
-        tabsActiveKey:'1',
         item:this.props.location.state || {}
     }
     componentWillMount(){
         let item = this.props.location.state;
-        if(item){
-            localStorage.setItem('addHouse', JSON.stringify(item));
-        }else {
-            let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
-            this.setState({item:addHouse})
-            console.log("111",addHouse)
-        }
-
+        // if(item){
+        //     localStorage.setItem('addHouse', JSON.stringify(item));
+        // }else {
+        //     let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
+        //     this.setState({item:addHouse})
+        //     console.log("111",addHouse)
+        // }
+        this.setState({item:item})
         console.log('item--->', this.state.item)
     }
-    callback=(key)=>{
-        this.setState({tabsActiveKey:key})
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!!err) {
+                console.log('Received values of form: ', values);
+                return
+            }
+            let url = "floor/add";
+            let param = values;
+
+
+            if (this.props.item) {
+                url = "floor/update";
+                param.id = this.props.item.id;
+                if(param.is_sys === !!param.is_sys){
+                    param.is_sys ? param.is_sys = 1 : param.is_sys = 0
+                }
+            }
+            this.postFile(url,param)
+        });
+    }
+    postFile=(url,param)=>{
+        axios.post(url,param,
+            result=> {
+                // console.log("修改成功--------->",result)
+                NotificationMixin.success("保存成功！")
+                this.props.history.push({pathname:'/houselist'})
+            },result=>{
+                NotificationMixin.error("保存失败！")
+            }
+        );
+    }
+    goBack=(modal,e)=>{
+        this.props.history.push({pathname:'/houselist',state:modal})
     }
     render(){
+        const {history}=this.props;
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 18 },
         };
+        const config = {
+            rules: [{ type: 'object', required: false, message: 'Please select time!' }],
+        };
         return (
-            <div>
-                <Form layout="horizontal" >
-
-                    <Tabs defaultActiveKey="1" activeKey={this.state.tabsActiveKey}  onChange={this.callback} >
-                        <TabPane tab="楼盘信息" key="1">
+            <Row>
+                <Col xs={24} sm={24} md={24} lg={24} xl={18}>
+                    <div className="form-box">
+                        <Form layout="horizontal"  onSubmit={this.handleSubmit}>
                             <FormItem
                                 {...formItemLayout}
                                 label="楼盘名称"
@@ -61,67 +98,6 @@ class AddHouselistModal extends React.Component{
                                     <Input type="text"  placeholder="楼盘名称" />
                                 )}
                             </FormItem>
-                            {/*<FormItem*/}
-                                {/*{...formItemLayout}*/}
-                                {/*label="状态"*/}
-                                {/*colon={true}*/}
-                                {/*className="item-box"*/}
-                            {/*>*/}
-                                {/*{getFieldDecorator('status', {*/}
-                                    {/*initialValue: (this.state.item && this.state.item.status )|| '',*/}
-                                    {/*rules: [{*/}
-                                        {/*required: false,*/}
-                                    {/*}],*/}
-                                {/*})(*/}
-                                    {/*<Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />*/}
-                                {/*)}*/}
-                            {/*</FormItem>*/}
-                            <FormItem
-                                {...formItemLayout}
-                                label="所属区域"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('names', {
-                                    initialValue: (this.state.item && this.state.item.names )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="所属区域" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="价格"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('price', {
-                                    initialValue: (this.state.item && this.state.item.price )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="广告位高度" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="价格单位"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('price_unit', {
-                                    initialValue: (this.state.item && this.state.item.price_unit )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="价格单位" />
-                                )}
-                            </FormItem>
-
                             <FormItem
                                 {...formItemLayout}
                                 label="销售状态"
@@ -134,59 +110,69 @@ class AddHouselistModal extends React.Component{
                                         required: false,
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="销售状态" />
+                                    <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={(this.state.item && this.state.item.sale_status === '1' ) ? true:false} />
                                 )}
                             </FormItem>
-
                             <FormItem
                                 {...formItemLayout}
-                                label="开发商"
+                                label="开发商名称"
                                 colon={true}
                                 className="item-box"
                             >
-                                {getFieldDecorator('developer_id', {
-                                    initialValue: (this.state.item && this.state.item.developer_id )|| '',
+                                {getFieldDecorator('developer_name', {
+                                    initialValue: (this.state.item && this.state.item.developer_name )|| '',
                                     rules: [{
                                         required: false,
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="开发商" />
+                                    <Input type="text"  placeholder="开发商名称" />
                                 )}
                             </FormItem>
                             <FormItem
                                 {...formItemLayout}
-                                label="经纪人"
+                                label="楼盘均价"
                                 colon={true}
                                 className="item-box"
                             >
-                                {getFieldDecorator('broker_id', {
-                                    initialValue: (this.state.item && this.state.item.broker_id )|| '',
+                                {getFieldDecorator('price', {
+                                    initialValue: (this.state.item && this.state.item.price )|| '',
                                     rules: [{
-                                        required: false,
+                                        required: true,
+                                        validator: (rule, value, callback) => {
+                                            if (!value || (value && value.length > 50)) {
+                                                callback(new Error('不能为空且长度不超过50!'));
+                                                this.setState({tabsActiveKey:'1'})
+                                            } else {
+                                                callback();
+                                            }
+                                        }
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="经纪人" />
+                                    <Input type="text"  placeholder="楼盘均价" />
                                 )}
                             </FormItem>
-
                             <FormItem
                                 {...formItemLayout}
-                                label="缩略图"
-                                colon={true}
+                                label="价格单位"
                                 className="item-box"
                             >
-                                {getFieldDecorator('img', {
-                                    initialValue: (this.state.item && this.state.item.img )|| '',
+                                {getFieldDecorator('price_unit', {
+                                    initialValue: (this.state.item && this.state.item.price_unit )|| '',
                                     rules: [{
-                                        required: false,
+                                        required: true,
+                                        message:'请选择价格单位'
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="缩略图" />
+                                    <Select>
+                                        <Option value=""> 请选择价格单位 </Option>
+                                        <Option value="1"> 1-元/㎡ </Option>
+                                        <Option value="2"> 2-万/套 </Option>
+                                    </Select>
                                 )}
                             </FormItem>
                             <FormItem
                                 {...formItemLayout}
-                                label="坐标"
+                                label="经度"
                                 colon={true}
                                 className="item-box"
                             >
@@ -196,25 +182,34 @@ class AddHouselistModal extends React.Component{
                                         required: false,
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="坐标" />
+                                    <Input type="text"  placeholder="经度" />
                                 )}
                             </FormItem>
-                            {/*<FormItem*/}
-                                {/*{...formItemLayout}*/}
-                                {/*label="开盘时间"*/}
-                                {/*colon={true}*/}
-                                {/*className="item-box"*/}
-                            {/*>*/}
-                                {/*{getFieldDecorator('opening_time', {*/}
-                                    {/*initialValue: (this.state.item && this.state.item.opening_time )|| '',*/}
-                                    {/*rules: [{*/}
-                                        {/*required: false,*/}
-                                    {/*}],*/}
-                                {/*})(*/}
-                                    {/*// <Input type="text"  placeholder="开盘时间" />*/}
-                                    {/*<DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />*/}
-                                {/*)}*/}
-                            {/*</FormItem>*/}
+                            <FormItem
+                                {...formItemLayout}
+                                label="纬度"
+                                colon={true}
+                                className="item-box"
+                            >
+                                {getFieldDecorator('lat', {
+                                    initialValue: (this.state.item && this.state.item.lat )|| '',
+                                    rules: [{
+                                        required: false,
+                                    }],
+                                })(
+                                    <Input type="text"  placeholder="纬度" />
+                                )}
+                            </FormItem>
+                            <FormItem
+                                {...formItemLayout}
+                                label="开盘时间"
+                                colon={true}
+                                className="item-box"
+                            >
+                                {getFieldDecorator('opening_time',config)(
+                                    <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                                )}
+                            </FormItem>
                             <FormItem
                                 {...formItemLayout}
                                 label="开盘备注"
@@ -230,21 +225,16 @@ class AddHouselistModal extends React.Component{
                                     <Input type="text"  placeholder="开盘备注" />
                                 )}
                             </FormItem>
-                            {/*<FormItem*/}
-                                {/*{...formItemLayout}*/}
-                                {/*label="交房时间"*/}
-                                {/*colon={true}*/}
-                                {/*className="item-box"*/}
-                            {/*>*/}
-                                {/*{getFieldDecorator('complete_time', {*/}
-                                    {/*initialValue: (this.state.item && this.state.item.complete_time )|| '',*/}
-                                    {/*rules: [{*/}
-                                        {/*required: false,*/}
-                                    {/*}],*/}
-                                {/*})(*/}
-                                    {/*<DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />*/}
-                                {/*)}*/}
-                            {/*</FormItem>*/}
+                            <FormItem
+                                {...formItemLayout}
+                                label="交房时间"
+                                colon={true}
+                                className="item-box"
+                            >
+                                {getFieldDecorator('complete_time', config)(
+                                    <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                                )}
+                            </FormItem>
                             <FormItem
                                 {...formItemLayout}
                                 label="交房备注"
@@ -365,23 +355,6 @@ class AddHouselistModal extends React.Component{
                                     <Input type="text"  placeholder="预售证" />
                                 )}
                             </FormItem>
-
-                            <FormItem
-                                {...formItemLayout}
-                                label="已报名看房人数"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('see_number', {
-                                    initialValue: (this.state.item && this.state.item.see_number )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="已报名看房人数" />
-                                )}
-                            </FormItem>
-
                             <FormItem
                                 {...formItemLayout}
                                 label="浏览量"
@@ -487,372 +460,33 @@ class AddHouselistModal extends React.Component{
                                     <Input type="text"  placeholder="语音讲房音频地址" />
                                 )}
                             </FormItem>
-                        </TabPane>
-                        <TabPane tab="配套信息" key="2">
                             <FormItem
                                 {...formItemLayout}
-                                label="楼盘介绍"
+                                label="排序"
                                 colon={true}
                                 className="item-box"
                             >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
+                                {getFieldDecorator('ordid', {
+                                    initialValue: (this.state.item && this.state.item.ordid )|| '',
                                     rules: [{
                                         required: false,
                                     }],
                                 })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
+                                    <Input type="text"  placeholder="排序" />
                                 )}
                             </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                            <FormItem
-                                {...formItemLayout}
-                                label="楼盘介绍"
-                                colon={true}
-                                className="item-box"
-                            >
-                                {getFieldDecorator('audio', {
-                                    initialValue: (this.state.item && this.state.item.audio )|| '',
-                                    rules: [{
-                                        required: false,
-                                    }],
-                                })(
-                                    <Input type="text"  placeholder="楼盘介绍" />
-                                )}
-                            </FormItem>
-                        </TabPane>
-                    </Tabs>
-                </Form>
-            </div>
+                            <Form.Item className="item-btn-box">
+                                <Button onClick={this.goBack.bind(this,'')}>
+                                    返回
+                                </Button>
+                                <Button type="primary" htmlType="submit">
+                                    提交
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+                </Col>
+            </Row>
         )
     }
 }

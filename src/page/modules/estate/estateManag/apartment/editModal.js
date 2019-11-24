@@ -1,7 +1,7 @@
 import React from 'react'
 import {Modal, Switch,Form,Input,Select,DatePicker } from 'antd';
-import axios from "../../../../axios";
-import NotificationMixin from "../../../../components/notification";
+import axios from "../../../../../axios";
+import NotificationMixin from "../../../../../components/notification";
 import locale from 'antd/es/locale-provider/zh_CN';
 
 const FormItem = Form.Item;
@@ -84,43 +84,43 @@ class editModal extends React.Component {
 
 
 
-      
+
     disabledStartDate = startValue => {
         const { endValue } = this.state;
         if (!startValue || !endValue) {
-        return false;
+            return false;
         }
         return startValue.valueOf() > endValue.valueOf();
     };
-    
+
     disabledEndDate = endValue => {
         const { startValue } = this.state;
         if (!endValue || !startValue) {
-        return false;
+            return false;
         }
         return endValue.valueOf() <= startValue.valueOf();
     };
-    
+
     onChange = (field, value) => {
         this.setState({
-        [field]: value,
+            [field]: value,
         });
     };
-    
+
     onStartChange = value => {
         this.onChange('startValue', value);
     };
-    
+
     onEndChange = value => {
         this.onChange('endValue', value);
     };
-    
+
     handleStartOpenChange = open => {
         if (!open) {
-        this.setState({ endOpen: true });
+            this.setState({ endOpen: true });
         }
     };
-    
+
     handleEndOpenChange = open => {
         this.setState({ endOpen: open });
     };

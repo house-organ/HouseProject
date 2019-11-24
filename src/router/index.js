@@ -32,7 +32,10 @@ import Attribute from '../page/modules/modular/extendedAttributes/attribute' //�
 import EstateManag from '../page/modules/estate/estateManag' //楼盘管理
 import Developers from '../page/modules/estate/developer' //开发管理
 import AddHouselistModal from '../page/modules/estate/estateManag/addHouselistModal' //添加楼盘
-
+import Apartment from '../page/modules/estate/estateManag/apartment' //楼盘户型
+import Album from '../page/modules/estate/estateManag/album' //楼盘相册
+import Dynamic from '../page/modules/estate/estateManag/dynamic' //楼盘动态
+import SandTable from '../page/modules/estate/estateManag/sandTable' //楼盘沙盘
 //*** 内容 ***//
 import ArticleType from '../page/modules/content/articleManag/articleType' //文章分类
 import ArticleList from '../page/modules/content/articleManag/articleList' //文章列表
@@ -77,6 +80,10 @@ export default class AdminRouter extends React.Component{
 
 
                                     <Route path="/houselist" exact component={EstateManag}/>{/*楼盘列表*/}
+                                    <Route path="/houselist/apartment" exact component={Apartment}/>{/*楼盘户型*/}
+                                    <Route path="/houselist/album" exact component={Album}/>{/*楼盘列表*/}
+                                    <Route path="/houselist/dynamic" exact component={Dynamic}/>{/*楼盘列表*/}
+                                    <Route path="/houselist/sandTable" exact component={SandTable}/>{/*楼盘列表*/}
                                     <Route path="/developer" exact component={Developers}/>{/*开发商管理*/}
                                     <Route path="/houseadd" exact component={AddHouselistModal}/>{/*添加楼盘列表*/}
 
