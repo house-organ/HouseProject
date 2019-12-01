@@ -11,6 +11,7 @@ const Option = Select.Option;
 class MenuManage extends React.Component{
     state = {
         data:[],
+        pagination: {showQuickJumper: true,showTotal: total => `共 ${total} 条`},
     }
     componentWillMount() {
         this.fetch()
@@ -22,9 +23,20 @@ class MenuManage extends React.Component{
         axios.get("article/list",null,
             result=> {
                 console.log(result.result)
-                this.setState({data:result.result.data ||[]})
+                const pagination = this.state.pagination;
+                pagination.total = Number(result.count);
+                this.setState({data:result.result.data ||[],pagination})
             },
-        );
+            result=> {
+                const pagination = this.state.pagination;
+                pagination.total = 0;
+                this.setState({
+                    loading: false,
+                    data: [],
+                    pagination,
+                })
+            }
+        )
     }
     addOrUpdate=(modal,e)=> {
         /**
@@ -129,8 +141,18 @@ class MenuManage extends React.Component{
                             label="分类"
                         >
                             {
-                                getFieldDecorator('title')(
-                                    <Input placeholder="请输入关键词搜索" />
+                                getFieldDecorator('title',{
+                                    initialValue: this.state.status|| '',
+                                    rules: [{
+                                        required: true,
+                                        message:'请选择分类'
+                                    }],
+                                })(
+                                    <Select>
+                                        <Option value=""> 请选择导航位置 </Option>
+                                        <Option value="1"> 页头菜单 </Option>
+                                        <Option value="2"> 页脚菜单 </Option>
+                                    </Select>
                                 )
                             }
                         </FormItem>
@@ -138,8 +160,18 @@ class MenuManage extends React.Component{
                             label="状态"
                         >
                             {
-                                getFieldDecorator('title')(
-                                    <Input placeholder="请输入关键词搜索" />
+                                getFieldDecorator('title',{
+                                    initialValue: this.state.status|| '',
+                                    rules: [{
+                                        required: true,
+                                        message:'请选择状态'
+                                    }],
+                                })(
+                                    <Select>
+                                        <Option value=""> 请选择导航位置 </Option>
+                                        <Option value="1"> 页头菜单 </Option>
+                                        <Option value="2"> 页脚菜单 </Option>
+                                    </Select>
                                 )
                             }
                         </FormItem>
@@ -162,7 +194,8 @@ class MenuManage extends React.Component{
                 <Table
                     columns={columns}
                     dataSource={this.state.data}
-                    pagination={ false }
+                    // pagination={ false }
+                    pagination={this.state.pagination}
                     size="small"
                     rowKey={(record) => record.id}
                 />
