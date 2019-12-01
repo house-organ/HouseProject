@@ -4,13 +4,22 @@ import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 import AddOrUpdateModal from './editModal'
 import ModalWrapper from "../../../../../components/modalwrapper";
+import './index.less'
 
 const FormItem = Form.Item;
 const createForm = Form.create;
 const Option = Select.Option;
-class MenuManage extends React.Component{
+class articleList extends React.Component{
     state = {
         data:[],
+        typeData:[
+            {id:'0', title: '楼盘资讯', key: '01'},
+            {id:'1', title: '购房宝典', key: '02'},
+            {id:'2', title: '房产百科', key: '03'},
+            {id:'3', title: '楼盘导购', key: '04'},
+            {id:'4', title: '优惠活动', key: '05'},
+            {id:'5', title: '购房知识', key: '06'},
+        ],
         pagination: {showQuickJumper: true,showTotal: total => `共 ${total} 条`},
     }
     componentWillMount() {
@@ -42,22 +51,23 @@ class MenuManage extends React.Component{
         /**
          * 说明：新增或编辑弹窗
          * */
-        e && e.preventDefault() ;
-        e && e.stopPropagation();
-        if(modal){
-            modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
-            modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
-        }
-
-        new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
-            this.fetch();
-        }, null, {
-            title:  modal && modal.id  ? '编辑' : '新增',
-            // item: modal && modal.id ? Helper.copyObject(modal) : {},
-            // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
-            item: modal && modal.id ? modal : {},
-            isEdit: modal && modal.id  ? true : false,
-        }).show();
+        // e && e.preventDefault() ;
+        // e && e.stopPropagation();
+        // if(modal){
+        //     modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
+        //     modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
+        // }
+        //
+        // new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
+        //     this.fetch();
+        // }, null, {
+        //     title:  modal && modal.id  ? '编辑' : '新增',
+        //     // item: modal && modal.id ? Helper.copyObject(modal) : {},
+        //     // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
+        //     item: modal && modal.id ? modal : {},
+        //     isEdit: modal && modal.id  ? true : false,
+        // }).show();
+        this.props.history.push({pathname:'/add',state:modal})
     }
     handleDelete=(record)=> {
         /**
@@ -102,15 +112,15 @@ class MenuManage extends React.Component{
     render(){
         const { getFieldDecorator } = this.props.form;
         let columns = [
-            { title: '编号',dataIndex: 'id', key: 'id', width: '6%'},
+            { title: '编号',dataIndex: 'id', key: 'id', width: '3%'},
             // { title: '标题', dataIndex: 'title', key: 'title', width: '25%',
             //     render: (text, record) => {
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '文章标题', dataIndex: 'title', key: 'title', width: '6%',  },
+            { title: '文章标题', dataIndex: 'title', key: 'title', width: '26%',  },
             { title: '分类别名', dataIndex: 'cate_alias', key: 'cate_alias', width: '6%',  },
-            { title: '添加时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
+            { title: '发布时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
             { title: '更新时间', dataIndex: 'update_time', key: 'update_time', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
@@ -120,12 +130,13 @@ class MenuManage extends React.Component{
             },
             { title: '操作', key: '#', width: '10%',
                 render: (text, record) => {
-                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
+                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="danger" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                // record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>
@@ -142,16 +153,19 @@ class MenuManage extends React.Component{
                         >
                             {
                                 getFieldDecorator('title',{
-                                    initialValue: this.state.status|| '',
+                                    initialValue:  '',
                                     rules: [{
                                         required: true,
                                         message:'请选择分类'
                                     }],
                                 })(
-                                    <Select>
-                                        <Option value=""> 请选择导航位置 </Option>
-                                        <Option value="1"> 页头菜单 </Option>
-                                        <Option value="2"> 页脚菜单 </Option>
+                                    <Select className="seach-item-box">
+                                        <Option value=""> 所有 </Option>
+                                        {
+                                            this.state.typeData && this.state.typeData.map((item, index) => {
+                                                return (<Option value={item.id} kye={item.id}> {item.title} </Option>)
+                                            })
+                                        }
                                     </Select>
                                 )
                             }
@@ -160,17 +174,17 @@ class MenuManage extends React.Component{
                             label="状态"
                         >
                             {
-                                getFieldDecorator('title',{
+                                getFieldDecorator('status',{
                                     initialValue: this.state.status|| '',
                                     rules: [{
                                         required: true,
                                         message:'请选择状态'
                                     }],
                                 })(
-                                    <Select>
-                                        <Option value=""> 请选择导航位置 </Option>
-                                        <Option value="1"> 页头菜单 </Option>
-                                        <Option value="2"> 页脚菜单 </Option>
+                                    <Select className="seach-item-box">
+                                        <Option value=""> 所有 </Option>
+                                        <Option value="1"> 启用 </Option>
+                                        <Option value="2"> 禁用 </Option>
                                     </Select>
                                 )
                             }
@@ -185,10 +199,11 @@ class MenuManage extends React.Component{
                             }
                         </FormItem>
                         <FormItem>
-                            <Button type="primary" htmlType="submit">导航查询</Button>
+                            <Button type="primary" htmlType="submit">查询</Button>
                         </FormItem>
-
-                        <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加文章</Button>
+                        <FormItem>
+                            <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加文章</Button>
+                        </FormItem>
                     </Form>
                 </div>
                 <Table
@@ -203,5 +218,5 @@ class MenuManage extends React.Component{
         )
     }
 }
-MenuManage = Form.create()(MenuManage);
-export default MenuManage;
+articleList = Form.create()(articleList);
+export default articleList;

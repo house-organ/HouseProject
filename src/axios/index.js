@@ -3,7 +3,7 @@ import axios from 'axios'
 import showMsg from '../components/notification'
 
 // 配置API接口地址
-var root = 'http://47.112.131.32/api/v1/'
+var root = 'http://www.xinsuifc.com/api/v1/'
 // var root = '/prefix'
 // 自定义判断元素类型JS
 function toType (obj) {
