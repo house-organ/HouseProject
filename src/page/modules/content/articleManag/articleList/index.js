@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Button,Table,Popconfirm,Switch} from 'antd';
+import {Form,Button,Table,Popconfirm,Switch,Input,Select} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 import AddOrUpdateModal from './editModal'
@@ -7,6 +7,7 @@ import ModalWrapper from "../../../../../components/modalwrapper";
 
 const FormItem = Form.Item;
 const createForm = Form.create;
+const Option = Select.Option;
 class MenuManage extends React.Component{
     state = {
         data:[],
@@ -16,12 +17,12 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：菜单列表接口方法
+         * 说明：文章列表接口方法
          * */
-        axios.get("nav/all",null,
+        axios.get("article/list",null,
             result=> {
-                // console.log(result.result)
-                this.setState({data:result.result ||[]})
+                console.log(result.result)
+                this.setState({data:result.result.data ||[]})
             },
         );
     }
@@ -52,7 +53,6 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        console.log("record---",record);
         axios.delete("nav",param,
             result=> {
                 NotificationMixin.success("删除成功！")
@@ -96,23 +96,16 @@ class MenuManage extends React.Component{
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '菜单名称', dataIndex: 'title', key: 'title', width: '6%',  },
-            { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
-            { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
+            { title: '文章标题', dataIndex: 'title', key: 'title', width: '6%',  },
+            { title: '分类别名', dataIndex: 'cate_alias', key: 'cate_alias', width: '6%',  },
+            { title: '添加时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
+            { title: '更新时间', dataIndex: 'update_time', key: 'update_time', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
-            { title: '是否预置菜单', dataIndex: 'is_sys', key: 'is_sys', width: '6%',
-                render:(text, record)=>{
-                    return (<Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={record['is_sys']==='1' ? true:false} disabled/>)
-                }
-            },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
                 }
             },
-            { title: 'SEO标题', dataIndex: 'seo_title', key: 'seo_title', width: '6%',  },
-            { title: 'SEO关键字', dataIndex: 'seo_keys', key: 'seo_keys', width: '6%',  },
-
             { title: '操作', key: '#', width: '10%',
                 render: (text, record) => {
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
@@ -132,18 +125,38 @@ class MenuManage extends React.Component{
             <div className="admin-content">
                 <div className="form-search">
                     <Form layout="inline" onSubmit={this.handleSubmit} autoComplete="off">
-                        {/*<FormItem>*/}
-                            {/*{*/}
-                                {/*getFieldDecorator('title')(*/}
-                                    {/*<Input placeholder="请输入内容库名称" />*/}
-                                {/*)*/}
-                            {/*}*/}
-                        {/*</FormItem>*/}
-                        {/*<FormItem>*/}
-                            {/*<Button type="primary" htmlType="submit">导航查询</Button>*/}
-                        {/*</FormItem>*/}
+                        <FormItem
+                            label="分类"
+                        >
+                            {
+                                getFieldDecorator('title')(
+                                    <Input placeholder="请输入关键词搜索" />
+                                )
+                            }
+                        </FormItem>
+                        <FormItem
+                            label="状态"
+                        >
+                            {
+                                getFieldDecorator('title')(
+                                    <Input placeholder="请输入关键词搜索" />
+                                )
+                            }
+                        </FormItem>
+                        <FormItem
+                            label="关键词"
+                        >
+                            {
+                                getFieldDecorator('title')(
+                                    <Input placeholder="请输入关键词搜索" />
+                                )
+                            }
+                        </FormItem>
+                        <FormItem>
+                            <Button type="primary" htmlType="submit">导航查询</Button>
+                        </FormItem>
 
-                        <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
+                        <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加文章</Button>
                     </Form>
                 </div>
                 <Table

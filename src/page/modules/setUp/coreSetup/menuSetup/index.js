@@ -74,7 +74,7 @@ class MenuManage extends React.Component{
         const { getFieldDecorator } = this.props.form;
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id'},
-            { title: '菜单名称', dataIndex: 'title', key: 'title',width: '50%', },
+            { title: '菜单名称', dataIndex: 'title', key: 'title' },
             { title: '排序', dataIndex: 'ordid', key: 'ordid'},
             // { title: '标题', dataIndex: 'title', key: 'title', width: '25%',
             //     render: (text, record) => {
@@ -87,7 +87,7 @@ class MenuManage extends React.Component{
                 // }
             // },
 
-            { title: '操作', key: '#', width: '18%',
+            { title: '操作', key: '#', width: '22%',
                 render: (text, record) => {
                     return (
                         <div>
