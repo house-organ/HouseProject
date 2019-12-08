@@ -47,9 +47,6 @@ class MenuManage extends React.Component{
             isEdit: modal && modal.id  ? true : false,
         }).show();
     }
-    goBack=(modal,e)=>{
-        this.props.history.push({pathname:'/houselist',state:modal})
-    }
     handleDelete=(record)=> {
         /**
          * 说明：删除方法
@@ -138,7 +135,6 @@ class MenuManage extends React.Component{
                             {/*<Button type="primary" htmlType="submit">导航查询</Button>*/}
                         {/*</FormItem>*/}
                         <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
-                        <Button onClick={this.goBack.bind(this,'')} style={{marginLeft:'15px'}}>返回</Button>
                     </Form>
                 </div>
                 <Table

@@ -16,9 +16,9 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：菜单列表接口方法
+         * 说明：属性管理列表接口方法
          * */
-        axios.get("nav/all",null,
+        axios.get("attribute/list",null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result ||[]})
@@ -52,8 +52,7 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        console.log("record---",record);
-        axios.delete("nav",param,
+        axios.delete("attribute",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -74,7 +73,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("attribute",param)
 
     }
     postFile=(url,param)=>{
@@ -96,15 +95,7 @@ class MenuManage extends React.Component{
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '菜单名称', dataIndex: 'title', key: 'title', width: '6%',  },
-            { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
-            { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
-            { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
-            { title: '是否预置菜单', dataIndex: 'is_sys', key: 'is_sys', width: '6%',
-                render:(text, record)=>{
-                    return (<Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={record['is_sys']==='1' ? true:false} disabled/>)
-                }
-            },
+            { title: '菜单名称', dataIndex: 'names', key: 'names', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
