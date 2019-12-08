@@ -39,7 +39,7 @@ import SandTable from '../page/modules/estate/estateManag/sandTable' //楼盘沙
 //*** 内容 ***//
 import ArticleType from '../page/modules/content/articleManag/articleType' //文章分类
 import ArticleList from '../page/modules/content/articleManag/articleList' //文章列表
-import AddArticle from '../page/modules/content/articleManag/articleList/addModal' //添加文章
+// import AddArticle from '../page/modules/content/articleManag/articleList/addModal' //添加文章
 import RecycleBin from '../page/modules/content/articleManag/recycleBin' //回收站
 
 //*** 用户 ***//
@@ -103,7 +103,7 @@ export default class AdminRouter extends React.Component{
 
                                     <Route path="/articlesort" exact component={ArticleType}/>{/*文章分类*/}
                                     <Route path="/list" exact component={ArticleList}/>{/*文章列表*/}
-                                    <Route path="/add" exact component={AddArticle}/>{/*添加文章*/}
+                                    {/*<Route path="/add" exact component={AddArticle}/>/!*添加文章*!/*/}
                                     <Route path="/recycle" exact component={RecycleBin}/>{/*回收站*/}
 
 

@@ -11,6 +11,14 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        typeData:[
+            {id:'0', title: '楼盘资讯', key: '01'},
+            {id:'1', title: '购房宝典', key: '02'},
+            {id:'2', title: '房产百科', key: '03'},
+            {id:'3', title: '楼盘导购', key: '04'},
+            {id:'4', title: '优惠活动', key: '05'},
+            {id:'5', title: '购房知识', key: '06'},
+        ],
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
@@ -45,12 +53,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "article/add";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
+                url = "article/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -90,7 +98,28 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="所属分类"
+                    >
+                        {getFieldDecorator('cate_id', {
+                            initialValue: (this.state.item && this.state.item.cate_id )|| '',
+                            rules: [{
+                                required: true,
+                                message:'请选择所属分类'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择 </Option>
+                                {
+                                    this.state.typeData && this.state.typeData.map((item, index) => {
+                                        return (<Option value={item.id} key={item.id}> {item.title} </Option>)
+                                    })
+                                }
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="标题"
                     >
                         {getFieldDecorator('title', {
                             initialValue: (this.state.item && this.state.item.title )|| '',
@@ -110,77 +139,41 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="简介"
                     >
-                        {getFieldDecorator('status', {
-                            initialValue: (this.state.item && this.state.item.status )|| '',
+                        {getFieldDecorator('description', {
+                            initialValue: (this.state.item && this.state.item.description )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                            <TextArea type="text"  placeholder="简介" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="图标："
+                        label="内容"
                     >
-                        {getFieldDecorator('icon', {
-                            initialValue: '',
+                        {getFieldDecorator('info', {
+                            initialValue: (this.state.item && this.state.item.info )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="icon" />
+                            <TextArea type="text"  placeholder="内容" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="导航位置："
+                        label="浏览数"
                     >
-                        {getFieldDecorator('pos', {
-                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 页头菜单 </Option>
-                                <Option value="2"> 页脚菜单 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="打开方式："
-                    >
-                        {getFieldDecorator('open_type', {
-                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 新页面 </Option>
-                                <Option value="2"> 当前页面 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序："
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                        {getFieldDecorator('hits', {
+                            initialValue: (this.state.item && this.state.item.hits )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="排序" />
+                            <Input type="text"  placeholder="浏览数" />
                         )}
                     </FormItem>
                     <FormItem
@@ -209,9 +202,6 @@ class editModal extends React.Component {
                             <Input type="text"  placeholder="seo关键词" />
                         )}
                     </FormItem>
-
-
-
                     <FormItem
                         {...formItemLayout}
                         label="SEO描述："

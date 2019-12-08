@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, TreeSelect,Form,Input,Select,Icon} from 'antd';
+import {Modal, TreeSelect, Form, Input, Select, Icon, Switch} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -12,7 +12,7 @@ const { TreeNode } = TreeSelect;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
-        data:[
+        typeData:[
             {id:'0', title: '楼盘资讯', key: '01'},
             {id:'1', title: '购房宝典', key: '02'},
             {id:'2', title: '房产百科', key: '03'},
@@ -32,15 +32,15 @@ class editModal extends React.Component {
     };
     fetch=()=>{
         /**
-         * 说明：文章分裂父级树状选择器数据接口
+         * 说明：文章分类父级树状选择器数据接口
          * */
-        axios.get("menu/list",null,
-            result=> {
-                this.setState({data:result.result ||[]})
-            },
-            result=> {
-            }
-        );
+        // axios.get("menu/list",null,
+        //     result=> {
+        //         this.setState({data:result.result ||[]})
+        //     },
+        //     result=> {
+        //     }
+        // );
     }
     hideModal=()=> {
         /**
@@ -57,10 +57,10 @@ class editModal extends React.Component {
                 console.log('Errors in form!!!');
                 return;
             }
-            let url = "nav";
+            let url = "article/cate/add";
             let param = values;
             if (this.props.item.id) {
-                url = "nav";
+                url = "article/cate/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -80,24 +80,6 @@ class editModal extends React.Component {
         );
 
     }
-    treeNodeOne=(dataList)=>{
-        /**
-         * 说明：父级ID树选择器方法
-         * */
-        let treeNodeOne = [];
-         dataList.map(item=>{
-             if(item.children){
-                 treeNodeOne.push(
-                     <TreeNode value={item.id} title={item.title} key={item.id} >
-                         {this.treeNodeOne(item.children)}
-                     </TreeNode>
-                 )
-             }else {
-                 treeNodeOne.push(<TreeNode value={item.id} title={item.title} key={item.id} />)
-             }
-        })
-        return treeNodeOne
-    }
     render() {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -112,12 +94,33 @@ class editModal extends React.Component {
                 maskClosable={false}
                 onOk={this.handleSubmit}
                 onCancel={this.hideModal}
-                width={680}
+                // width={680}
             >
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="分类名称："
+                        label="上级栏目"
+                    >
+                        {getFieldDecorator('cate_id', {
+                            initialValue: (this.state.item && this.state.item.cate_id )|| '',
+                            rules: [{
+                                required: true,
+                                message:'请选择上级分类'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择 </Option>
+                                {
+                                    this.state.typeData && this.state.typeData.map((item, index) => {
+                                        return (<Option value={item.id} key={item.id}> {item.title} </Option>)
+                                    })
+                                }
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="栏目名称"
                     >
                         {getFieldDecorator('names', {
                             initialValue: (this.state.item && this.state.item.names) || '',
@@ -132,12 +135,12 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="分类名称" />
+                            <Input type="text"  placeholder="栏目名称" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="分类别名："
+                        label="栏目别名"
                     >
                         {getFieldDecorator('alias', {
                             initialValue: (this.state.item && this.state.item.alias) || '',
@@ -152,59 +155,34 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="分类别名" />
+                            <Input type="text"  placeholder="栏目别名" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="父id："
+                        label="状态"
+                        colon={true}
                     >
-                        {getFieldDecorator('pid', {
-                            initialValue: (this.state.item && this.state.item.id) || '',
+                        {getFieldDecorator('sale_status', {
+                            initialValue: (this.state.item && this.state.item.sale_status )|| '',
                             rules: [{
-                                required: true,
-                                message:'请选择父id'
+                                required: false,
                             }],
                         })(
-                            <TreeSelect
-                                showSearch
-                                style={{ width: '100%' }}
-                                // value={this.state.value}
-                                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                placeholder="Please select"
-                                allowClear
-                                treeDefaultExpandAll
-                                onChange={this.onChange}
-                            >
-                                <TreeNode value="" title="请选择父id" key="0" />
-                                {this.treeNodeOne(this.state.data)}
-                            </TreeSelect>
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={(this.state.item && this.state.item.sale_status === '1' ) ? true:false} />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="所有父级id"
+                        label="排序"
                     >
-                        {getFieldDecorator('spid', {
-                            initialValue: (this.state.item && this.state.item.spid) || '',
+                        {getFieldDecorator('ordid', {
+                            initialValue: (this.state.item && this.state.item.ordid )|| '',
                             rules: [{
-                                required: true,
-                                message:'请选择父id'
+                                required: false,
                             }],
                         })(
-                            <TreeSelect
-                                showSearch
-                                style={{ width: '100%' }}
-                                // value={this.state.value}
-                                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                placeholder="Please select"
-                                allowClear
-                                treeDefaultExpandAll
-                                onChange={this.onChange}
-                            >
-                                <TreeNode value="" title="请选择父id" key="0" />
-                                {this.treeNodeOne(this.state.data)}
-                            </TreeSelect>
+                            <Input type="text"  placeholder="排序" />
                         )}
                     </FormItem>
                     <FormItem
@@ -244,19 +222,6 @@ class editModal extends React.Component {
                             }],
                         })(
                             <TextArea rows={4} placeholder="SEO描述" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序："
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="排序" />
                         )}
                     </FormItem>
                 </Form>

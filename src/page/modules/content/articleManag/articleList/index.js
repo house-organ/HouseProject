@@ -51,23 +51,22 @@ class articleList extends React.Component{
         /**
          * 说明：新增或编辑弹窗
          * */
-        // e && e.preventDefault() ;
-        // e && e.stopPropagation();
-        // if(modal){
-        //     modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
-        //     modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
-        // }
-        //
-        // new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
-        //     this.fetch();
-        // }, null, {
-        //     title:  modal && modal.id  ? '编辑' : '新增',
-        //     // item: modal && modal.id ? Helper.copyObject(modal) : {},
-        //     // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
-        //     item: modal && modal.id ? modal : {},
-        //     isEdit: modal && modal.id  ? true : false,
-        // }).show();
-        this.props.history.push({pathname:'/add',state:modal})
+        e && e.preventDefault() ;
+        e && e.stopPropagation();
+        if(modal){
+            modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
+            modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
+        }
+
+        new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
+            this.fetch();
+        }, null, {
+            title:  modal && modal.id  ? '编辑' : '新增',
+            // item: modal && modal.id ? Helper.copyObject(modal) : {},
+            // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
+            item: modal && modal.id ? modal : {},
+            isEdit: modal && modal.id  ? true : false,
+        }).show();
     }
     handleDelete=(record)=> {
         /**
@@ -75,7 +74,7 @@ class articleList extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        axios.delete("nav",param,
+        axios.delete("article",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -84,10 +83,11 @@ class articleList extends React.Component{
             }
         );
     }
-    handleSubmit=()=>{
+    handleSubmit=(e)=>{
         /**
          * 说明：表头表单事件
          * */
+        console.log('e----->', e)
     }
     statusChange=(record,checked)=>{
         /**
@@ -96,7 +96,7 @@ class articleList extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("article/update",param)
 
     }
     postFile=(url,param)=>{
@@ -113,13 +113,8 @@ class articleList extends React.Component{
         const { getFieldDecorator } = this.props.form;
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id', width: '3%'},
-            // { title: '标题', dataIndex: 'title', key: 'title', width: '25%',
-            //     render: (text, record) => {
-            //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
-            //     }
-            // },
-            { title: '文章标题', dataIndex: 'title', key: 'title', width: '26%',  },
-            { title: '分类别名', dataIndex: 'cate_alias', key: 'cate_alias', width: '6%',  },
+            { title: '标题', dataIndex: 'title', key: 'title', width: '26%',  },
+            { title: '所属分类', dataIndex: 'cate_alias', key: 'cate_alias', width: '6%',  },
             { title: '发布时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
             { title: '更新时间', dataIndex: 'update_time', key: 'update_time', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
@@ -148,28 +143,28 @@ class articleList extends React.Component{
             <div className="admin-content">
                 <div className="form-search">
                     <Form layout="inline" onSubmit={this.handleSubmit} autoComplete="off">
-                        <FormItem
-                            label="分类"
-                        >
-                            {
-                                getFieldDecorator('title',{
-                                    initialValue:  '',
-                                    rules: [{
-                                        required: true,
-                                        message:'请选择分类'
-                                    }],
-                                })(
-                                    <Select className="seach-item-box">
-                                        <Option value=""> 所有 </Option>
-                                        {
-                                            this.state.typeData && this.state.typeData.map((item, index) => {
-                                                return (<Option value={item.id} kye={item.id}> {item.title} </Option>)
-                                            })
-                                        }
-                                    </Select>
-                                )
-                            }
-                        </FormItem>
+                        {/*<FormItem*/}
+                        {/*    label="分类"*/}
+                        {/*>*/}
+                        {/*    {*/}
+                        {/*        getFieldDecorator('title',{*/}
+                        {/*            initialValue: this.state.title|| '',*/}
+                        {/*            rules: [{*/}
+                        {/*                required: true,*/}
+                        {/*                message:'请选择分类'*/}
+                        {/*            }],*/}
+                        {/*        })(*/}
+                        {/*            <Select className="seach-item-box">*/}
+                        {/*                <Option value=""> 请选择 </Option>*/}
+                        {/*            {*/}
+                        {/*                this.state.typeData && this.state.typeData.map((item, index) => {*/}
+                        {/*                    return (<Option value={item.id} kye={item.key}> {item.title} </Option>)*/}
+                        {/*                })*/}
+                        {/*            }*/}
+                        {/*            </Select>*/}
+                        {/*        )*/}
+                        {/*    }*/}
+                        {/*</FormItem>*/}
                         <FormItem
                             label="状态"
                         >
@@ -182,9 +177,9 @@ class articleList extends React.Component{
                                     }],
                                 })(
                                     <Select className="seach-item-box">
-                                        <Option value=""> 所有 </Option>
-                                        <Option value="1"> 启用 </Option>
-                                        <Option value="2"> 禁用 </Option>
+                                        <Option value="" key={0}> 所有 </Option>
+                                        <Option value="1" key={1}> 启用 </Option>
+                                        <Option value="2" key={2}> 禁用 </Option>
                                     </Select>
                                 )
                             }

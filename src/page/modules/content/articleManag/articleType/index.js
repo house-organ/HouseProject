@@ -57,7 +57,7 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        axios.delete("article",param,
+        axios.delete("article/cate",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -73,7 +73,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("article/update",param)
+        this.postFile("article/cate/update",param)
 
     }
     postFile=(url,param)=>{
@@ -90,11 +90,9 @@ class MenuManage extends React.Component{
         const { getFieldDecorator } = this.props.form;
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id'},
-            { title: '分类名称', dataIndex: 'names', key: 'names' },
-            { title: '分类别名', dataIndex: 'alias', key: 'alias' },
-            { title: '父级id', dataIndex: 'pid', key: 'pid' },
-            { title: '所有父级id', dataIndex: 'spid', key: 'spid' },
-            { title: '排序', dataIndex: 'ordid', key: 'ordid'},
+            { title: '栏目名称', dataIndex: 'names', key: 'names', width: '26%',  },
+            { title: '栏目别名', dataIndex: 'alias', key: 'alias', width: '6%',  },
+            { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
