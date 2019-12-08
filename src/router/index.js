@@ -81,10 +81,10 @@ export default class AdminRouter extends React.Component{
 
 
                                     <Route path="/houselist" exact component={EstateManag}/>{/*楼盘列表*/}
-                                    <Route path="/houselist/apartment" exact component={Apartment}/>{/*楼盘户型*/}
-                                    <Route path="/houselist/album" exact component={Album}/>{/*楼盘列表*/}
-                                    <Route path="/houselist/dynamic" exact component={Dynamic}/>{/*楼盘列表*/}
-                                    <Route path="/houselist/sandTable" exact component={SandTable}/>{/*楼盘列表*/}
+                                    <Route path="/houselist/apartment/:id" exact component={Apartment}/>{/*楼盘户型*/}
+                                    <Route path="/houselist/album/:id" exact component={Album}/>{/*楼盘相册*/}
+                                    <Route path="/houselist/dynamic/:id" exact component={Dynamic}/>{/*楼盘动态*/}
+                                    <Route path="/houselist/sandTable/:id" exact component={SandTable}/>{/*沙盘*/}
                                     <Route path="/developer" exact component={Developers}/>{/*开发商管理*/}
                                     <Route path="/houseadd" exact component={AddHouselistModal}/>{/*添加楼盘列表*/}
 

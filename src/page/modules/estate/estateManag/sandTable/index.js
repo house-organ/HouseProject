@@ -12,13 +12,18 @@ class MenuManage extends React.Component{
         data:[],
     }
     componentWillMount() {
-        this.fetch()
+        let hid = this.props.match.params.id || '';
+        this.fetch(hid)
     }
-    fetch=()=>{
+    fetch=(hid)=>{
         /**
          * 说明：楼盘沙盘列表接口方法
          * */
-        axios.get("nav/all",null,
+        let hd_id = hid || ''
+        if(hd_id === ''){
+            this.props.history.push({pathname:'/houselist'})
+        }
+        axios.get("floor/type/list/"+hd_id,null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result ||[]})

@@ -48,8 +48,12 @@ class MenuManage extends React.Component{
         this.props.history.push({pathname:'/houseadd',state:modal})
     }
     goDetil=(modal,e)=>{
-        let url = '/houselist/' + e
-        this.props.history.push({pathname:url,state:modal})
+        if (modal.id && modal.id !== '') {
+            let url = '/houselist/' + e + '/' + modal.id
+            this.props.history.push({pathname:url})
+        } else {
+            NotificationMixin.error("楼盘id不能为空！")
+        }
     }
     handleDelete=(record)=> {
         /**

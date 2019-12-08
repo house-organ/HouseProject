@@ -12,17 +12,15 @@ class MenuManage extends React.Component{
         data:[],
     }
     componentWillMount() {
-        let item = this.props.location.state;
-        this.fetch(item)
+        let hid = this.props.match.params.id;
+        this.fetch(hid)
     }
-    fetch=(item)=>{
+    fetch=(hid)=>{
         /**
          * 说明：户型列表接口方法
          * */
-        let hd_id = ''
-        if(item && item.id){
-            hd_id = item.hd_id
-        } else {
+        let hd_id = hid || ''
+        if(hd_id === ''){
             this.props.history.push({pathname:'/houselist'})
         }
         axios.get("floor/type/list/"+hd_id,null,
@@ -101,17 +99,16 @@ class MenuManage extends React.Component{
         const { getFieldDecorator } = this.props.form;
         const columns = [
             { title: '编号',dataIndex: 'id', key: 'id'},
-            { title: '楼盘名称', dataIndex: 'house_title', key: 'house_title' },
-            { title: '户型名称', dataIndex: 'title', key: 'title' },
-            { title: '面积', dataIndex: 'acreage', key: 'acreage' },
-            { title: '售价', dataIndex: 'price', key: 'price' },
-            { title: '排序', dataIndex: 'ordid', key: 'ordid' },
+            { title: '楼盘名称', dataIndex: 'house_id', key: 'house_id', width: '12%',  },
+            { title: '户型名称', dataIndex: 'title', key: 'title', width: '12%',  },
+            { title: '面积', dataIndex: 'acreage', key: 'acreage', width: '10%',  },
+            { title: '总价', dataIndex: 'price', key: 'price', width: '10%',  },
+            { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['sale_status']==='1' ? true:false} />)
                 }
             },
-            { title: '状态名称', dataIndex: 'status_name', key: 'status_name', width: '6%',  },
             {
                 title: '操作',
                 key: '#',

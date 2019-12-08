@@ -12,13 +12,18 @@ class MenuManage extends React.Component{
         data:[],
     }
     componentWillMount() {
-        this.fetch()
+        let hid = this.props.match.params.id;
+        this.fetch(hid)
     }
-    fetch=()=>{
+    fetch=(hid)=>{
         /**
          * 说明：相册列表接口方法
          * */
-        axios.get("nav/all",null,
+        let hd_id = hid || ''
+        if(hd_id === ''){
+            this.props.history.push({pathname:'/houselist'})
+        }
+        axios.get("floor/photo/list/"+hd_id,null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result ||[]})
@@ -55,7 +60,6 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        console.log("record---",record);
         axios.delete("nav",param,
             result=> {
                 NotificationMixin.success("删除成功！")
@@ -99,23 +103,16 @@ class MenuManage extends React.Component{
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '菜单名称', dataIndex: 'title', key: 'title', width: '6%',  },
-            { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
-            { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
+            { title: '楼盘名称', dataIndex: 'house_id', key: 'house_id', width: '6%',  },
+            { title: '户型名称', dataIndex: 'title', key: 'title', width: '6%',  },
+            { title: '面积', dataIndex: 'acreage', key: 'acreage', width: '6%',  },
+            { title: '总价', dataIndex: 'price', key: 'price', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
-            { title: '是否预置菜单', dataIndex: 'is_sys', key: 'is_sys', width: '6%',
-                render:(text, record)=>{
-                    return (<Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={record['is_sys']==='1' ? true:false} disabled/>)
-                }
-            },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
                 }
             },
-            { title: 'SEO标题', dataIndex: 'seo_title', key: 'seo_title', width: '6%',  },
-            { title: 'SEO关键字', dataIndex: 'seo_keys', key: 'seo_keys', width: '6%',  },
-
             { title: '操作', key: '#', width: '10%',
                 render: (text, record) => {
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
