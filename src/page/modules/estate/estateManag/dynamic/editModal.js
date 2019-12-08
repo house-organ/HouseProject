@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch, Form, Input, Select, Upload, Icon, message, DatePicker} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -8,6 +8,23 @@ const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
 
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+        message.error('You can only upload JPG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+    }
+    return isJPG && isLt2M;
+}
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
@@ -52,12 +69,11 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "floor/article/add";
             let param = values;
 
-
             if (this.props.item.id) {
-                url = "nav";
+                url = "floor/article/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -85,6 +101,16 @@ class editModal extends React.Component {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+        const config = {
+            rules: [{ type: 'object', required: false, message: 'Please select time!' }],
+        };
+        const uploadButton = (
+            <div>
+                <Icon type={this.state.loading ? 'loading' : 'plus'} />
+                <div className="ant-upload-text">Upload</div>
+            </div>
+        );
+        const imageUrl = this.state.imageUrl;
         return(
             <Modal
                 title={this.props.title}
@@ -99,28 +125,14 @@ class editModal extends React.Component {
                         {...formItemLayout}
                         label="所属楼盘"
                     >
-                        {getFieldDecorator('title', {
-                            initialValue: (this.state.item && this.state.item.title )|| '',
-                            rules: [{
-                                required: true,
-                                validator: (rule, value, callback) => {
-                                    if (!value || (value && value.length > 50)) {
-                                        callback(new Error('不能为空且长度不超过50!'));
-                                    } else {
-                                        callback();
-                                    }
-                                }
-                            }],
-                        })(
-                            <Input type="text"  placeholder="名称" />
-                        )}
+                        <Input type="text" value={this.state.house_title || ''} disabled/>
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="所属分类"
                     >
-                        {getFieldDecorator('price_unit', {
-                            initialValue: (this.state.item && this.state.item.price_unit )|| '',
+                        {getFieldDecorator('cate_id', {
+                            initialValue: (this.state.item && this.state.item.cate_id )|| '',
                             rules: [{
                                 required: true,
                                 message:'请选择所属分类'
@@ -138,82 +150,105 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="标题"
                     >
-                        {getFieldDecorator('status', {
-                            initialValue: (this.state.item && this.state.item.status )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="图标："
-                    >
-                        {getFieldDecorator('icon', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="icon" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="导航位置："
-                    >
-                        {getFieldDecorator('pos', {
-                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
+                        {getFieldDecorator('title', {
+                            initialValue: (this.state.item && this.state.item.title )|| '',
                             rules: [{
                                 required: true,
-                                message:'请选择导航位置'
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 页头菜单 </Option>
-                                <Option value="2"> 页脚菜单 </Option>
-                            </Select>
+                            <Input type="text"  placeholder="名称" />
                         )}
                     </FormItem>
-                    <FormItem
+                    <Form.Item
                         {...formItemLayout}
-                        label="打开方式："
+                        label="选择图片"
                     >
-                        {getFieldDecorator('open_type', {
-                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
+                        {getFieldDecorator('img', {
+                            initialValue: (this.state.data && this.state.data.img) || '',
                             rules: [{
-                                required: true,
-                                message:'请选择导航位置'
+                                // required: true,
+                                // validator: (rule, value, callback) => {
+                                //     if (!value || (value && value.length > 50)) {
+                                //         callback(new Error('不能为空且长度不超过50!'));
+                                //     } else {
+                                //         callback();
+                                //     }
+                                // }
                             }],
                         })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 新页面 </Option>
-                                <Option value="2"> 当前页面 </Option>
-                            </Select>
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleChange}
+                            >
+                                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                            </Upload>
                         )}
-                    </FormItem>
+                    </Form.Item>
                     <FormItem
                         {...formItemLayout}
-                        label="排序："
+                        label="简介"
                     >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                        {getFieldDecorator('description', {
+                            initialValue: (this.state.item && this.state.item.description )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="排序" />
+                            <TextArea type="text"  placeholder="简介" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo标题："
+                        label="内容"
+                    >
+                        {getFieldDecorator('info', {
+                            initialValue: (this.state.item && this.state.item.info )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <TextArea type="text"  placeholder="内容" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="开盘时间"
+                        colon={true}
+                    >
+                        {getFieldDecorator('opening_time',config)(
+                            <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="浏览数"
+                    >
+                        {getFieldDecorator('hits', {
+                            initialValue: (this.state.item && this.state.item.hits )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="浏览数" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="seo标题"
                     >
                         {getFieldDecorator('seo_title', {
                             initialValue: (this.state.item && this.state.item.seo_title )|| '',
@@ -226,7 +261,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo关键词："
+                        label="seo关键词"
                     >
                         {getFieldDecorator('seo_keys', {
                             initialValue: (this.state.item && this.state.item.seo_keys )|| '',
@@ -237,9 +272,6 @@ class editModal extends React.Component {
                             <Input type="text"  placeholder="seo关键词" />
                         )}
                     </FormItem>
-
-
-
                     <FormItem
                         {...formItemLayout}
                         label="SEO描述："

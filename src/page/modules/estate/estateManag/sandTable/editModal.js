@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch, Form, Input, Select, DatePicker} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -45,12 +45,12 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "floor/sand/add";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
+                url = "floor/sand/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -78,6 +78,9 @@ class editModal extends React.Component {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+        const config = {
+            rules: [{ type: 'object', required: false, message: 'Please select time!' }],
+        };
         return(
             <Modal
                 title={this.props.title}
@@ -90,7 +93,7 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="楼栋名称"
                     >
                         {getFieldDecorator('title', {
                             initialValue: (this.state.item && this.state.item.title )|| '',
@@ -105,12 +108,12 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="名称" />
+                            <Input type="text"  placeholder="楼栋名称" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -123,109 +126,94 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="图标："
+                        label="单元数"
                     >
-                        {getFieldDecorator('icon', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="icon" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="导航位置："
-                    >
-                        {getFieldDecorator('pos', {
-                            initialValue: (this.state.item && this.state.item.pos_name )|| '',
+                        {getFieldDecorator('unit', {
+                            initialValue: (this.state.item && this.state.item.unit )|| '',
                             rules: [{
                                 required: true,
-                                message:'请选择导航位置'
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 页头菜单 </Option>
-                                <Option value="2"> 页脚菜单 </Option>
-                            </Select>
+                            <Input type="text"  placeholder="单元数" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="打开方式："
+                        label="电梯数"
                     >
-                        {getFieldDecorator('open_type', {
-                            initialValue: (this.state.item && this.state.item.open_type_name )|| '',
-                            rules: [{
-                                required: true,
-                                message:'请选择导航位置'
-                            }],
-                        })(
-                            <Select>
-                                <Option value=""> 请选择导航位置 </Option>
-                                <Option value="1"> 新页面 </Option>
-                                <Option value="2"> 当前页面 </Option>
-                            </Select>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序："
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                        {getFieldDecorator('elevator', {
+                            initialValue: (this.state.item && this.state.item.elevator )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="排序" />
+                            <Input type="text"  placeholder="电梯数" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo标题："
+                        label="总楼层"
                     >
-                        {getFieldDecorator('seo_title', {
-                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
+                        {getFieldDecorator('floor_num', {
+                            initialValue: (this.state.item && this.state.item.floor_num )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="seo标题" />
+                            <Input type="text"  placeholder="总楼层" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo关键词："
+                        label="总户数"
                     >
-                        {getFieldDecorator('seo_keys', {
-                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
+                        {getFieldDecorator('room_num', {
+                            initialValue: (this.state.item && this.state.item.room_num )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="seo关键词" />
+                            <Input type="text"  placeholder="总户数" />
                         )}
                     </FormItem>
-
-
-
                     <FormItem
                         {...formItemLayout}
-                        label="SEO描述："
+                        label="开盘时间"
+                        colon={true}
                     >
-                        {getFieldDecorator('seo_desc', {
-                            initialValue: '',
+                        {getFieldDecorator('open_time',config)(
+                            <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="交房时间"
+                        colon={true}
+                    >
+                        {getFieldDecorator('complete_time',config)(
+                            <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="销售状态"
+                    >
+                        {getFieldDecorator('sale_status', {
+                            initialValue: (this.state.item && this.state.item.sale_status )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <TextArea rows={4} placeholder="SEO描述" />
+                            <Input type="text"  placeholder="销售状态" />
                         )}
                     </FormItem>
-
                 </Form>
             </Modal>
         )

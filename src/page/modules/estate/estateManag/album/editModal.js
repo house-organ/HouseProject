@@ -121,23 +121,9 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="所属楼盘："
+                        label="所属楼盘"
                     >
-                        {getFieldDecorator('title', {
-                            initialValue: (this.state.item && this.state.item.title )|| '',
-                            rules: [{
-                                required: true,
-                                validator: (rule, value, callback) => {
-                                    if (!value || (value && value.length > 50)) {
-                                        callback(new Error('不能为空且长度不超过50!'));
-                                    } else {
-                                        callback();
-                                    }
-                                }
-                            }],
-                        })(
-                            <Input type="text"  placeholder="名称" />
-                        )}
+                        <Input type="text" value={this.state.house_title || ''} disabled/>
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
