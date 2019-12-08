@@ -126,7 +126,7 @@ class MenuManage extends React.Component{
                             {/*<Button type="primary" htmlType="submit">导航查询</Button>*/}
                         {/*</FormItem>*/}
 
-                        {/*<Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>*/}
+                        <Button type="primary" onClick={this.addOrUpdate.bind(this,'')}>添加</Button>
                     </Form>
                 </div>
                 <Table
