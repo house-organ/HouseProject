@@ -16,7 +16,7 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：菜单列表接口方法
+         * 说明：链接类型列表接口方法
          * */
         axios.get("nav/all",null,
             result=> {

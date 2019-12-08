@@ -45,12 +45,9 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "poster_space/add";
+            let url = "position";
             let param = values;
-
-
             if (this.props.item.id) {
-                url = "poster_space/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -90,10 +87,10 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="广告位名称："
+                        label="推荐位名称"
                     >
-                        {getFieldDecorator('names', {
-                            initialValue: (this.state.item && this.state.item.names )|| '',
+                        {getFieldDecorator('title', {
+                            initialValue: (this.state.item && this.state.item.title )|| '',
                             rules: [{
                                 required: true,
                                 validator: (rule, value, callback) => {
@@ -105,15 +102,15 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="广告位名称" />
+                            <Input type="text"  placeholder="推荐位名称" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="类型："
+                        label="所属模型"
                     >
-                        {getFieldDecorator('type', {
-                            initialValue: (this.state.item && this.state.item.type) || '',
+                        {getFieldDecorator('model', {
+                            initialValue: (this.state.item && this.state.item.model) || '',
                             rules: [{
                                 required: true,
                                 message:'请选择类型'
@@ -121,19 +118,16 @@ class editModal extends React.Component {
                         })(
                             <Select>
                                 <Option value=""> 请选择类型 </Option>
-                                <Option value="1"> 矩形横幅 </Option>
-                                <Option value="2"> 对联广告 </Option>
-                                <Option value="3"> 图片列表 </Option>
-                                <Option value="4"> PC轮播图 </Option>
-                                <Option value="5"> 手机轮播图 </Option>
-                                <Option value="6"> 文字广告 </Option>
-                                <Option value="7"> 代码广告 </Option>
+                                <Option value="1"> 新房 </Option>
+                                <Option value="2"> 小区 </Option>
+                                <Option value="3"> 二手房 </Option>
+                                <Option value="4"> 出租房 </Option>
                             </Select>
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -142,58 +136,6 @@ class editModal extends React.Component {
                             }],
                         })(
                             <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="广告位宽度："
-                    >
-                        {getFieldDecorator('width', {
-                            initialValue: (this.state.item && this.state.item.width )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="广告位宽度" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="广告位高度："
-                    >
-                        {getFieldDecorator('height', {
-                            initialValue: (this.state.item && this.state.item.height )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="广告位高度" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="显示广告数："
-                    >
-                        {getFieldDecorator('display_num', {
-                            initialValue: (this.state.item && this.state.item.display_num )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="显示广告数" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="说明："
-                    >
-                        {getFieldDecorator('description', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <TextArea rows={4} placeholder="说明" />
                         )}
                     </FormItem>
 
