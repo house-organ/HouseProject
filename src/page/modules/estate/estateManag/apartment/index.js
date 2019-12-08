@@ -60,8 +60,7 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        console.log("record---",record);
-        axios.delete("floor",param,
+        axios.delete("floor/type",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -82,7 +81,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("floor/update",param)
+        this.postFile("floor/type/update",param)
 
     }
     postFile=(url,param)=>{

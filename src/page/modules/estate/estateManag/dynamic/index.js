@@ -23,7 +23,7 @@ class MenuManage extends React.Component{
         if(hd_id === ''){
             this.props.history.push({pathname:'/houselist'})
         }
-        axios.get("floor/article/list/"+hd_id,null,
+        axios.get("floor/article/list"+hd_id,null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result ||[]})
@@ -60,8 +60,7 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        console.log("record---",record);
-        axios.delete("nav",param,
+        axios.delete("floor/article",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -82,7 +81,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("floor/article/update",param)
 
     }
     postFile=(url,param)=>{

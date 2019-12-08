@@ -77,55 +77,11 @@ class editModal extends React.Component {
         );
 
     }
-
-
-
-
-
-
-
-
-    disabledStartDate = startValue => {
-        const { endValue } = this.state;
-        if (!startValue || !endValue) {
-            return false;
-        }
-        return startValue.valueOf() > endValue.valueOf();
-    };
-
-    disabledEndDate = endValue => {
-        const { startValue } = this.state;
-        if (!endValue || !startValue) {
-            return false;
-        }
-        return endValue.valueOf() <= startValue.valueOf();
-    };
-
     onChange = (field, value) => {
         this.setState({
             [field]: value,
         });
     };
-
-    onStartChange = value => {
-        this.onChange('startValue', value);
-    };
-
-    onEndChange = value => {
-        this.onChange('endValue', value);
-    };
-
-    handleStartOpenChange = open => {
-        if (!open) {
-            this.setState({ endOpen: true });
-        }
-    };
-
-    handleEndOpenChange = open => {
-        this.setState({ endOpen: open });
-    };
-
-
     render() {
         const { getFieldDecorator } = this.props.form;
         const config = {
@@ -345,67 +301,7 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="特色" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="朝向"
-                        colon={true}
-                    >
-                        {getFieldDecorator('orientation', {
-                            initialValue: (this.state.item && this.state.item.orientation )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="朝向" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="状态"
-                        colon={true}
-                    >
-                        {getFieldDecorator('status', {
-                            initialValue: (this.state.item && this.state.item.status )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={(this.state.item && this.state.item.status === '1' ) ? true:false} />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="排序"
-                        colon={true}
-                    >
-                        {getFieldDecorator('ordid', {
-                            initialValue: (this.state.item && this.state.item.ordid )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="排序" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="添加时间"
-                        colon={true}
-                    >
-                        {getFieldDecorator('create_time',config)(
-                            <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="更新时间"
-                        colon={true}
-                    >
-                        {getFieldDecorator('update_time',config)(
-                            <DatePicker showTime placeholder="Select Time" style={{width:'100%'}}  />
+                            <TextArea type="text"  placeholder="特色" />
                         )}
                     </FormItem>
                 </Form>

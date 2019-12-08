@@ -11,6 +11,13 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        typeData: [
+            {id: '1', title: '实景图'},
+            {id: '2', title: '效果图'},
+            {id: '3', title: '配套图'},
+            {id: '4', title: '样板间'},
+            {id: '5', title: '区位图'},
+        ]
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
@@ -90,7 +97,7 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="所属楼盘"
                     >
                         {getFieldDecorator('title', {
                             initialValue: (this.state.item && this.state.item.title )|| '',
@@ -106,6 +113,27 @@ class editModal extends React.Component {
                             }],
                         })(
                             <Input type="text"  placeholder="名称" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="所属分类"
+                    >
+                        {getFieldDecorator('price_unit', {
+                            initialValue: (this.state.item && this.state.item.price_unit )|| '',
+                            rules: [{
+                                required: true,
+                                message:'请选择所属分类'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择 </Option>
+                                {
+                                    this.state.typeData && this.state.typeData.map((item, index) => {
+                                        return (<Option value={item.id} key={item.id}> {item.title} </Option>)
+                                    })
+                                }
+                            </Select>
                         )}
                     </FormItem>
                     <FormItem

@@ -15,21 +15,21 @@ class editModal extends React.Component {
         tabsActiveKey:'1'
     }
     componentWillMount() {
-        console.log("item--->",this.state.item)
+        let id = 'price_unit'
+        this.fetch(id)
     }
     fetch=(id)=>{
-        // axios.get("topic/"+id,null,
-        //     result=> {
-        //         this.setState({
-        //             data:result.data ||{},
-        //             authorName:result.data.author.loginname || '',
-        //             replies:result.data.replies || [],
-        //         })
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+        axios.get("constant/info/"+id,null,
+            result=> {
+                console.log('result--->', result.data)
+                this.setState({
+                    data:result.data ||{}
+                })
+            },
+            result=> {
+
+            }
+        );
     }
     hideModal=()=> {
         /**

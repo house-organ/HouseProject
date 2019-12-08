@@ -13,16 +13,35 @@ class AddHouselistModal extends React.Component{
     state = {
         item:this.props.location.state || {}
     }
-    componentWillMount(){
-        let item = this.props.location.state;
-        // if(item){
-        //     localStorage.setItem('addHouse', JSON.stringify(item));
-        // }else {
-        //     let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
-        //     this.setState({item:addHouse})
-        //     console.log("111",addHouse)
-        // }
+    // componentWillMount(){
+    //     let item = this.props.location.state;
+    //     // if(item){
+    //     //     localStorage.setItem('addHouse', JSON.stringify(item));
+    //     // }else {
+    //     //     let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
+    //     //     this.setState({item:addHouse})
+    //     //     console.log("111",addHouse)
+    //     // }
+    //
+    // }
+    componentWillMount() {
+        let item = this.props.location.state || {};
         this.setState({item:item})
+        let id = 'price_unit'
+        this.fetch(id)
+    }
+    fetch=(id)=>{
+        axios.get("constant/info/"+id,null,
+            result=> {
+                console.log('result--->', result.data)
+                this.setState({
+                    data:result.data ||{}
+                })
+            },
+            result=> {
+
+            }
+        );
     }
     handleSubmit = e => {
         e.preventDefault();

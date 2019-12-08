@@ -60,7 +60,7 @@ class MenuManage extends React.Component{
          * */
         let param = {};
         param.id=record.id;
-        axios.delete("nav",param,
+        axios.delete("floor​/photo​",param,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -81,7 +81,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("floor/photo/update",param)
 
     }
     postFile=(url,param)=>{
@@ -104,9 +104,9 @@ class MenuManage extends React.Component{
             //     }
             // },
             { title: '楼盘名称', dataIndex: 'house_id', key: 'house_id', width: '6%',  },
-            { title: '户型名称', dataIndex: 'title', key: 'title', width: '6%',  },
-            { title: '面积', dataIndex: 'acreage', key: 'acreage', width: '6%',  },
-            { title: '总价', dataIndex: 'price', key: 'price', width: '6%',  },
+            { title: '相册名称', dataIndex: 'title', key: 'title', width: '6%',  },
+            { title: '所属分类', dataIndex: 'cate_name', key: 'cate_name', width: '6%',  },
+            { title: '添加时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
