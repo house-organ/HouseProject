@@ -37,7 +37,6 @@ class login extends React.Component{
                             let token = result.result.token;
                             localStorage.setItem('token', JSON.stringify(token)); //token缓存
 
-                            console.log("1")
                             if(this.state.checkboxVal){
                                 let accountInfo = values.ac+ '&' +values.se
                                 let Days = 3;  //cookie保存时间
@@ -59,7 +58,6 @@ class login extends React.Component{
                                 this.state.password = '';
 
                             }
-                            console.log("2")
                             window.location.href = '/#/home';
                         }
 
@@ -163,22 +161,10 @@ class login extends React.Component{
                 <div className='login-main'>
                     <div className='login-box'>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                        <Card title="测试" className='login-box' bordered={false}>
+                        <Card title="后台管理系统" className='login-box' bordered={false}>
                             <Form onSubmit={this.handleSubmit} className="login-form">
                                 <Form.Item>
-                                    {getFieldDecorator('ac', {
+                                    {getFieldDecorator('user_name', {
                                         initialValue: this.state.username || '',
                                         rules: [{ required: true, message: '请输入帐号!' }],
                                     })(
@@ -189,7 +175,7 @@ class login extends React.Component{
                                     )}
                                 </Form.Item>
                                 <Form.Item>
-                                    {getFieldDecorator('se', {
+                                    {getFieldDecorator('password', {
                                         initialValue: this.state.password || '',
                                         rules: [{ required: true, message: '请输入密码!' }],
                                     })(
