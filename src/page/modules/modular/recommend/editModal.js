@@ -154,10 +154,11 @@ class editModal extends React.Component {
                         })(
                             <Select>
                                 <Option value=""> 请选择所属楼盘 </Option>
-                                <Option value="1"> 新房 </Option>
-                                <Option value="2"> 小区 </Option>
-                                <Option value="3"> 二手房 </Option>
-                                <Option value="4"> 出租房 </Option>
+                                {
+                                    this.state.houselist && this.state.houselist.map((item, index) => {
+                                        return (<Option value={item.id} key={item.id}> {item.title} </Option>)
+                                    })
+                                }
                             </Select>
                         )}
                     </FormItem>
