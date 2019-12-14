@@ -16,7 +16,7 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：楼盘动态列表接口方法
+         * 说明：楼盘列表接口方法
          * */
         axios.get("floor/list",null,
             result=> {

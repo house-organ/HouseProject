@@ -22,7 +22,6 @@ class MenuManage extends React.Component{
          * */
         axios.get("/region/list",null,
             result=> {
-                console.log(result.result)
                 this.setState({data:result.result.data ||[]})
             },
         );

@@ -11,23 +11,39 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        recommendList: [],
+        houselist: []
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
+        this.fetch()
+        this.getHouselist()
     }
-    fetch=(id)=>{
-        // axios.get("topic/"+id,null,
-        //     result=> {
-        //         this.setState({
-        //             data:result.data ||{},
-        //             authorName:result.data.author.loginname || '',
-        //             replies:result.data.replies || [],
-        //         })
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+    fetch=()=>{
+        /**
+         * 说明：推荐位列表接口方法
+         * */
+        axios.get("position/list",null,
+            result=> {
+                console.log(result.result)
+                let recommendList = []
+                result.result.data && result.result.data.map((item,index)=>{
+                    recommendList.push({'pid':item.pid,'title':item.title})
+                })
+                this.setState({recommendList:recommendList})
+            },
+        );
+    }
+    getHouselist=()=>{
+        /**
+         * 说明：楼盘列表接口方法
+         * */
+        axios.get("floor/list",null,
+            result=> {
+                console.log('floor/list--->',result.result)
+                this.setState({houselist:result.result.data ||[]})
+            },
+        );
     }
     hideModal=()=> {
         /**
@@ -127,6 +143,46 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
+                        label="所属楼盘"
+                    >
+                        {getFieldDecorator('model', {
+                            initialValue: (this.state.item && this.state.item.model) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择所属楼盘'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择所属楼盘 </Option>
+                                <Option value="1"> 新房 </Option>
+                                <Option value="2"> 小区 </Option>
+                                <Option value="3"> 二手房 </Option>
+                                <Option value="4"> 出租房 </Option>
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="推荐位父id"
+                    >
+                        {getFieldDecorator('pid', {
+                            initialValue: (this.state.item && this.state.item.pid ) || '',
+                            rules: [{
+                                required: true,
+                                message:'推荐位父id'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择推荐位父id </Option>
+                                <Option value="1"> 新房 </Option>
+                                <Option value="2"> 小区 </Option>
+                                <Option value="3"> 二手房 </Option>
+                                <Option value="4"> 出租房 </Option>
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
                         label="状态"
                     >
                         {getFieldDecorator('status', {
@@ -138,7 +194,19 @@ class editModal extends React.Component {
                             <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
                         )}
                     </FormItem>
-
+                    <FormItem
+                        {...formItemLayout}
+                        label="排序"
+                    >
+                        {getFieldDecorator('ordid', {
+                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="排序" />
+                        )}
+                    </FormItem>
                 </Form>
             </Modal>
         )

@@ -22,7 +22,7 @@ class editModal extends React.Component {
         axios.get("region/list",null,
             result=> {
                 this.setState({
-                    data:result.result ||{},
+                    data:result.result.data || {},
                 })
             },
             result=> {

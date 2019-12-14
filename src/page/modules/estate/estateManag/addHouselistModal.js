@@ -35,7 +35,7 @@ class AddHouselistModal extends React.Component{
             result=> {
                 console.log('result--->', result.data)
                 this.setState({
-                    data:result.data ||{}
+                    data:result.result.data ||{}
                 })
             },
             result=> {

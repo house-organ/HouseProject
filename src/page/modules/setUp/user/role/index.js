@@ -21,7 +21,7 @@ class MenuManage extends React.Component{
         axios.get("nav/all",null,
             result=> {
                 // console.log(result.result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
         );
     }

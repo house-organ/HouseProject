@@ -30,7 +30,7 @@ class editModal extends React.Component {
         axios.get("menu/list",null,
             result=> {
                 console.log("菜单设置------11--->",result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
             result=> {
 

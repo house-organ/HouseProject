@@ -57,6 +57,7 @@ class MenuManage extends React.Component{
             // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
             item: modal && modal.id ? modal : {},
             isEdit: modal && modal.id  ? true : false,
+            space_id: this.props.match.params.id
         }).show();
     }
     goBack=(modal,e)=>{
@@ -66,11 +67,12 @@ class MenuManage extends React.Component{
         /**
          * 说明：删除方法
          * */
-        let param = {};
-        param.id=record.id;
-        axios.delete("floor​/photo​",param,
+        let id=record.id;
+        axios.delete("poster/​"+id,null,
             result=> {
                 NotificationMixin.success("删除成功！")
+                let id = this.props.match.params.id;
+                this.fetch(id)
             },
             result=> {
 
