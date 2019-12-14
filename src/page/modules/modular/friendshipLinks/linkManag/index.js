@@ -50,12 +50,11 @@ class MenuManage extends React.Component{
         /**
          * 说明：删除方法
          * */
-        let param = {};
-        param.id=record.id;
-        console.log("record---",record);
-        axios.delete("link",param,
+        let id=record.id;
+        axios.delete("link",null,
             result=> {
                 NotificationMixin.success("删除成功！")
+                this.fetch()
             },
             result=> {
 
@@ -81,6 +80,7 @@ class MenuManage extends React.Component{
         axios.post(url,param,
             result=> {
                 NotificationMixin.success("修改成功！")
+                this.fetch()
             },
             result=> {
 
@@ -112,7 +112,7 @@ class MenuManage extends React.Component{
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>

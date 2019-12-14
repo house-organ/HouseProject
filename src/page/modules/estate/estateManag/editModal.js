@@ -17,13 +17,27 @@ class editModal extends React.Component {
     componentWillMount() {
         let id = 'price_unit'
         this.fetch(id)
+        this.getCityList()
     }
     fetch=(id)=>{
         axios.get("constant/info/"+id,null,
             result=> {
-                console.log('result--->', result.data)
+                console.log('result--1->', result.data)
                 this.setState({
-                    data:result.data ||{}
+                    data: result.result.data ||{}
+                })
+            },
+            result=> {
+
+            }
+        );
+    }
+    getCityList=()=>{
+        axios.get("city/info",null,
+            result=> {
+                console.log('result--2->', result.data)
+                this.setState({
+                    cityList: result.result.data ||{}
                 })
             },
             result=> {
@@ -97,7 +111,30 @@ class editModal extends React.Component {
 
                     <Tabs defaultActiveKey="1" activeKey={this.state.tabsActiveKey}  onChange={this.callback} >
                         <TabPane tab="楼盘信息" key="1">
-                                <FormItem
+                            <FormItem
+                                {...formItemLayout}
+                                label="城市"
+                                colon={true}
+                                className="item-box"
+                            >
+                                {getFieldDecorator('city_id', {
+                                    initialValue: (this.state.item && this.state.item.city_id ) || '',
+                                    rules: [{
+                                        required: true,
+                                        message:'请选择城市'
+                                    }],
+                                })(
+                                    <Select>
+                                        <Option value=""> 请选择城市 </Option>
+                                        {
+                                            this.state.cityList && this.state.cityList.map((item, index) => {
+                                                return (<Option value={item.code} key={item.code}> {item.name} </Option>)
+                                            })
+                                        }
+                                    </Select>
+                                )}
+                            </FormItem>
+                            <FormItem
                                 {...formItemLayout}
                                 label="楼盘名称"
                                 colon={true}

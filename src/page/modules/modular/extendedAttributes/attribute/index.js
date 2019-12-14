@@ -50,11 +50,11 @@ class MenuManage extends React.Component{
         /**
          * 说明：删除方法
          * */
-        let param = {};
-        param.id=record.id;
-        axios.delete("attribute",param,
+        let id=record.id;
+        axios.delete("attribute",null,
             result=> {
                 NotificationMixin.success("删除成功！")
+                this.fetch()
             },
             result=> {
 
@@ -80,6 +80,7 @@ class MenuManage extends React.Component{
         axios.post(url,param,
             result=> {
                 NotificationMixin.success("修改成功！")
+                this.fetch()
             },
             result=> {
 

@@ -11,31 +11,37 @@ const { TextArea } = Input;
 const { TabPane } = Tabs;
 class AddHouselistModal extends React.Component{
     state = {
-        item:this.props.location.state || {}
+        item:this.props.location.state || {},
+        priceList: [],
+        cityList: []
     }
-    // componentWillMount(){
-    //     let item = this.props.location.state;
-    //     // if(item){
-    //     //     localStorage.setItem('addHouse', JSON.stringify(item));
-    //     // }else {
-    //     //     let addHouse = localStorage.getItem('addHouse', JSON.parse(addHouse));
-    //     //     this.setState({item:addHouse})
-    //     //     console.log("111",addHouse)
-    //     // }
-    //
-    // }
+
     componentWillMount() {
         let item = this.props.location.state || {};
         this.setState({item:item})
         let id = 'price_unit'
         this.fetch(id)
+        this.getCityList()
     }
     fetch=(id)=>{
         axios.get("constant/info/"+id,null,
             result=> {
-                console.log('result--->', result.data)
+                console.log('result--1->', result)
                 this.setState({
-                    data:result.result.data ||{}
+                    priceList:result || []
+                })
+            },
+            result=> {
+
+            }
+        );
+    }
+    getCityList=()=>{
+        axios.get("city/info",null,
+            result=> {
+                console.log('result--2->', result.data)
+                this.setState({
+                    cityList: result.result.data ||{}
                 })
             },
             result=> {
@@ -91,6 +97,29 @@ class AddHouselistModal extends React.Component{
                 <Col xs={24} sm={24} md={24} lg={24} xl={18}>
                     <div className="form-box">
                         <Form layout="horizontal"  onSubmit={this.handleSubmit}>
+                            <FormItem
+                                {...formItemLayout}
+                                label="城市"
+                                colon={true}
+                                className="item-box"
+                            >
+                                {getFieldDecorator('city_id', {
+                                    initialValue: (this.state.item && this.state.item.city_id ) || '',
+                                    rules: [{
+                                        required: true,
+                                        message:'请选择城市'
+                                    }],
+                                })(
+                                    <Select>
+                                        <Option value=""> 请选择城市 </Option>
+                                        {
+                                            this.state.cityList && this.state.cityList.map((item, index) => {
+                                                return (<Option value={item.code} key={item.code}> {item.name} </Option>)
+                                            })
+                                        }
+                                    </Select>
+                                )}
+                            </FormItem>
                             <FormItem
                                 {...formItemLayout}
                                 label="楼盘名称"
@@ -181,8 +210,11 @@ class AddHouselistModal extends React.Component{
                                 })(
                                     <Select>
                                         <Option value=""> 请选择价格单位 </Option>
-                                        <Option value="1"> 1-元/㎡ </Option>
-                                        <Option value="2"> 2-万/套 </Option>
+                                        {
+                                            this.state.priceList && this.state.priceList.map((item, index) => {
+                                                return (<Option value={item.key} key={item.key}> {item.title} </Option>)
+                                            })
+                                        }
                                     </Select>
                                 )}
                             </FormItem>
@@ -335,7 +367,15 @@ class AddHouselistModal extends React.Component{
                                 {getFieldDecorator('address', {
                                     initialValue: (this.state.item && this.state.item.address )|| '',
                                     rules: [{
-                                        required: false,
+                                        required: true,
+                                        validator: (rule, value, callback) => {
+                                            if (!value || (value && value.length > 50)) {
+                                                callback(new Error('不能为空且长度不超过50!'));
+                                                this.setState({tabsActiveKey:'1'})
+                                            } else {
+                                                callback();
+                                            }
+                                        }
                                     }],
                                 })(
                                     <Input type="text"  placeholder="楼盘地址" />

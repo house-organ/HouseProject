@@ -4,7 +4,7 @@ import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 import AddOrUpdateModal from './editModal'
 import ModalWrapper from "../../../../../components/modalwrapper";
-import './index.less'
+
 
 const FormItem = Form.Item;
 const createForm = Form.create;

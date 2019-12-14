@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch,Form,Input,Select,Upload, message,Icon} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -8,30 +8,64 @@ const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
 
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+        message.error('You can only upload JPG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+    }
+    return isJPG && isLt2M;
+}
+
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
         typeData: [
             {id: '1', title: '友情链接'},
             {id: '2', title: '热闹搜索'},
-        ]
+        ],
+        linkList: [],
+        cityList:[]
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
+        this.fetch()
+        this.getCityList()
     }
-    fetch=(id)=>{
-        // axios.get("topic/"+id,null,
-        //     result=> {
-        //         this.setState({
-        //             data:result.data ||{},
-        //             authorName:result.data.author.loginname || '',
-        //             replies:result.data.replies || [],
-        //         })
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+    fetch=()=>{
+        axios.get("link/list",null,
+            result=> {
+                console.log("item--1->",result.result.data)
+                this.setState({
+                    linkList: result.result.data || [],
+                })
+            },
+            result=> {
+
+            }
+        );
+    }
+    getCityList=()=>{
+        axios.get("city/info",null,
+            result=> {
+                console.log("item-2-->",result.result.data)
+                this.setState({
+                    cityList: result.result.data || [],
+                })
+            },
+            result=> {
+
+            }
+        );
     }
     hideModal=()=> {
         /**
@@ -49,12 +83,11 @@ class editModal extends React.Component {
                 return;
             }
             // console.log("values",values)
-            let url = "nav";
+            let url = "link";
             let param = values;
 
 
             if (this.props.item.id) {
-                url = "nav";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -82,6 +115,13 @@ class editModal extends React.Component {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+        const uploadButton = (
+            <div>
+                <Icon type={this.state.loading ? 'loading' : 'plus'} />
+                <div className="ant-upload-text">Upload</div>
+            </div>
+        );
+        const imageUrl = this.state.imageUrl;
         return(
             <Modal
                 title={this.props.title}
@@ -91,7 +131,7 @@ class editModal extends React.Component {
                 onCancel={this.hideModal}
                 // width={800}
             >
-                <Form  layout="horizontal" >
+                <Form layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
                         label="所属分类"
@@ -115,7 +155,49 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="名称"
+                        label="推荐位父id"
+                    >
+                        {getFieldDecorator('pid', {
+                            initialValue: (this.state.item && this.state.item.pid ) || '',
+                            rules: [{
+                                required: true,
+                                message:'推荐位父id'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择推荐位父id </Option>
+                                {
+                                    this.state.linkList && this.state.linkList.map((item, index) => {
+                                        return (<Option value={item.pid} key={item.pid}> {item.name} </Option>)
+                                    })
+                                }
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="城市"
+                    >
+                        {getFieldDecorator('city_id', {
+                            initialValue: (this.state.item && this.state.item.city_id ) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择城市'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择城市 </Option>
+                                {
+                                    this.state.cityList && this.state.cityList.map((item, index) => {
+                                        return (<Option value={item.pid} key={item.pid}> {item.name} </Option>)
+                                    })
+                                }
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="链接名称"
                     >
                         {getFieldDecorator('name', {
                             initialValue: (this.state.item && this.state.item.name )|| '',
@@ -155,7 +237,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -168,7 +250,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="排序："
+                        label="排序"
                     >
                         {getFieldDecorator('ordid', {
                             initialValue: (this.state.item && this.state.item.ordid )|| '',
@@ -179,6 +261,36 @@ class editModal extends React.Component {
                             <Input type="text"  placeholder="排序" />
                         )}
                     </FormItem>
+                    <Form.Item
+                        {...formItemLayout}
+                        label="选择图片"
+                    >
+                        {getFieldDecorator('img', {
+                            initialValue: (this.state.data && this.state.data.img) || '',
+                            rules: [{
+                                // required: true,
+                                // validator: (rule, value, callback) => {
+                                //     if (!value || (value && value.length > 50)) {
+                                //         callback(new Error('不能为空且长度不超过50!'));
+                                //     } else {
+                                //         callback();
+                                //     }
+                                // }
+                            }],
+                        })(
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleChange}
+                            >
+                                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                            </Upload>
+                        )}
+                    </Form.Item>
                 </Form>
             </Modal>
         )

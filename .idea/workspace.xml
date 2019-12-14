@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba6cb315-af89-406f-a37a-97197a91c612" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/addHouselistModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/doc/功能模块测试.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/doc/功能模块测试.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/doc/开发记录.text" beforeDir="false" afterPath="$PROJECT_DIR$/public/doc/开发记录.text" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/editModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/editModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/modules/modular/recommend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/modules/modular/recommend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,22 +33,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1575">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="392">
+              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="26" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -43,20 +47,8 @@
       <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="33" column="37" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+            <state relative-caret-position="307">
+              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -65,43 +57,22 @@
         </entry>
       </file>
       <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/editModal.js">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
+            <state relative-caret-position="840">
+              <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="186" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="129" column="27" lean-forward="true" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editModal.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/editModal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/editModal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="36" selection-end-column="9" />
+            <state relative-caret-position="462">
+              <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -112,8 +83,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1449">
-              <caret line="75" column="63" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+            <state relative-caret-position="412">
+              <caret line="112" column="53" selection-start-line="112" selection-start-column="53" selection-end-line="112" selection-end-column="53" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -122,10 +93,59 @@
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/menu/index.js">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2394">
-              <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
+            <state relative-caret-position="126">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addHouselistModal.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/addHouselistModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#303#339#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/editModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="98" column="20" selection-start-line="98" selection-start-column="20" selection-end-line="216" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/editModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="143" column="32" selection-start-line="143" selection-start-column="32" selection-end-line="147" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,40 +161,41 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>breadcrumb-box</find>
-      <find>Menu</find>
-      <find>collapsed</find>
+      <find>Redirect</find>
+      <find>pathname</find>
+      <find>storage</find>
+      <find>questions</find>
+      <find>Received values of form</find>
+      <find>region</find>
+      <find>treeNodeOne</find>
+      <find>onChange</find>
+      <find>nestedTable</find>
+      <find>广告位名称</find>
+      <find>goDetil</find>
+      <find>houselist</find>
+      <find>PosterSpaceList</find>
+      <find>type=&quot;primary&quot; style={{marginLeft: &quot;10px&quot;}}&gt;删除&lt;/B</find>
+      <find>RegionalManag</find>
+      <find>result.result || {}</find>
       <find>advert</find>
-      <find>proxy</find>
-      <find>loadAccountInfo</find>
-      <find>Recommend</find>
-      <find>callback</find>
-      <find>TabPane</find>
-      <find>status</find>
-      <find>EstateManag</find>
-      <find>Picker</find>
-      <find>localStorage</find>
-      <find>className</find>
-      <find>Option</find>
-      <find>tim</find>
-      <find>opening_time_memo</find>
-      <find>备注</find>
-      <find>showTime</find>
-      <find>经度</find>
-      <find>排序</find>
+      <find>AddHouselistModal</find>
       <find>时间</find>
+      <find>dateFormat</find>
+      <find>cityList</find>
+      <find>recommend</find>
       <find>config</find>
-      <find>statusChangeChild</find>
-      <find>goBack</find>
-      <find>site</find>
-      <find>statusChange</find>
-      <find>getFieldDecorator</find>
-      <find>WebsiteSetup</find>
-      <find>select</find>
+      <find>link</find>
+      <find>typeData</find>
+      <find>attributeList</find>
+      <find>linkMana</find>
+      <find>list</find>
+      <find>ArticleList</find>
+      <find>priceList</find>
     </findStrings>
     <replaceStrings>
       <replace>initialValue: (this</replace>
       <replace>)|| ''</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,57 +204,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/header/index.less" />
-        <option value="$PROJECT_DIR$/src/page/index/index.less" />
-        <option value="$PROJECT_DIR$/src/page/modules/coreSetup/navSetup/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/coreSetup/navSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/coreSetup/menuSetup/editModal.js" />
-        <option value="$PROJECT_DIR$/src/components/header/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/coreSetup/menuSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/cloudStorage/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/envelopeSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/watermarkSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/weChatSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/webSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/home/index.js" />
-        <option value="$PROJECT_DIR$/src/components/menu/index.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/regionalManag/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/advertManag/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/advertManag/editModalChild.js" />
-        <option value="$PROJECT_DIR$/src/page/login/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/recommend/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModalChild.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/developer/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/editModalChild.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/index.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/public/doc/开发记录.text" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.less" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index2.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/developer/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js" />
-        <option value="$PROJECT_DIR$/src/router/index.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/editModal.js" />
         <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/editModal.js" />
-        <option value="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js" />
         <option value="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/noFind/topics.js" />
+        <option value="$PROJECT_DIR$/src/components/hocPrivateRoute/index.js" />
+        <option value="$PROJECT_DIR$/src/page/index/index.js" />
+        <option value="$PROJECT_DIR$/src/page/login/index.js" />
+        <option value="$PROJECT_DIR$/src/components/menu/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/advertManag/index.js" />
+        <option value="$PROJECT_DIR$/src/components/header/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/recycleBin/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkType/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/home/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/developer/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/commentManage/commentList/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/appointment/rentalHousing/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/appointment/secondHand/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/appointment/newHouse/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/userManag/agentManage/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/user/queAns/queAnsList/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/regionalManag/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/regionalManag/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/user/administrators/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/setUp/user/role/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/advertManag/posterSpaceList/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/advertManag/posterSpaceList/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/recommend/index.js" />
+        <option value="$PROJECT_DIR$/public/doc/开发记录.text" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js" />
+        <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js" />
+        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.less" />
+        <option value="$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/addHouselistModal.js" />
       </list>
     </option>
   </component>
@@ -254,9 +275,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-6" />
-    <option name="y" value="2" />
-    <option name="width" value="1317" />
+    <option name="x" value="726" />
+    <option name="y" value="52" />
+    <option name="width" value="1466" />
     <option name="height" value="1416" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -265,6 +286,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -280,46 +302,25 @@
             <path>
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="axios" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="menu" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="page" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="index" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
@@ -370,15 +371,6 @@
               <item name="page" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="estate" type="462c0819:PsiDirectoryNode" />
-              <item name="developer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="estate" type="462c0819:PsiDirectoryNode" />
               <item name="estateManag" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -395,113 +387,17 @@
               <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="estate" type="462c0819:PsiDirectoryNode" />
-              <item name="estateManag" type="462c0819:PsiDirectoryNode" />
-              <item name="apartment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="estate" type="462c0819:PsiDirectoryNode" />
-              <item name="estateManag" type="462c0819:PsiDirectoryNode" />
-              <item name="dynamic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="modular" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="modular" type="462c0819:PsiDirectoryNode" />
-              <item name="extendedAttributes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="modular" type="462c0819:PsiDirectoryNode" />
-              <item name="extendedAttributes" type="462c0819:PsiDirectoryNode" />
-              <item name="screen" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="setUp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="setUp" type="462c0819:PsiDirectoryNode" />
-              <item name="coreSetup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="setUp" type="462c0819:PsiDirectoryNode" />
-              <item name="coreSetup" type="462c0819:PsiDirectoryNode" />
-              <item name="userManage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="setUp" type="462c0819:PsiDirectoryNode" />
-              <item name="coreSetup" type="462c0819:PsiDirectoryNode" />
-              <item name="websiteSetup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="setUp" type="462c0819:PsiDirectoryNode" />
-              <item name="coreSetup" type="462c0819:PsiDirectoryNode" />
-              <item name="websiteSetup" type="462c0819:PsiDirectoryNode" />
-              <item name="webSetup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HouseProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HouseProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myweb-pc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ibox-admin-bj" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="F:\work\workspace\HouseProject\node_modules\eslint" />
@@ -511,19 +407,19 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="F:\work\workspace\HouseProject\node_modules\prettier" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag" />
-      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\apartment" />
-      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\sandTable" />
-      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\dynamic" />
-      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\album" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\work\workspace\HouseProject\src\page\modules\uesr\userManag" />
       <recent name="F:\work\workspace\HouseProject\src\page\modules\uesr" />
       <recent name="F:\work\workspace\HouseProject\src\page\modules\setUp" />
       <recent name="F:\work\workspace\HouseProject\src\page\modules\user" />
       <recent name="F:\work\workspace\HouseProject\src\page\modules\coreSetup" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\work\workspace\HouseProject\src\page\modules\content\articleManag\articleList" />
+      <recent name="F:\work\workspace\HouseProject\src\page\modules\modular\advertManag\posterSpaceList" />
+      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag" />
+      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\apartment" />
+      <recent name="F:\work\workspace\HouseProject\src\page\modules\estate\estateManag\sandTable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -562,22 +458,28 @@
       <workItem from="1575169480608" duration="2192000" />
       <workItem from="1575777750346" duration="6912000" />
       <workItem from="1575805238388" duration="925000" />
+      <workItem from="1575806912066" duration="645000" />
+      <workItem from="1576071574039" duration="185000" />
+      <workItem from="1576160614564" duration="489000" />
+      <workItem from="1576289853689" duration="37880000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87956000" />
+    <option name="totallyTimeSpent" value="127155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19661151" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17927502" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.25920126" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.19342208" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -589,7 +491,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.25920126" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,277 +500,17 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/home/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/user/role/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/editModalChild.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="63" column="35" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/regionalManag/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/modalwrapper/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="3" column="53" lean-forward="true" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4191">
-          <caret line="214" column="20" selection-start-line="214" selection-start-column="20" selection-end-line="226" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="103" column="60" selection-start-line="103" selection-start-column="55" selection-end-line="103" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="13" lean-forward="true" selection-end-line="249" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkType/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModalChild.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/editModalChild.js" />
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="176" column="11" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5082">
-          <caret line="248" selection-start-line="248" selection-end-line="249" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1722">
-          <caret line="88" column="22" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="12996" column="4" selection-start-line="12996" selection-start-column="4" selection-end-line="12996" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/developer/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="136" column="20" selection-start-line="136" selection-start-column="20" selection-end-line="153" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/page/login/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4039">
-          <caret line="40" column="55" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
+        <state relative-caret-position="662">
+          <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/index/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="39" column="26" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js">
+    <entry file="file://$PROJECT_DIR$/src/page/modules/noFind/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
-          <caret line="148" column="24" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index3.js" />
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2289">
-          <caret line="114" column="145" selection-start-line="114" selection-start-column="145" selection-end-line="114" selection-end-column="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModalChild.js" />
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/developer/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/editModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2898">
-          <caret line="141" column="27" selection-start-line="141" selection-start-column="27" selection-end-line="145" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="777">
-          <caret line="202" column="35" lean-forward="true" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/doc/开发记录.text">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/addModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="209" column="28" lean-forward="true" selection-start-line="209" selection-start-column="28" selection-end-line="229" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/axios/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="60" column="11" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/websiteSetup/webSetup/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2940">
-          <caret line="144" column="42" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="62" column="37" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
+          <caret line="25" column="1" lean-forward="true" selection-end-line="25" selection-end-column="1" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -878,45 +519,276 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/menu/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2394">
-          <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
+        <state relative-caret-position="411">
+          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/queAns/queAnsList/editModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1449">
-          <caret line="75" column="63" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+        <state>
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js">
+    <entry file="file://$PROJECT_DIR$/src/components/header/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+        <state relative-caret-position="588">
+          <caret line="28" column="49" lean-forward="true" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="37" />
+        <state relative-caret-position="546">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="30" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+        <state relative-caret-position="483">
+          <caret line="114" column="182" selection-start-line="114" selection-start-column="182" selection-end-line="114" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/recycleBin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="130" column="108" lean-forward="true" selection-start-line="130" selection-start-column="108" selection-end-line="130" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="100" column="182" selection-start-line="100" selection-start-column="182" selection-end-line="100" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/sandTable/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="116" column="182" selection-start-line="116" selection-start-column="182" selection-end-line="116" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkType/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="96" column="52" selection-start-line="96" selection-start-column="52" selection-end-line="96" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/navSetup/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/home/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleType/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="107" column="52" selection-start-line="107" selection-start-column="52" selection-end-line="107" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/developer/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="107" column="182" selection-start-line="107" selection-start-column="182" selection-end-line="107" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/commentManage/commentList/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="115" column="50" lean-forward="true" selection-start-line="115" selection-start-column="50" selection-end-line="115" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/appointment/rentalHousing/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/appointment/secondHand/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/appointment/newHouse/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/userManag/agentManage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/user/queAns/queAnsList/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/coreSetup/menuSetup/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/user/role/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/setUp/user/administrators/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/regionalManag/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-609">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/posterSpaceList/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="164" column="50" selection-start-line="164" selection-start-column="50" selection-end-line="164" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/editModalChild.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5094">
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="26" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/regionalManag/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="211" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/posterSpaceList/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="59" column="20" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/advertManag/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2793">
+          <caret line="133" column="20" selection-start-line="133" selection-start-column="20" selection-end-line="145" selection-end-column="31" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -925,7 +797,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/apartment/editModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
+        <state relative-caret-position="1659">
           <caret line="79" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -933,10 +805,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/editModal.js">
+    <entry file="file://$PROJECT_DIR$/public/doc/开发记录.text">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="36" selection-end-column="9" />
+        <state relative-caret-position="294">
+          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="117" column="182" selection-start-line="117" selection-start-column="182" selection-end-line="117" selection-end-column="182" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -945,27 +834,138 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/dynamic/editModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="36" column="9" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="129" column="27" lean-forward="true" selection-start-line="129" selection-start-column="27" selection-end-line="129" selection-end-column="27" />
+        <state relative-caret-position="2940">
+          <caret line="248" column="20" selection-start-line="248" selection-start-column="20" selection-end-line="286" selection-end-column="31" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/screen/editModal.js">
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/album/editModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
+        <state relative-caret-position="462">
+          <caret line="148" column="20" lean-forward="true" selection-start-line="148" selection-start-column="20" selection-end-line="160" selection-end-column="31" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/friendshipLinks/linkManag/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="791">
+          <caret line="170" column="86" selection-start-line="170" selection-start-column="83" selection-end-line="170" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/recommend/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="186" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/modular/extendedAttributes/attribute/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="143" column="32" selection-start-line="143" selection-start-column="32" selection-end-line="147" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="112" column="53" selection-start-line="112" selection-start-column="53" selection-end-line="112" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/estate/estateManag/addHouselistModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/editModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="98" column="20" selection-start-line="98" selection-start-column="20" selection-end-line="216" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/modules/content/articleManag/articleList/addHouselistModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="129" column="59" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#303#339#0" expanded="true" />
           </folding>
         </state>
       </provider>

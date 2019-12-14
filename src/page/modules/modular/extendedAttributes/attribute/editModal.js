@@ -11,23 +11,24 @@ const { TextArea } = Input;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        attributeList: []
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
+        this.fetch()
     }
-    fetch=(id)=>{
-        // axios.get("topic/"+id,null,
-        //     result=> {
-        //         this.setState({
-        //             data:result.data ||{},
-        //             authorName:result.data.author.loginname || '',
-        //             replies:result.data.replies || [],
-        //         })
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+    fetch=()=>{
+        axios.get("attribute/list",null,
+            result=> {
+                console.log("item-1-->",result.result.data)
+                this.setState({
+                    attributeList:result.result.data ||[]
+                })
+            },
+            result=> {
+
+            }
+        );
     }
     hideModal=()=> {
         /**
@@ -109,7 +110,48 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="菜单别名"
+                    >
+                        {getFieldDecorator('alias', {
+                            initialValue: (this.state.item && this.state.item.alias )|| '',
+                            rules: [{
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
+                            }],
+                        })(
+                            <Input type="text"  placeholder="菜单别名" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="父级id"
+                    >
+                        {getFieldDecorator('pid', {
+                            initialValue: (this.state.item && this.state.item.pid ) || '',
+                            rules: [{
+                                required: true,
+                                message:'请选择父级id'
+                            }],
+                        })(
+                            <Select>
+                                <Option value=""> 请选择父级id </Option>
+                                {
+                                    this.state.attributeList && this.state.attributeList.map((item, index) => {
+                                        return (<Option value={item.pid} key={item.id}> {item.names} </Option>)
+                                    })
+                                }
+                            </Select>
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -118,6 +160,58 @@ class editModal extends React.Component {
                             }],
                         })(
                             <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="排序："
+                    >
+                        {getFieldDecorator('ordid', {
+                            initialValue: (this.state.item && this.state.item.ordid )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="排序" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="seo标题"
+                    >
+                        {getFieldDecorator('seo_title', {
+                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="seo标题" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="seo关键词"
+                    >
+                        {getFieldDecorator('seo_keys', {
+                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="seo关键词" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="SEO描述："
+                    >
+                        {getFieldDecorator('seo_desc', {
+                            initialValue: '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <TextArea rows={4} placeholder="SEO描述" />
                         )}
                     </FormItem>
                 </Form>

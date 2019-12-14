@@ -24,7 +24,7 @@ import AdvertManag from '../page/modules/modular/advertManag' //广告位管理
 import PosterSpaceList from '../page/modules/modular/advertManag/posterSpaceList' //广告管理
 import Recommend from '../page/modules/modular/recommend' //推荐位管理
 import LinkManag from '../page/modules/modular/friendshipLinks/linkManag' //友情链接管理
-import LinkType from '../page/modules/modular/friendshipLinks/linkType' //友情链接管理
+import LinkType from '../page/modules/modular/friendshipLinks/linkType' //链接分类管理
 import Screen from '../page/modules/modular/extendedAttributes/screen' //筛选条件 
 import Attribute from '../page/modules/modular/extendedAttributes/attribute' //属性管理 
  
@@ -40,7 +40,7 @@ import SandTable from '../page/modules/estate/estateManag/sandTable' //楼盘沙
 //*** 内容 ***//
 import ArticleType from '../page/modules/content/articleManag/articleType' //文章分类
 import ArticleList from '../page/modules/content/articleManag/articleList' //文章列表
-// import AddArticle from '../page/modules/content/articleManag/articleList/addModal' //添加文章
+import AddArticle from '../page/modules/content/articleManag/articleList/addHouselistModal' //添加文章
 import RecycleBin from '../page/modules/content/articleManag/recycleBin' //回收站
 
 //*** 用户 ***//
@@ -110,7 +110,7 @@ export default class AdminRouter extends React.Component{
 
                                     <Route exact path="/articlesort" component={ArticleType}/>{/*文章分类*/}
                                     <Route exact path="/list" component={ArticleList}/>{/*文章列表*/}
-                                    {/*<Route path="/add" component={AddArticle}/>/!*添加文章*!/*/}
+                                    <Route path="/add" component={AddArticle}/>{/*添加文章*/}
                                     <Route exact path="/recycle" component={RecycleBin}/>{/*回收站*/}
 
 

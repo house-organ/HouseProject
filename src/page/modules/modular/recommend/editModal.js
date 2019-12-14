@@ -15,7 +15,6 @@ class editModal extends React.Component {
         houselist: []
     }
     componentWillMount() {
-        console.log("item--->",this.state.item)
         this.fetch()
         this.getHouselist()
     }
@@ -25,7 +24,6 @@ class editModal extends React.Component {
          * */
         axios.get("position/list",null,
             result=> {
-                console.log(result.result)
                 let recommendList = []
                 result.result.data && result.result.data.map((item,index)=>{
                     recommendList.push({'pid':item.pid,'title':item.title})
@@ -40,7 +38,6 @@ class editModal extends React.Component {
          * */
         axios.get("floor/list",null,
             result=> {
-                console.log('floor/list--->',result.result)
                 this.setState({houselist:result.result.data ||[]})
             },
         );
@@ -76,7 +73,6 @@ class editModal extends React.Component {
     postFile=(url,param)=>{
         axios.post(url,param,
             result=> {
-                // console.log("修改成功--------->",result)
                 NotificationMixin.success("提交成功！")
                 this.props.onManualClose && this.props.onManualClose();
             },result=>{
@@ -145,14 +141,20 @@ class editModal extends React.Component {
                         {...formItemLayout}
                         label="所属楼盘"
                     >
-                        {getFieldDecorator('model', {
-                            initialValue: (this.state.item && this.state.item.model) || '',
+                        {getFieldDecorator('house_id', {
+                            initialValue: (this.state.item && this.state.item.house_id) || '',
                             rules: [{
                                 required: true,
                                 message:'请选择所属楼盘'
                             }],
                         })(
-                            <Select>
+                            <Select
+                                // showSearch
+                                // optionFilterProp="children"
+                                // filterOption={(input, option) =>
+                                //     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                // }
+                            >
                                 <Option value=""> 请选择所属楼盘 </Option>
                                 {
                                     this.state.houselist && this.state.houselist.map((item, index) => {
@@ -175,10 +177,11 @@ class editModal extends React.Component {
                         })(
                             <Select>
                                 <Option value=""> 请选择推荐位父id </Option>
-                                <Option value="1"> 新房 </Option>
-                                <Option value="2"> 小区 </Option>
-                                <Option value="3"> 二手房 </Option>
-                                <Option value="4"> 出租房 </Option>
+                                {
+                                    this.state.recommendList && this.state.recommendList.map((item, index) => {
+                                        return (<Option value={item.pid} key={item.pid}> {item.title} </Option>)
+                                    })
+                                }
                             </Select>
                         )}
                     </FormItem>
