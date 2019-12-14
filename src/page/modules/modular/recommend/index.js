@@ -22,7 +22,7 @@ class MenuManage extends React.Component{
         axios.get("position/list",null,
             result=> {
                 // console.log(result.result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
         );
     }

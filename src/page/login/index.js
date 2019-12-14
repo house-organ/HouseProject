@@ -28,15 +28,11 @@ class login extends React.Component{
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-
-
                 axios.post("token/app",values,
                     result=> {
-                        console.log("登录--------->",result)
                         if(result.result){
                             let token = result.result.token;
                             localStorage.setItem('token', JSON.stringify(token)); //token缓存
-
                             if(this.state.checkboxVal){
                                 let accountInfo = values.ac+ '&' +values.se
                                 let Days = 3;  //cookie保存时间
@@ -59,6 +55,8 @@ class login extends React.Component{
 
                             }
                             window.location.href = '/#/home';
+                            console.log(111)
+                            // this.props.history.push({pathname:'/home'})
                         }
 
                     },

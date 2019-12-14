@@ -33,7 +33,7 @@ class articleList extends React.Component{
             result=> {
                 console.log(result.result)
                 const pagination = this.state.pagination;
-                pagination.total = Number(result.count);
+                pagination.total = Number(result.result.count);
                 this.setState({data:result.result.data ||[],pagination})
             },
             result=> {

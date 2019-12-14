@@ -18,7 +18,7 @@ export default class Home extends React.Component{
         axios.get("general/all",null,
             result=> {
                 // console.log("控制面板--------->",result.result)
-                let list = result.result  ||[]
+                let list = result.result.data  ||[]
                 let data = []
                 let obj  = {}
                 list && list.map((item,index)=>{
@@ -60,7 +60,7 @@ export default class Home extends React.Component{
                 //         <div>
                 //             <Button type="primary" onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
                 //             <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleClose.bind(this,record)} okText="确定" cancelText="取消">
-                //                 <Button type="primary" style={{marginLeft: "10px"}}>删除</Button>
+                //                 <Button type="danger" style={{marginLeft: "10px"}}>删除</Button>
                 //             </Popconfirm>
                 //         </div>
                 //     )

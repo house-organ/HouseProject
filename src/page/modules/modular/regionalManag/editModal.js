@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
+import {Modal, Switch,Form,Input,Select,Icon,TreeSelect} from 'antd';
 import axios from "../../../../axios";
 import NotificationMixin from "../../../../components/notification";
 
@@ -7,27 +7,28 @@ const FormItem = Form.Item;
 const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
+const { TreeNode } = TreeSelect;
 
 class editModal extends React.Component {
     state = {
-        item:this.props.item || {},
+        item: this.props.item || {},
+        data: []
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
+        this.fetch()
     }
-    fetch=(id)=>{
-        // axios.get("topic/"+id,null,
-        //     result=> {
-        //         this.setState({
-        //             data:result.data ||{},
-        //             authorName:result.data.author.loginname || '',
-        //             replies:result.data.replies || [],
-        //         })
-        //     },
-        //     result=> {
-        //
-        //     }
-        // );
+    fetch=()=>{
+        axios.get("region/list",null,
+            result=> {
+                this.setState({
+                    data:result.result ||{},
+                })
+            },
+            result=> {
+
+            }
+        );
     }
     hideModal=()=> {
         /**
@@ -44,10 +45,10 @@ class editModal extends React.Component {
                 console.log('Errors in form!!!');
                 return;
             }
-            // console.log("values",values)
+            console.log("values",values)
             let url = "region/add";
             let param = values;
-
+                param.pid = '0'
 
             if (this.props.item.id) {
                 url = "region/update";
@@ -70,6 +71,24 @@ class editModal extends React.Component {
         );
 
     }
+    treeNodeOne=(dataList)=>{
+        /**
+         * 说明：父级ID树选择器方法
+         * */
+        let treeNodeOne = [];
+        dataList.map(item=>{
+            if(item.children){
+                treeNodeOne.push(
+                    <TreeNode value={item.id} title={item.names} key={item.id} >
+                        {this.treeNodeOne(item.children)}
+                    </TreeNode>
+                )
+            }else {
+                treeNodeOne.push(<TreeNode value={item.id} title={item.names} key={item.id} />)
+            }
+        })
+        return treeNodeOne
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -86,6 +105,32 @@ class editModal extends React.Component {
                 // width={800}
             >
                 <Form  layout="horizontal" >
+                    <FormItem
+                        {...formItemLayout}
+                        label="上级栏目"
+                    >
+                        {getFieldDecorator('pid', {
+                            initialValue: (this.state.item && this.state.item.pid) || 0,
+                            // rules: [{
+                            //     required: true,
+                            //     message:'请选择上级栏目'
+                            // }],
+                        })(
+                            <TreeSelect
+                                showSearch
+                                style={{ width: '100%' }}
+                                // value={this.state.value}
+                                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                                placeholder="Please select"
+                                allowClear
+                                treeDefaultExpandAll
+                                onChange={this.onChange}
+                            >
+                                <TreeNode value="0" title="请选择上级栏目" key="0" />
+                                {this.treeNodeOne(this.state.data)}
+                            </TreeSelect>
+                        )}
+                    </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="栏目名称："
@@ -108,12 +153,19 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="区域别名："
+                        label="区域别名"
                     >
                         {getFieldDecorator('alias', {
                             initialValue: (this.state.item && this.state.item.alias )|| '',
                             rules: [{
-                                required: false,
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text"  placeholder="区域别名" />
@@ -121,7 +173,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -134,7 +186,20 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="排序："
+                        label="状态"
+                    >
+                        {getFieldDecorator('is_hot', {
+                            initialValue: (this.state.item && this.state.item.is_hot )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={this.state.item.is_hot ==='1' ? true:false} />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="排序"
                     >
                         {getFieldDecorator('ordid', {
                             initialValue: (this.state.item && this.state.item.ordid )|| '',
@@ -147,7 +212,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="绑定域名："
+                        label="绑定域名"
                     >
                         {getFieldDecorator('domain', {
                             initialValue: (this.state.item && this.state.item.domain )|| '',

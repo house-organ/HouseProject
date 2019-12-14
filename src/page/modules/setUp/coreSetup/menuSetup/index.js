@@ -20,7 +20,7 @@ class MenuManage extends React.Component{
         axios.get("menu/list",null,
             result=> {
                 console.log("菜单设置------11--->",result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
             result=> {
 
@@ -94,7 +94,7 @@ class MenuManage extends React.Component{
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>添加子栏目</Button>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)} style={{marginLeft:15}}>修改</Button>
                             <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleClose.bind(this,record)} okText="确定" cancelText="取消">
-                                <Button type="primary" style={{marginLeft: "10px"}}>删除</Button>
+                                <Button type="danger" style={{marginLeft: "10px"}}>删除</Button>
                             </Popconfirm>
                         </div>
                     )

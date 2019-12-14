@@ -13,6 +13,7 @@ class MenuManage extends React.Component{
     }
     componentWillMount() {
         let hid = this.props.match.params.id;
+        console.log('hid-->', hid)
         this.fetch(hid)
     }
     fetch=(hid)=>{
@@ -25,8 +26,7 @@ class MenuManage extends React.Component{
         }
         axios.get("floor/type/list/"+hd_id,null,
             result=> {
-                // console.log(result.result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
         );
     }
@@ -98,7 +98,7 @@ class MenuManage extends React.Component{
         const { getFieldDecorator } = this.props.form;
         const columns = [
             { title: '编号',dataIndex: 'id', key: 'id'},
-            { title: '楼盘名称', dataIndex: 'house_id', key: 'house_id', width: '12%',  },
+            { title: '楼盘名称', dataIndex: 'house.title', key: 'house.title', width: '12%',  },
             { title: '户型名称', dataIndex: 'title', key: 'title', width: '12%',  },
             { title: '面积', dataIndex: 'acreage', key: 'acreage', width: '10%',  },
             { title: '总价', dataIndex: 'price', key: 'price', width: '10%',  },
@@ -112,7 +112,7 @@ class MenuManage extends React.Component{
                 title: '操作',
                 key: '#',
                 render: (text, record) =>{
-                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
+                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="danger" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>

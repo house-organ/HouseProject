@@ -24,10 +24,9 @@ export default class Headers extends React.Component{
             result=> {
                 // console.log("顶部导航--------->",result)
                 let currentKey = []
-                currentKey[0] = JSON.stringify(result.result[0].id) || '';
-                // console.log(currentKey)
+                currentKey[0] = result.result.data[0].id || '';
                 this.setState({
-                    data:result.result ||[],
+                    data:result.result.data ||[],
                     currentKey:currentKey
                 })
             },

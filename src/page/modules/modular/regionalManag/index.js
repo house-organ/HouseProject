@@ -18,12 +18,12 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：菜单列表接口方法
+         * 说明：区域列表接口方法
          * */
         axios.get("/region/list",null,
             result=> {
                 console.log(result.result)
-                this.setState({data:result.result ||[]})
+                this.setState({data:result.result.data ||[]})
             },
         );
     }
@@ -52,12 +52,12 @@ class MenuManage extends React.Component{
         /**
          * 说明：删除方法
          * */
-        let param = {};
-        param.id=record.id;
+        let id = record.id;
         console.log("record---",record);
-        axios.delete("region",param,
+        axios.delete("region/"+id,null,
             result=> {
                 NotificationMixin.success("删除成功！")
+                this.fetch()
             },
             result=> {
 
@@ -109,7 +109,7 @@ class MenuManage extends React.Component{
             },
             { title: '操作', key: '#',
                 render: (text, record) => {
-                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="primary" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
+                    let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="danger" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
