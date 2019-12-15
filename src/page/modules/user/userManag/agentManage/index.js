@@ -112,9 +112,8 @@ class articleList extends React.Component{
         const { getFieldDecorator } = this.props.form;
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id', width: '3%'},
-            { title: '用户名', dataIndex: 'user_name', key: 'user_name', width: '26%',  },
+            { title: '用户名', dataIndex: 'user_name', key: 'user_name', width: '16%',  },
             { title: '手机号码', dataIndex: 'mobile', key: 'mobile', width: '6%',  },
-            { title: '密码', dataIndex: 'password', key: 'password', width: '6%',  },
             { title: '昵称', dataIndex: 'nick_name', key: 'nick_name', width: '6%',  },
             { title: '登录时间', dataIndex: 'login_time', key: 'login_time', width: '6%',  },
             { title: '注册ip', dataIndex: 'reg_ip', key: 'reg_ip', width: '6%',  },
