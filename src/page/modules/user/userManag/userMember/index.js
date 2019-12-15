@@ -29,7 +29,7 @@ class articleList extends React.Component{
         /**
          * 说明：会员管理列表接口方法 1：普通 会员，2：经纪人
          * */
-        axios.get("user/list/2",null,
+        axios.get("user/list/1",null,
             result=> {
                 console.log(result.result)
                 const pagination = this.state.pagination;

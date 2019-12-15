@@ -40,10 +40,14 @@ import SandTable from '../page/modules/estate/estateManag/sandTable' //楼盘沙
 //*** 内容 ***//
 import ArticleType from '../page/modules/content/articleManag/articleType' //文章分类
 import ArticleList from '../page/modules/content/articleManag/articleList' //文章列表
-import AddArticle from '../page/modules/content/articleManag/articleList/addHouselistModal' //添加文章
+import AddArticle from '../page/modules/content/articleManag/articleList/addArticleListModal' //添加文章
 import RecycleBin from '../page/modules/content/articleManag/recycleBin' //回收站
 
 //*** 用户 ***//
+
+
+import ModuleConfig from '../page/modules/user/userManag/moduleConfig' //模块配置
+import UserMember from '../page/modules/user/userManag/userMember' //会员管理
 import AgentManag from '../page/modules/user/userManag/agentManage' //经济人管理  
 import QueAnsList from '../page/modules/user/queAns/queAnsList' //问答列表
 import CommentList from '../page/modules/user/commentManage/commentList' //评论列表
@@ -113,8 +117,8 @@ export default class AdminRouter extends React.Component{
                                     <Route path="/add" component={AddArticle}/>{/*添加文章*/}
                                     <Route exact path="/recycle" component={RecycleBin}/>{/*回收站*/}
 
-
-
+                                    <Route exact path="/module" component={ModuleConfig}/>{/*会员管理*/}
+                                    <Route exact path="/member" component={UserMember}/>{/*会员管理*/}
                                     <Route exact path="/agent" component={AgentManag}/>{/*经济人管理*/}
                                     <Route exact path="/questions" component={QueAnsList}/>{/*问答列表*/}
                                     <Route exact path="/comment" component={CommentList}/>{/*评论列表*/}

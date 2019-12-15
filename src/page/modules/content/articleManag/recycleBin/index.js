@@ -83,7 +83,6 @@ class MenuManage extends React.Component{
          * */
         let param = {}
         console.log('modal,record--->', modal,record)
-        return false
         axios.put('article/recycle',param,
             result=> {
                 NotificationMixin.success("恢复成功！")
