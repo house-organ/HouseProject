@@ -120,7 +120,6 @@ class articleList extends React.Component{
             { title: '登录ip', dataIndex: 'login_ip', key: 'login_ip', width: '6%',  },
             { title: '登录次数', dataIndex: 'login_num', key: 'login_num', width: '6%',  },
             { title: '邮箱', dataIndex: 'email', key: 'email', width: '6%',  },
-            { title: '登录时间', dataIndex: 'login_time', key: 'login_time', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
                     return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch, Form, Input, Select, Radio} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
-
+const RadioGroup = Radio.Group;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
@@ -95,33 +95,48 @@ class editModal extends React.Component {
                 // width={800}
             >
                 <Form  layout="horizontal" >
-                    <FormItem
+                    <Form.Item
                         {...formItemLayout}
-                        label="所属分类"
+                        label="所属模型"
                     >
-                        {getFieldDecorator('cate_id', {
-                            initialValue: (this.state.item && this.state.item.cate_id )|| '',
+                        {getFieldDecorator('model', {
+                            initialValue: '1',
                             rules: [{
-                                required: true,
-                                message:'请选择所属分类'
+                                // required: true,
+                                // validator: (rule, value, callback) => {
+                                //     if (!value || (value && value.length > 50)) {
+                                //         callback(new Error('不能为空且长度不超过50!'));
+                                //     } else {
+                                //         callback();
+                                //     }
+                                // }
                             }],
                         })(
-                            <Select>
-                                <Option value=""> 请选择 </Option>
-                                {
-                                    this.state.typeData && this.state.typeData.map((item, index) => {
-                                        return (<Option value={item.id} key={item.id}> {item.title} </Option>)
-                                    })
-                                }
-                            </Select>
+                            <RadioGroup>
+                                <Radio value={'1'} disabled>普通用户</Radio>
+                                <Radio value={'2'} disabled>经纪人</Radio>
+                            </RadioGroup>
+                        )}
+                    </Form.Item>
+                    <FormItem
+                        {...formItemLayout}
+                        label="状态"
+                    >
+                        {getFieldDecorator('status', {
+                            initialValue: (this.state.item && this.state.item.status )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="标题"
+                        label="用户名"
                     >
-                        {getFieldDecorator('title', {
-                            initialValue: (this.state.item && this.state.item.title )|| '',
+                        {getFieldDecorator('user_name', {
+                            initialValue: (this.state.item && this.state.item.user_name )|| '',
                             rules: [{
                                 required: true,
                                 validator: (rule, value, callback) => {
@@ -133,89 +148,63 @@ class editModal extends React.Component {
                                 }
                             }],
                         })(
-                            <Input type="text"  placeholder="名称" />
+                            <Input type="text"  placeholder="用户名" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="简介"
+                        label="手机号码"
                     >
-                        {getFieldDecorator('description', {
-                            initialValue: (this.state.item && this.state.item.description )|| '',
+                        {getFieldDecorator('mobile', {
+                            initialValue: (this.state.item && this.state.item.mobile )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <TextArea type="text"  placeholder="简介" />
+                            <Input type="text"  placeholder="手机号码" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="内容"
+                        label="密码"
                     >
-                        {getFieldDecorator('info', {
-                            initialValue: (this.state.item && this.state.item.info )|| '',
+                        {getFieldDecorator('password', {
+                            initialValue: (this.state.item && this.state.item.password )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <TextArea type="text"  placeholder="内容" />
+                            <Input type="text"  placeholder="密码" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="浏览数"
+                        label="昵称"
                     >
-                        {getFieldDecorator('hits', {
-                            initialValue: (this.state.item && this.state.item.hits )|| '',
+                        {getFieldDecorator('nick_name', {
+                            initialValue: (this.state.item && this.state.item.nick_name )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="浏览数" />
+                            <Input type="text"  placeholder="昵称" />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="seo标题："
+                        label="邮箱"
                     >
-                        {getFieldDecorator('seo_title', {
-                            initialValue: (this.state.item && this.state.item.seo_title )|| '',
+                        {getFieldDecorator('email', {
+                            initialValue: (this.state.item && this.state.item.email )|| '',
                             rules: [{
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="seo标题" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="seo关键词："
-                    >
-                        {getFieldDecorator('seo_keys', {
-                            initialValue: (this.state.item && this.state.item.seo_keys )|| '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <Input type="text"  placeholder="seo关键词" />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="SEO描述："
-                    >
-                        {getFieldDecorator('seo_desc', {
-                            initialValue: '',
-                            rules: [{
-                                required: false,
-                            }],
-                        })(
-                            <TextArea rows={4} placeholder="SEO描述" />
+                            <Input type="text"  placeholder="邮箱" />
                         )}
                     </FormItem>
 
-                </Form>
+                </Form >
             </Modal>
         )
     }

@@ -16,9 +16,9 @@ class MenuManage extends React.Component{
     }
     fetch=()=>{
         /**
-         * 说明：菜单列表接口方法
+         * 说明：新房预约列表接口方法
          * */
-        axios.get("nav/all",null,
+        axios.get("subscribe/list/1",null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result.data ||[]})
@@ -50,10 +50,8 @@ class MenuManage extends React.Component{
         /**
          * 说明：删除方法
          * */
-        let param = {};
-        param.id=record.id;
-        console.log("record---",record);
-        axios.delete("nav",param,
+        let id=record.id;
+        axios.delete("subscribe/"+id,null,
             result=> {
                 NotificationMixin.success("删除成功！")
             },
@@ -69,12 +67,12 @@ class MenuManage extends React.Component{
     }
     statusChange=(record,checked)=>{
         /**
-         * 说明：是否预置菜单状态方法
+         * 说明：状态方法
          * */
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("nav/update",param)
+        this.postFile("subscribe",param)
 
     }
     postFile=(url,param)=>{
@@ -96,7 +94,7 @@ class MenuManage extends React.Component{
             //         return (<Link to={"/userCore/menuManage/editModal/"+record['id']}>{record['title']}</Link>)
             //     }
             // },
-            { title: '菜单名称', dataIndex: 'title', key: 'title', width: '6%',  },
+            { title: '联系人', dataIndex: 'user_name', key: 'user_name', width: '6%',  },
             { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
             { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
