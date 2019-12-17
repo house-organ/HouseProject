@@ -3,6 +3,7 @@ import {Form,Button,Table,Popconfirm,Switch} from 'antd';
 import axios from "../../../../../axios/index";
 import NotificationMixin from "../../../../../components/notification/index";
 import AddOrUpdateModal from './editModal'
+import EditAgentModal from './editAgentModal'
 import ModalWrapper from "../../../../../components/modalwrapper/index";
 
 const FormItem = Form.Item;
@@ -37,6 +38,27 @@ class MenuManage extends React.Component{
         }
 
         new ModalWrapper(AddOrUpdateModal, "addOrUpdateModal", ()=> {
+            this.fetch();
+        }, null, {
+            title:  modal && modal.id  ? '编辑' : '新增',
+            // item: modal && modal.id ? Helper.copyObject(modal) : {},
+            // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
+            item: modal && modal.id ? modal : {},
+            isEdit: modal && modal.id  ? true : false,
+        }).show();
+    }
+    agentUpdate=(modal,e)=> {
+        /**
+         * 说明：新增或编辑弹窗
+         * */
+        e && e.preventDefault() ;
+        e && e.stopPropagation();
+        if(modal){
+            modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
+            modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
+        }
+
+        new ModalWrapper(EditAgentModal, "editAgentModal", ()=> {
             this.fetch();
         }, null, {
             title:  modal && modal.id  ? '编辑' : '新增',
@@ -95,30 +117,25 @@ class MenuManage extends React.Component{
             //     }
             // },
             { title: '联系人', dataIndex: 'user_name', key: 'user_name', width: '6%',  },
-            { title: '导航位置', dataIndex: 'pos_name', key: 'pos_name', width: '6%',  },
-            { title: '打开方式', dataIndex: 'open_type_name', key: 'open_type_name', width: '6%',  },
-            { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
-            { title: '是否预置菜单', dataIndex: 'is_sys', key: 'is_sys', width: '6%',
-                render:(text, record)=>{
-                    return (<Switch checkedChildren="是" unCheckedChildren="否" defaultChecked={record['is_sys']==='1' ? true:false} disabled/>)
-                }
-            },
+            { title: '手机号码', dataIndex: 'mobile', key: 'mobile', width: '6%',  },
+            { title: '楼盘名称', dataIndex: 'house_name', key: 'house_name', width: '6%',  },
+            { title: '预约类型', dataIndex: 'model', key: 'model', width: '6%',  },
+            { title: '提交时间', dataIndex: 'create_time', key: 'create_time', width: '6%',  },
+            { title: '经纪人', dataIndex: 'broker_id', key: 'broker_id', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
-                    return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['status']==='1' ? true:false} />)
+                    return (<Switch checkedChildren="已联系" unCheckedChildren="待联系" onChange={this.statusChange.bind(this,record)} defaultChecked={record['status']==='1' ? true:false} />)
                 }
             },
-            { title: 'SEO标题', dataIndex: 'seo_title', key: 'seo_title', width: '6%',  },
-            { title: 'SEO关键字', dataIndex: 'seo_keys', key: 'seo_keys', width: '6%',  },
-
-            { title: '操作', key: '#', width: '10%',
+            { title: '操作', key: '#', width: '12%',
                 render: (text, record) => {
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="danger" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
-                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
+                            <Button type="primary"  onClick={this.agentUpdate.bind(this,record)}>分配经纪人</Button>
+                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)} style={{marginLeft:15}}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>
