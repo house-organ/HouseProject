@@ -121,7 +121,7 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.status ==='1' ? true:false} />
                         )}
                     </FormItem>
                     <FormItem

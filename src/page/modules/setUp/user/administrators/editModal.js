@@ -118,7 +118,20 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={this.state.item.is_sys ==='1' ? true:false} />
+                            <Input type="text"  placeholder="密码" />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="确认密码"
+                    >
+                        {getFieldDecorator('password_confirm', {
+                            initialValue: (this.state.item && this.state.item.password_confirm )|| '',
+                            rules: [{
+                                required: false,
+                            }],
+                        })(
+                            <Input type="text"  placeholder="确认密码" />
                         )}
                     </FormItem>
                     <FormItem
