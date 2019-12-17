@@ -120,7 +120,7 @@ class MenuManage extends React.Component{
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>

@@ -3,6 +3,7 @@ import {Form,Button,Table,Popconfirm,Switch} from 'antd';
 import axios from "../../../../../axios/index";
 import NotificationMixin from "../../../../../components/notification/index";
 import AddOrUpdateModal from './editModal'
+import MenuUpdateModal from './editMenuModal'
 import ModalWrapper from "../../../../../components/modalwrapper/index";
 
 const FormItem = Form.Item;
@@ -40,6 +41,27 @@ class MenuManage extends React.Component{
             this.fetch();
         }, null, {
             title:  modal && modal.id  ? '编辑' : '新增',
+            // item: modal && modal.id ? Helper.copyObject(modal) : {},
+            // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
+            item: modal && modal.id ? modal : {},
+            isEdit: modal && modal.id  ? true : false,
+        }).show();
+    }
+    menuUpdate=(modal,e) => {
+        /**
+         * 说明：菜单权限弹窗
+         * */
+        e && e.preventDefault() ;
+        e && e.stopPropagation();
+        if(modal){
+            modal.pos_name === '页头菜单' ? modal.pos_name = '1' :  modal.pos_name = '2'
+            modal.open_type_name === '新页面' ? modal.open_type_name = '1' :  modal.open_type_name = '2'
+        }
+
+        new ModalWrapper(MenuUpdateModal, "MenuUpdateModal", ()=> {
+            this.fetch();
+        }, null, {
+            title:  modal && modal.id  ? '菜单权限配置' : '新增',
             // item: modal && modal.id ? Helper.copyObject(modal) : {},
             // item: modal && modal.id ? CommonMethod.copyObject(modal) : {},
             item: modal && modal.id ? modal : {},
@@ -108,9 +130,10 @@ class MenuManage extends React.Component{
                     let html = <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消"><Button type="danger" style={{marginLeft: "10px"}}>删除</Button></Popconfirm>
                     return (
                         <div>
-                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
+                            <Button type="primary"  onClick={this.menuUpdate.bind(this,record)} disabled={record['id'] === '1' ? true:false}>菜单权限</Button>
+                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)} style={{marginLeft:15}}>修改</Button>
                             {
-                                record.is_sys === '0' ? html :''
+                                html
                             }
 
                         </div>
