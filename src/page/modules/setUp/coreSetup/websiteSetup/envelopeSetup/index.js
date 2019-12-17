@@ -82,7 +82,7 @@ class webSetup extends React.Component{
                         label="短信平台"
                     >
                         {getFieldDecorator('platform', {
-                            initialValue: (this.state.data && this.state.data.platform) || '',
+                            initialValue: (this.state.data && this.state.data.platform) || '1',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -95,8 +95,7 @@ class webSetup extends React.Component{
                             }],
                         })(
                             <RadioGroup>
-                                <Radio value={'0'}>关闭</Radio>
-                                <Radio value={'1'}>开启</Radio>
+                                <Radio value={'1'}>阿里云</Radio>
                             </RadioGroup>
                         )}
                     </Form.Item>

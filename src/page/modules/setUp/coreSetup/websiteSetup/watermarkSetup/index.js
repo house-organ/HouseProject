@@ -82,7 +82,7 @@ class webSetup extends React.Component{
                         label="是否开启水印"
                     >
                         {getFieldDecorator('open_water', {
-                            initialValue: (this.state.data && this.state.data.open_water) || '',
+                            initialValue: (this.state.data && this.state.data.open_water) || '0',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -104,7 +104,7 @@ class webSetup extends React.Component{
                         label="水印类型"
                     >
                         {getFieldDecorator('water_type', {
-                            initialValue: (this.state.data && this.state.data.water_type) || '',
+                            initialValue: (this.state.data && this.state.data.water_type) || '1',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -240,7 +240,7 @@ class webSetup extends React.Component{
                         label="水印位置"
                     >
                         {getFieldDecorator('water_pos', {
-                            initialValue: (this.state.data && this.state.data.water_pos) || '',
+                            initialValue: (this.state.data && this.state.data.water_pos) || '1',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -263,63 +263,6 @@ class webSetup extends React.Component{
                                 <Radio value={'8'}>底部居中</Radio>
                                 <Radio value={'9'}>底部居右</Radio>
                             </RadioGroup>
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="是否开启水印"
-                    >
-                        {getFieldDecorator('open_water_name', {
-                            initialValue: (this.state.data && this.state.data.open_water_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="是否开启水印" />
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="水印类型"
-                    >
-                        {getFieldDecorator('water_type_name', {
-                            initialValue: (this.state.data && this.state.data.water_type_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="水印类型" />
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="水印位置"
-                    >
-                        {getFieldDecorator('water_pos_name', {
-                            initialValue: (this.state.data && this.state.data.water_pos_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="水印位置" />
                         )}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>

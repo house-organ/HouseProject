@@ -82,7 +82,7 @@ class webSetup extends React.Component{
                         label="是否开启云存储"
                     >
                         {getFieldDecorator('cloud_storage', {
-                            initialValue: (this.state.data && this.state.data.cloud_storage) || '',
+                            initialValue: (this.state.data && this.state.data.cloud_storage) || '0',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -104,7 +104,7 @@ class webSetup extends React.Component{
                         label="上传类型"
                     >
                         {getFieldDecorator('upload_type', {
-                            initialValue: (this.state.data && this.state.data.upload_type) || '',
+                            initialValue: (this.state.data && this.state.data.upload_type) || '1',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -126,7 +126,7 @@ class webSetup extends React.Component{
                         label="类型"
                     >
                         {getFieldDecorator('type', {
-                            initialValue: (this.state.data && this.state.data.type) || '',
+                            initialValue: (this.state.data && this.state.data.type) || '1',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -169,14 +169,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('secret_key', {
                             initialValue: (this.state.data && this.state.data.secret_key) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="secretKey" />
@@ -188,14 +188,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('bucket', {
                             initialValue: (this.state.data && this.state.data.bucket) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="存储空间名" />
@@ -207,14 +207,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('domain', {
                             initialValue: (this.state.data && this.state.data.domain) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="资源访问域名" />
@@ -237,63 +237,6 @@ class webSetup extends React.Component{
                             }],
                         })(
                             <Input type="text" placeholder="EndPoint" />
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="是否开启云存储"
-                    >
-                        {getFieldDecorator('cloud_storage_name', {
-                            initialValue: (this.state.data && this.state.data.cloud_storage_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="是否开启云存储" />
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="上传类型"
-                    >
-                        {getFieldDecorator('upload_type_name', {
-                            initialValue: (this.state.data && this.state.data.upload_type_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="上传类型" />
-                        )}
-                    </Form.Item>
-                    <Form.Item
-                        label="类型"
-                    >
-                        {getFieldDecorator('type_name', {
-                            initialValue: (this.state.data && this.state.data.type_name) || '',
-                            rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
-                            }],
-                        })(
-                            <Input type="text" placeholder="类型" />
                         )}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>

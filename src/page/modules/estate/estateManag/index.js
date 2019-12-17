@@ -107,7 +107,7 @@ class MenuManage extends React.Component{
             { title: '排序', dataIndex: 'ordid', key: 'ordid', width: '6%',  },
             { title: '状态', dataIndex: 'status', key: 'status', width: '6%',
                 render:(text, record)=>{
-                    return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['is_sys']==='1' ? true:false} />)
+                    return (<Switch checkedChildren="开" unCheckedChildren="关" onChange={this.statusChange.bind(this,record)} defaultChecked={record['status']==='1' ? true:false} />)
                 }
             },
             { title: '状态名称', dataIndex: 'status_name', key: 'status_name', width: '6%',  },

@@ -28,15 +28,12 @@ class webSetup extends React.Component{
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.setState({
-                    param:values ||[]
-                }.this.putFile)
+                this.putFile(values)
             }
         });
     }
-    putFile=()=>{
-        axios.post("setting/weixin",this.state.param,
+    putFile=(values)=>{
+        axios.post("setting/weixin",values,
             result=> {
                 console.log("微信设置参数--------->",result)
                 NotificationMixin.success("修改成功！")
@@ -114,10 +111,10 @@ class webSetup extends React.Component{
                         )}
                     </Form.Item>
                     <Form.Item
-                        label="token"
+                        label="tokens"
                     >
-                        {getFieldDecorator('token', {
-                            initialValue: (this.state.data && this.state.data.token) || '',
+                        {getFieldDecorator('tokens', {
+                            initialValue: (this.state.data && this.state.data.tokens) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -129,7 +126,7 @@ class webSetup extends React.Component{
                                 // }
                             }],
                         })(
-                            <Input type="text" placeholder="token" />
+                            <Input type="text" placeholder="tokens" />
                         )}
                     </Form.Item>
                     <Form.Item
