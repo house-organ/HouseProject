@@ -10,6 +10,7 @@ const createForm = Form.create;
 class MenuManage extends React.Component{
     state = {
         data:[],
+        advertType: []
     }
     componentWillMount() {
         this.fetch()
@@ -21,7 +22,22 @@ class MenuManage extends React.Component{
         axios.get("/poster_space/list",null,
             result=> {
                 // console.log(result.result)
-                this.setState({data:result.result.data ||[]})
+                this.setState({
+                    data:result.result.data ||[]
+                },this.advertType())
+            },
+        );
+    }
+    advertType=()=>{
+        /**
+         * 说明：广告位类型枚举接口方法
+         * */
+        axios.get("/constant/info/poster_space_type",null,
+            result=> {
+                console.log('poster_space_type----->', result)
+                this.setState({
+                    advertType: result ||[]
+                })
             },
         );
     }
@@ -49,7 +65,6 @@ class MenuManage extends React.Component{
     goDetil=(modal,e)=>{
         if (modal.id && modal.id !== '') {
             let url = '/advert/' + e + '/' + modal.id
-            console.log('url--->', url)
             this.props.history.push({pathname:url})
         } else {
             NotificationMixin.error("广告位不能为空！")
@@ -101,7 +116,13 @@ class MenuManage extends React.Component{
         let columns = [
             { title: '编号',dataIndex: 'id', key: 'id'},
             { title: '广告位名称', dataIndex: 'names', key: 'names', },
-            { title: '广告类型', dataIndex: 'type', key: 'type' },
+            { title: '广告类型', dataIndex: 'type', key: 'type',
+                render: (text, record) => {
+                    // console.log('record-->', record)
+                    // return (record['companyid'] && companyList &&  companyList[record['companyid']])
+                    return (<div>1</div>)
+                }
+            },
             { title: '广告位宽度', dataIndex: 'width', key: 'width'},
             { title: '广告位高度', dataIndex: 'height', key: 'height' },
             { title: '广告数量', dataIndex: 'items', key: 'items' },

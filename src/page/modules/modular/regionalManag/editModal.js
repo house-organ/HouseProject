@@ -51,7 +51,6 @@ class editModal extends React.Component {
                 param.pid = '0'
 
             if (this.props.item.id) {
-                url = "region/update";
                 param.id = this.props.item.id;
                 if(param.is_sys === !!param.is_sys){
                     param.is_sys ? param.is_sys = 1 : param.is_sys = 0
@@ -110,7 +109,7 @@ class editModal extends React.Component {
                         label="上级栏目"
                     >
                         {getFieldDecorator('pid', {
-                            initialValue: (this.state.item && this.state.item.pid) || 0,
+                            initialValue: (this.state.item && this.state.item.id) || 0,
                             // rules: [{
                             //     required: true,
                             //     message:'请选择上级栏目'

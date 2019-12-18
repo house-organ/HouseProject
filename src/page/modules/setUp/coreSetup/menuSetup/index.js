@@ -3,6 +3,7 @@ import {Form,Button,Table,Popconfirm,} from 'antd';
 import axios from "../../../../../axios";
 import AddOrUpdateModal from './editModal'
 import ModalWrapper from "../../../../../components/modalwrapper";
+import NotificationMixin from "../../../../../components/notification";
 
 // const FormItem = Form.Item;
 // const createForm = Form.create;
@@ -50,22 +51,19 @@ class MenuManage extends React.Component{
             isEdit: modal && modal.id  ? true : false,
         }).show();
     }
-    handleClose=(record)=> {
-        let that = this;
-        if (!record) return;
-        console.log("record---",record);
-        this.post({
-            url: "c509bd90a82719a3569291e12c24a6f1af4bac",
-            param: {
-                id: record.id
+    handleDelete=(record)=> {
+        /**
+         * 说明：删除方法
+         * */
+        let id=record.id;
+        axios.delete("menu/"+id,null,
+            result=> {
+                NotificationMixin.success("删除成功！")
             },
-            noLoading: true
-        }).then(result=> {
-            if (result.result) {
-                that.success("操作成功");
-                that.fetch();
+            result=> {
+
             }
-        });
+        );
     }
     handleSubmit=()=>{
 
@@ -93,7 +91,7 @@ class MenuManage extends React.Component{
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>添加子栏目</Button>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)} style={{marginLeft:15}}>修改</Button>
-                            <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleClose.bind(this,record)} okText="确定" cancelText="取消">
+                            <Popconfirm placement="topRight" title={"您确定要删除该数据吗?"} onConfirm={this.handleDelete.bind(this,record)} okText="确定" cancelText="取消">
                                 <Button type="danger" style={{marginLeft: "10px"}}>删除</Button>
                             </Popconfirm>
                         </div>

@@ -98,7 +98,6 @@ class MenuManage extends React.Component{
             //     }
             // },
             { title: '栏目名称', dataIndex: 'names', key: 'names', },
-            { title: '栏目别名', dataIndex: 'alias', key: 'alias',   },
             { title: '域名', dataIndex: 'domain', key: 'domain',  },
             { title: '排序', dataIndex: 'ordid', key: 'ordid',  },
             { title: '状态', dataIndex: 'status', key: 'status', 
@@ -112,7 +111,6 @@ class MenuManage extends React.Component{
                     return (
                         <div>
                             <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}>修改</Button>
-                            <Button type="primary"  onClick={this.addOrUpdate.bind(this,record)}  style={{marginLeft: "10px"}}>添加</Button>
                             {
                                 // record.is_sys === '0' ? html :''
                                 html

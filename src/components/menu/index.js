@@ -35,13 +35,13 @@ class Menus extends React.Component{
         axios.get("menu/"+(this.state.param || id),null,
             result=> {
                 let menuData = result.result.data ||[];
-                let home = {}
-                home.id = '0';
-                home.title= "控制台";
-                home.request_child= "home";
-                home.request_method= "index";
-                home.request_parent= null;
-                menuData[0].leftChild.push(home)
+                // let home = {}
+                // home.id = '0';
+                // home.title= "控制台";
+                // home.request_child= "home";
+                // home.request_method= "index";
+                // home.request_parent= null;
+                // menuData[0].leftChild.push(home)
                 console.log("左侧菜单接口数据----",menuData)
                 let menuList = this.readerMenu(menuData)
                 this.setState({
