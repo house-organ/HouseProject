@@ -73,7 +73,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("attribute",param)
+        this.postFile("attribute/update",param)
 
     }
     postFile=(url,param)=>{

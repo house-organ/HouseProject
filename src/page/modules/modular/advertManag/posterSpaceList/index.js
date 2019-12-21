@@ -10,16 +10,19 @@ const createForm = Form.create;
 class MenuManage extends React.Component{
     state = {
         data: [],
-        posterTypeList: []
+        posterTypeList: [],
+        id: ''
     }
     componentWillMount() {
         let id = this.props.match.params.id;
-        this.fetch(id)
+        this.setState({id: id},this.fetch)
+        // this.fetch()
     }
-    fetch=(id)=>{
+    fetch=()=>{
         /**
          * 说明：广告列表接口方法
          * */
+        let id = this.state.id
         axios.get("poster/look/"+id,null,
             result=> {
                 // console.log(result.result)

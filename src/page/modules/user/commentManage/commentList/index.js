@@ -19,7 +19,8 @@ class MenuManage extends React.Component{
         /**
          * 说明：评论列表接口方法
          * */
-        axios.get("comment​/list",null,
+        // axios.get("comment​/list",null,
+        axios.get("comment/list",null,
             result=> {
                 // console.log(result.result)
                 this.setState({data:result.result.data ||[]})

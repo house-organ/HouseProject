@@ -97,8 +97,7 @@ class MenuManage extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("poster_space​/update",param)
-
+        this.postFile("poster_space/update",param)
     }
     postFile=(url,param)=>{
         axios.post(url,param,
@@ -118,9 +117,13 @@ class MenuManage extends React.Component{
             { title: '广告位名称', dataIndex: 'names', key: 'names', },
             { title: '广告类型', dataIndex: 'type', key: 'type',
                 render: (text, record) => {
-                    // console.log('record-->', record)
-                    // return (record['companyid'] && companyList &&  companyList[record['companyid']])
-                    return (<div>1</div>)
+                    let html =  ''
+                    this.state.advertType && this.state.advertType.map((item, index)=>{
+                        if(item.key === record['type']) {
+                            html = item.title
+                        }
+                    })
+                    return ( <div>{html}</div> )
                 }
             },
             { title: '广告位宽度', dataIndex: 'width', key: 'width'},

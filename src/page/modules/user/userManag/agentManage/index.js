@@ -95,7 +95,7 @@ class articleList extends React.Component{
         let param = {}
         param.id = record.id
         param.status = checked ? "1":"0"
-        this.postFile("user",param)
+        this.postFile("user/update",param)
 
     }
     postFile=(url,param)=>{
