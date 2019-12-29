@@ -67,8 +67,6 @@ class webSetup extends React.Component{
     fetch=()=>{
         axios.get("setting/site",null,
             result=> {
-                console.log('result.result.data---1111-->', result.result.data)
-                //result.result.data.mobile_logo
                 let url = 'http://www.xinsuifc.com'
                 this.setState({
                     data:result.result.data ||[],
@@ -83,7 +81,6 @@ class webSetup extends React.Component{
         );
     }
     putFile=()=>{
-        console.log('this.state.param-->',this.state.param)
         axios.post("setting/site",this.state.param,
             result=> {
                 console.log("站点设置参数--------->",result)
