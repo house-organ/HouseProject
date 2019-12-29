@@ -49,7 +49,8 @@ class Menus extends React.Component{
                     menuTreeNode:menuList,
                     defaultOpenKeys:[menuData[0].id],
                     defaultSelectedKeys:[menuData[0].leftChild[0].id],
-                },this.urlSetMenu)
+                // },this.urlSetMenu)
+                })
             },
             result=> {
 

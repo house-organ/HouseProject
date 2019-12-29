@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Input, Button,Upload, Icon, message,Radio } from 'antd'
+import {Form,Input, Button,Upload, Icon, message,Radio,Modal } from 'antd'
 import './index.less'
 import axios from "../../../../../../axios";
 import NotificationMixin from '../../../../../../components/notification';
@@ -9,28 +9,43 @@ const createForm = Form.create;
 const RadioGroup = Radio.Group;
 
 
-function getBase64(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-}
+// function getBase64(img, callback) {
+//     const reader = new FileReader();
+//     reader.addEventListener('load', () => callback(reader.result));
+//     reader.readAsDataURL(img);
+// }
 
-function beforeUpload(file) {
-    const isJPG = file.type === 'image/jpeg';
-    if (!isJPG) {
-        message.error('You can only upload JPG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-    }
-    return isJPG && isLt2M;
+// function beforeUpload(file) {
+//     const isJPG = file.type === 'image/jpeg';
+//     if (!isJPG) {
+//         message.error('You can only upload JPG file!');
+//     }
+//     const isLt2M = file.size / 1024 / 1024 < 2;
+//     if (!isLt2M) {
+//         message.error('Image must smaller than 2MB!');
+//     }
+//     return isJPG && isLt2M;
+// }
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 }
 class webSetup extends React.Component{
     state = {
         data:[],
         loading: false,
-        param:{}
+        param:{},
+        previewVisible: false,
+        previewImage: '',
+        fileList: [],
+        fileListMob: [],
+        fileListWechat: [],
+        url: ''
     }
     componentWillMount(){
         this.fetch()
@@ -39,9 +54,12 @@ class webSetup extends React.Component{
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                let param = values
+                param.pc_logo = this.state.fileList[0].response.result.data.path
+                param.mobile_logo = this.state.fileListMob[0].response.result.data.path
+                param.wechat_code = this.state.fileListMob[0].response.result.data.path
                 this.setState({
-                    param:values ||[]
+                    param:param || {}
                 },this.putFile)
             }
         });
@@ -49,8 +67,15 @@ class webSetup extends React.Component{
     fetch=()=>{
         axios.get("setting/site",null,
             result=> {
-                console.log("站点设置参数--------->",result)
-                this.setState({data:result.result ||[]})
+                console.log('result.result.data---1111-->', result.result.data)
+                //result.result.data.mobile_logo
+                let url = 'http://www.xinsuifc.com'
+                this.setState({
+                    data:result.result.data ||[],
+                    fileList: [{url: url + result.result.data.pc_logo, uid: result.result.data.mobile_logo,}] || [],
+                    fileListMob: [{url: url + result.result.data.mobile_logo, uid: result.result.data.mobile_logo,}] || [],
+                    fileListWechat: [{url: url + result.result.data.wechat_code, uid: result.result.data.mobile_logo,}] || []
+                })
             },
             result=> {
 
@@ -58,6 +83,7 @@ class webSetup extends React.Component{
         );
     }
     putFile=()=>{
+        console.log('this.state.param-->',this.state.param)
         axios.post("setting/site",this.state.param,
             result=> {
                 console.log("站点设置参数--------->",result)
@@ -68,20 +94,26 @@ class webSetup extends React.Component{
             }
         );
     }
-    handleChange = info => {
-        if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
-            return;
+    handleCancel = () => this.setState({ previewVisible: false });
+
+    handlePreview = async file => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
         }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl,
-                    loading: false,
-                }),
-            );
-        }
+        this.setState({
+            previewImage: file.url || file.preview,
+            previewVisible: true,
+        });
+    };
+
+    handleChange = ({fileList}) => {
+        this.setState({ fileList })
+    };
+    handleChangeMob = ({fileList}) => {
+        this.setState({ fileListMob: fileList })
+    };
+    handleChangeWechat = ({fileList}) => {
+        this.setState({ fileListWechat: fileList })
     };
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -109,13 +141,20 @@ class webSetup extends React.Component{
                 },
             },
         };
+        // const uploadButton = (
+        //     <div>
+        //         <Icon type={this.state.loading ? 'loading' : 'plus'} />
+        //         <div className="ant-upload-text">Upload</div>
+        //     </div>
+        // );
+        // const imageUrl = this.state.imageUrl;
+        const { previewVisible, previewImage, fileList, fileListMob, fileListWechat } = this.state;
         const uploadButton = (
             <div>
-                <Icon type={this.state.loading ? 'loading' : 'plus'} />
+                <Icon type="plus" />
                 <div className="ant-upload-text">Upload</div>
             </div>
         );
-        const imageUrl = this.state.imageUrl;
         return(
             <div className="tabs-box">
                 <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -123,14 +162,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('status', {
                             initialValue: (this.state.data && this.state.data.status) || '0',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <RadioGroup>
@@ -145,14 +184,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('site_name', {
                             initialValue: (this.state.data && this.state.data.site_name) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="站点名称" />
@@ -164,63 +203,71 @@ class webSetup extends React.Component{
                         {getFieldDecorator('pc_logo', {
                             initialValue: (this.state.data && this.state.data.pc_logo) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                beforeUpload={beforeUpload}
-                                onChange={this.handleChange}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-                            </Upload>
+                            <div className="clearfix">
+                                <Upload
+                                    action="http://www.xinsuifc.com/api/v1/upload/pic"
+                                    listType="picture-card"
+                                    fileList={fileList}
+                                    name="image"
+                                    onPreview={this.handlePreview}
+                                    onChange={this.handleChange}
+                                >
+                                    {fileList.length >= 1 ? null : uploadButton}
+                                </Upload>
+                                <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                </Modal>
+                            </div>
                         )}
                     </Form.Item>
                     <Form.Item
                         label="移动端Logo"
                     >
                         {getFieldDecorator('mobile_logo', {
-                            initialValue: (this.state.data && this.state.data.mobile_logo) || '',
+                            initialValue: (this.state.data && this.state.data.mobile_logo ) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                beforeUpload={beforeUpload}
-                                onChange={this.handleChange}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-                            </Upload>
+                            <div className="clearfix">
+                                <Upload
+                                    action="http://www.xinsuifc.com/api/v1/upload/pic"
+                                    listType="picture-card"
+                                    fileList={fileListMob}
+                                    name="image"
+                                    onPreview={this.handlePreview}
+                                    onChange={this.handleChangeMob}
+                                >
+                                    {fileListMob.length >= 1 ? null : uploadButton}
+                                </Upload>
+                                <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                </Modal>
+                            </div>
                         )}
                     </Form.Item>
                     <Form.Item
                         label="微信二维码"
                     >
                         {getFieldDecorator('wechat_code', {
-                            initialValue: (this.state.data && this.state.data.wechat_code) || '',
+                            initialValue: (this.state.data && this.state.data.wechat_code ) || '',
                             rules: [{
                                 // required: true,
                                 // validator: (rule, value, callback) => {
@@ -232,33 +279,37 @@ class webSetup extends React.Component{
                                 // }
                             }],
                         })(
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                beforeUpload={beforeUpload}
-                                onChange={this.handleChange}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-                            </Upload>
+                            <div className="clearfix">
+                                <Upload
+                                    action="http://www.xinsuifc.com/api/v1/upload/pic"
+                                    listType="picture-card"
+                                    fileList={fileListWechat}
+                                    name="image"
+                                    onPreview={this.handlePreview}
+                                    onChange={this.handleChangeWechat}
+                                >
+                                    {fileListWechat.length >= 1 ? null : uploadButton}
+                                </Upload>
+                                <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                </Modal>
+                            </div>
                         )}
                     </Form.Item>
                     <Form.Item
                         label="备案号"
                     >
-                        {getFieldDecorator('record_numbe', {
-                            initialValue: (this.state.data && this.state.data.record_numbe) || '',
+                        {getFieldDecorator('record_number', {
+                            initialValue: (this.state.data && this.state.data.record_number) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="备案号" />
@@ -270,14 +321,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('customer_telephone', {
                             initialValue: (this.state.data && this.state.data.customer_telephone) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="客服电话" />
@@ -289,14 +340,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('customer_qq', {
                             initialValue: (this.state.data && this.state.data.customer_qq) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="客服QQ" />
@@ -308,14 +359,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('map_point', {
                             initialValue: (this.state.data && this.state.data.map_point) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="默认地图坐标" />
@@ -344,14 +395,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('city_domain', {
                             initialValue: (this.state.data && this.state.data.city_domain) || '0',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <RadioGroup>
@@ -364,14 +415,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('red_packet', {
                             initialValue: (this.state.data && this.state.data.red_packet) || '0',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <RadioGroup>
@@ -387,14 +438,14 @@ class webSetup extends React.Component{
                         {getFieldDecorator('company_name', {
                             initialValue: (this.state.data && this.state.data.company_name) || '',
                             rules: [{
-                                // required: true,
-                                // validator: (rule, value, callback) => {
-                                //     if (!value || (value && value.length > 50)) {
-                                //         callback(new Error('不能为空且长度不超过50!'));
-                                //     } else {
-                                //         callback();
-                                //     }
-                                // }
+                                required: true,
+                                validator: (rule, value, callback) => {
+                                    if (!value || (value && value.length > 50)) {
+                                        callback(new Error('不能为空且长度不超过50!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }
                             }],
                         })(
                             <Input type="text" placeholder="企业名称" />
