@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select} from 'antd';
+import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 
@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
-
+const InputGroup = Input.Group;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
@@ -78,6 +78,14 @@ class editModal extends React.Component {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
+        const prefixSelector = getFieldDecorator('icon', {
+            initialValue: '86',
+        })(
+            <Select style={{ width: 70 }}>
+                <Option value="86">+86</Option>
+                <Option value="87">+87</Option>
+            </Select>,
+        );
         return(
             <Modal
                 title={this.props.title}
@@ -90,7 +98,7 @@ class editModal extends React.Component {
                 <Form  layout="horizontal" >
                     <FormItem
                         {...formItemLayout}
-                        label="菜单名称："
+                        label="菜单名称"
                     >
                         {getFieldDecorator('title', {
                             initialValue: (this.state.item && this.state.item.title )|| '',
@@ -110,7 +118,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="状态："
+                        label="状态"
                     >
                         {getFieldDecorator('status', {
                             initialValue: (this.state.item && this.state.item.status )|| '',
@@ -123,7 +131,7 @@ class editModal extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="图标："
+                        label="图标"
                     >
                         {getFieldDecorator('icon', {
                             initialValue: '',
@@ -131,12 +139,12 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Input type="text"  placeholder="icon" />
+                            <Input addonAfter={prefixSelector} style={{ width: '100%' }} />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="导航位置："
+                        label="导航位置"
                     >
                         {getFieldDecorator('pos', {
                             initialValue: (this.state.item && this.state.item.pos_name )|| '',

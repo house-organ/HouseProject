@@ -70,9 +70,9 @@ class webSetup extends React.Component{
                 let url = 'http://www.xinsuifc.com'
                 this.setState({
                     data:result.result.data ||[],
-                    fileList: [{url: url + result.result.data.pc_logo, uid: result.result.data.mobile_logo,}] || [],
+                    fileList: [{url: url + result.result.data.pc_logo, uid: result.result.data.pc_logo,}] || [],
                     fileListMob: [{url: url + result.result.data.mobile_logo, uid: result.result.data.mobile_logo,}] || [],
-                    fileListWechat: [{url: url + result.result.data.wechat_code, uid: result.result.data.mobile_logo,}] || []
+                    fileListWechat: [{url: url + result.result.data.wechat_code, uid: result.result.data.wechat_code,}] || []
                 })
             },
             result=> {
