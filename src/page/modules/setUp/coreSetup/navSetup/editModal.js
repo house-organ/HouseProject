@@ -1,7 +1,8 @@
 import React from 'react'
-import {Modal, Switch,Form,Input,Select,Icon} from 'antd';
+import {Modal, Switch,Form,Input,Select,Card, Icon,Row, Col} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
+import './index.less'
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -11,6 +12,7 @@ const InputGroup = Input.Group;
 class editModal extends React.Component {
     state = {
         item:this.props.item || {},
+        iconStatus: false
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
@@ -72,19 +74,40 @@ class editModal extends React.Component {
         );
 
     }
+    changIcon = () => {
+        console.log('this.state.iconStatus----->', this.state.iconStatus)
+        let iconStatus = !this.state.iconStatus
+        this.setState({
+            iconStatus: iconStatus
+        })
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 5 },
             wrapperCol: { span: 18 },
         };
-        const prefixSelector = getFieldDecorator('icon', {
-            initialValue: '86',
-        })(
-            <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>,
+        const iconList = (
+            <div className="icon-list-box">
+                <Icon type="setting" onClick={this.changIcon} />
+                <div className = {this.state.iconStatus ? "on icon-list-pop" : "icon-list-pop"}>
+                    <Card>
+                        <Row>
+                        <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col><Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                        </Row>
+                    </Card>
+                </div>
+            </div>
         );
         return(
             <Modal
@@ -139,7 +162,7 @@ class editModal extends React.Component {
                                 required: false,
                             }],
                         })(
-                            <Input addonAfter={prefixSelector} style={{ width: '100%' }} />
+                            <Input addonAfter={iconList} style={{ width: '100%' }} />
                         )}
                     </FormItem>
                     <FormItem
