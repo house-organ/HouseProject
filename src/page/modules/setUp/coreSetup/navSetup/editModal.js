@@ -3,6 +3,7 @@ import {Modal, Switch,Form,Input,Select,Card, Icon,Row, Col} from 'antd';
 import axios from "../../../../../axios";
 import NotificationMixin from "../../../../../components/notification";
 import './index.less'
+import FontAwesomeIcon  from '@fortawesome/fontawesome-free';
 
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -20,7 +21,7 @@ class editModal extends React.Component {
     fetch=(id)=>{
         // axios.get("topic/"+id,null,
         //     result=> {
-        //         this.setState({
+        //         this.setState({https://blog.csdn.net/qq_37059838/article/details/100995824
         //             data:result.data ||{},
         //             authorName:result.data.author.loginname || '',
         //             replies:result.data.replies || [],
