@@ -17,6 +17,7 @@ class editModal extends React.Component {
     }
     componentWillMount() {
         console.log("item--->",this.state.item)
+        console.log('ontAwesomeIcon', FontAwesomeIcon)
     }
     fetch=(id)=>{
         // axios.get("topic/"+id,null,
@@ -99,7 +100,8 @@ class editModal extends React.Component {
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
-                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col><Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
+                            <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
                             <Col span={4} className="iocn-td"><Icon type="setting" /></Col>
@@ -145,7 +147,7 @@ class editModal extends React.Component {
                         label="状态"
                     >
                         {getFieldDecorator('status', {
-                            initialValue: (this.state.item && this.state.item.status )|| '',
+                            initialValue: (this.state.item && this.state.item.status ) || '',
                             rules: [{
                                 required: false,
                             }],
