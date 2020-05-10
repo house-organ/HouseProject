@@ -28,7 +28,7 @@ class AddHouselistModal extends React.Component{
             result=> {
                 console.log('result--1->', result)
                 this.setState({
-                    priceList:result || []
+                    priceList: result || []
                 })
             },
             result=> {
@@ -39,7 +39,7 @@ class AddHouselistModal extends React.Component{
     getCityList=()=>{
         axios.get("city/info",null,
             result=> {
-                console.log('result--2->', result.data)
+                console.log('result--2->', result.result.data)
                 this.setState({
                     cityList: result.result.data ||{}
                 })

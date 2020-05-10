@@ -13,7 +13,7 @@ const createForm = Form.create;
 const Option = Select.Option;
 const { TextArea } = Input;
 const { TabPane } = Tabs;
-class AddHouselistModal extends React.Component{
+class addArticleListModal extends React.Component{
     state = {
         item:this.props.location.state || {},
         priceList: [],
@@ -260,5 +260,5 @@ class AddHouselistModal extends React.Component{
         )
     }
 }
-AddHouselistModal = Form.create()(AddHouselistModal);
-export default AddHouselistModal;
+addArticleListModal = Form.create()(addArticleListModal);
+export default addArticleListModal;
